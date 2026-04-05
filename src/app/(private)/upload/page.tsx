@@ -74,7 +74,7 @@ export default function UploadPage() {
 
     return (
         <div className="min-h-screen bg-brand-bg flex items-center justify-center p-6 font-inter text-brand-dark selection:bg-brand-accent selection:text-white">
-            <div className="w-full max-w-2xl bg-white shadow-2xl shadow-brand-dark/5 p-16 border border-brand-dark/5 relative animate-in fade-in zoom-in duration-700">
+            <div className="w-full max-w-2xl bg-white shadow-2xl shadow-brand-dark/5 p-12 border border-brand-dark/5 relative animate-in fade-in zoom-in duration-700">
                 
                 {/* Brand Decor (Removed the dark/blue side-line as requested) */}
                 <div className="absolute top-0 left-0 w-full h-1.5 bg-brand-accent"></div>
@@ -84,11 +84,12 @@ export default function UploadPage() {
                         <div className="w-4 h-4 bg-brand-action"></div>
                         <span className="text-[12px] font-black uppercase tracking-[0.2em] font-tektur text-brand-muted italic opacity-70">Brickanta Audit Portal</span>
                     </div>
-                    <h1 className="text-6xl font-black font-tektur tracking-tighter italic leading-[0.85] mb-8 uppercase">
-                        Initiate <span className="font-brand-serif font-light text-brand-accent lowercase italic">Tender Audit</span>
+                    <h1 className="text-6xl font-black font-tektur tracking-tighter italic leading-[0.85] mb-4 uppercase text-brand-dark">
+                        Initiate <span className="font-brand-serif font-light text-brand-accent lowercase italic">tender</span><br/>
+                        <span className="font-brand-serif font-light text-brand-accent lowercase italic">audit</span>
                     </h1>
-                    <p className="text-brand-muted text-[13px] font-bold uppercase tracking-[0.05em] font-tektur leading-relaxed opacity-80 max-w-sm">
-                        Ingest technical PDF documentation into the Brickanta AI engine for risk-gap extraction.
+                    <p className="text-brand-muted text-[15px] font-medium tracking-wide font-inter leading-relaxed opacity-90 max-w-xl">
+                        Securely ingest technical PDF documentation into the Brickanta AI engine for instant risk-gap extraction and structural integrity analysis.
                     </p>
                 </div>
 
@@ -100,7 +101,7 @@ export default function UploadPage() {
                     onClick={() => fileInputRef.current?.click()}
                     className={`
                         relative group cursor-pointer
-                        border-[3px] border-dashed p-24 transition-all duration-500
+                        border-[3px] border-dashed p-10 transition-all duration-500
                         flex flex-col items-center justify-center gap-8
                         ${isDragging ? "border-brand-accent bg-brand-dark/5 scale-[1.01]" : "border-brand-dark/10 hover:border-brand-accent hover:bg-brand-bg"}
                         ${file ? "border-brand-secondary bg-brand-paper" : ""}
@@ -115,12 +116,12 @@ export default function UploadPage() {
                     />
                     {!file ? (
                         <>
-                            <div className="w-20 h-20 bg-brand-bg border border-brand-dark/5 flex items-center justify-center text-brand-dark/20 group-hover:bg-brand-dark group-hover:text-brand-bg transition-all duration-700 shadow-sm">
-                                <Upload size={36} />
+                            <div className="w-20 h-20 bg-brand-bg border border-brand-dark/5 flex items-center justify-center text-brand-dark/30 group-hover:bg-brand-dark group-hover:text-brand-bg transition-all duration-700 shadow-sm rounded-sm mb-4">
+                                <Upload size={32} />
                             </div>
                             <div className="text-center font-tektur">
-                                <p className="font-black text-brand-dark uppercase tracking-[0.2em] text-[13px] mb-2">Select / Drop PDF Sequence</p>
-                                <p className="text-[11px] text-brand-muted tracking-[0.1em] font-black italic opacity-60 uppercase">MAX (50MB) • ISO CONSTRUCTION STANDARD</p>
+                                <p className="font-black text-brand-dark uppercase tracking-[0.2em] text-[15px] mb-2">Drop PDF Sequence Here</p>
+                                <p className="text-[12px] text-brand-muted tracking-[0.15em] font-black italic opacity-60 uppercase">MAX (50MB) • ISO CONSTRUCTION STANDARD</p>
                             </div>
                         </>
                     ) : (

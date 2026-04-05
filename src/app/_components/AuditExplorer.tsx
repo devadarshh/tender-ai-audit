@@ -109,9 +109,7 @@ export function AuditExplorer({ initialDocuments, userEmail }: AuditExplorerProp
                <p className="text-[14px] mt-4 uppercase tracking-[0.1em] font-black opacity-80 italic">Audits Sequence Active</p>
              </div>
              <BarChart3 size={200} className="absolute -bottom-16 -right-16 opacity-10 group-hover:scale-125 transition-transform duration-1000 rotate-12"/>
-             <button className="relative w-full border-t border-brand-paper/20 pt-6 text-[12px] uppercase font-black tracking-widest flex items-center justify-between group-hover:text-brand-accent transition-colors cursor-pointer">
-                Full Document Report <ChevronRight size={16}/>
-             </button>
+
           </div>
 
           {initialDocuments.map((doc) => (
