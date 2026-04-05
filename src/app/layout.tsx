@@ -28,7 +28,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Brickanta | Agentic AI for Society Builders",
   description: "AI platform for construction tender analysis and risk management.",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/icon.png" }],
 };
 
 export default function RootLayout({

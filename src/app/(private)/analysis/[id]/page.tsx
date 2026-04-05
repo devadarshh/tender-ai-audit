@@ -8,14 +8,16 @@ import {
 } from 'recharts';
 import { 
   ShieldAlert, Target, Clock, AlertTriangle, DollarSign, 
-  Zap, CheckCircle2, Info, Loader2, Search, TrendingUp
+  Zap, CheckCircle2, Info, Loader2, Search, TrendingUp, ChevronLeft
 } from "lucide-react";
+import Link from "next/link";
 import { getAnalysisResult } from "../../actions";
 import { toast } from "sonner";
 
 // --- Types ---
 
 interface AnalysisData {
+  document?: any;
   projectSnapshot: any;
   scopeGaps: string[];
   risks: any[];
@@ -93,20 +95,42 @@ export default function AnalysisPage() {
 
   // Formatting for Recharts
   const riskData = Object.entries(data.riskSummary || {}).map(([name, value]) => ({ name, value }));
-  const costData = Object.entries(data.costBreakdown || {}).map(([name, value]) => ({ name, value }));
+  const costData = Object.entries(data.costBreakdown || {}).map(([name, value]) => ({ 
+    name, 
+    value: typeof value === 'number' ? value : parseFloat(String(value).replace(/[^0-9.]/g, '')) || 10
+  }));
   const radialData = [{ name: 'Completeness', value: data.completenessScore || 0, fill: BRAND_COLORS.accent }];
+
+  const confidenceLevel = data.confidence?.level || 'Medium';
+  let confColorText = 'text-yellow-500';
+  let confColorBg = 'bg-yellow-500';
+  if (confidenceLevel === 'High') {
+    confColorText = 'text-[#10B981]'; // Tailwind emerald-500 hex
+    confColorBg = 'bg-[#10B981]';
+  } else if (confidenceLevel === 'Low') {
+    confColorText = 'text-[#F43F5E]'; // Tailwind rose-500 hex
+    confColorBg = 'bg-[#F43F5E]';
+  }
 
   return (
     <div className="min-h-screen bg-brand-bg p-8 pt-24 font-inter text-brand-dark overflow-x-hidden">
       <div className="max-w-7xl mx-auto space-y-12 animate-in slide-in-from-bottom-6 duration-1000">
         
+        {/* Navigation Back Action */}
+        <Link 
+          href="/overview" 
+          className="inline-flex items-center gap-2 text-[12px] font-black uppercase tracking-[0.2em] font-tektur text-brand-muted hover:text-brand-accent transition-colors w-fit"
+        >
+          <ChevronLeft size={16} /> Return to Ledger
+        </Link>
+
         {/* Brickanta Premium Header */}
         <div className="flex flex-col md:flex-row justify-between items-end gap-6 pb-8 border-b-2 border-brand-dark/10">
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-4 h-4 bg-brand-action rounded-xs"></div>
-              <span className="text-[12px] font-black uppercase tracking-[0.2em] font-tektur text-brand-secondary">
-                {data.projectSnapshot?.project_type || "Tender Document"} • Audited by Brickanta
+              <span className="text-[12px] font-black uppercase tracking-[0.2em] font-tektur text-brand-secondary truncate max-w-sm">
+                {data.document?.fileName || data.projectSnapshot?.project_type || "Tender Document"} • Audited by Brickanta
               </span>
             </div>
             <h1 className="text-6xl font-black tracking-tighter font-tektur leading-[0.8] mb-4">
@@ -120,11 +144,11 @@ export default function AnalysisPage() {
           <div className="text-right space-y-1">
             <p className="text-[12px] font-black text-brand-muted uppercase tracking-widest font-tektur text-right opacity-60">Confidence Level</p>
             <div className="flex items-center gap-4">
-               <span className={`text-2xl font-black font-tektur font-italic ${data.confidence?.level === 'High' ? 'text-brand-accent' : 'text-brand-secondary'}`}>
+               <span className={`text-2xl font-black font-tektur italic ${confColorText}`}>
                   {data.confidence?.score}%
                 </span>
                 <div className="w-32 h-1 bg-brand-dark/5 overflow-hidden">
-                  <div className="bg-brand-accent h-full transition-all duration-[2s]" style={{ width: `${data.confidence?.score}%` }}></div>
+                  <div className={`h-full transition-all duration-[2s] ${confColorBg}`} style={{ width: `${data.confidence?.score}%` }}></div>
                 </div>
             </div>
           </div>
@@ -162,16 +186,15 @@ export default function AnalysisPage() {
               <div className="bg-brand-dark p-10 py-12 rounded-sm text-brand-bg relative flex flex-col justify-between overflow-hidden shadow-2xl">
                 <div className="absolute -top-10 -right-10 p-20 opacity-5 rotate-12 scale-150"><Target size={300}/></div>
                 <div className="relative">
-                    <div className="flex items-center gap-3 mb-8">
+                    <div className="flex items-center gap-3 mb-6">
                       <div className="text-brand-accent font-tektur italic font-bold">Expert Verdict</div>
                     </div>
-                    <p className="font-brand-serif text-3xl font-light leading-snug italic text-brand-paper/90">
-                      "{data.recommendation}"
-                    </p>
+                    <div className="overflow-y-auto max-h-[300px] pr-4 custom-scrollbar">
+                      <p className="font-inter text-lg font-medium leading-relaxed italic text-brand-paper/90">
+                        "{data.recommendation}"
+                      </p>
+                    </div>
                 </div>
-                <button className="relative mt-12 w-full py-5 bg-brand-accent text-brand-bg font-black text-[12px] uppercase tracking-[0.3em] font-tektur hover:bg-brand-secondary transition-all active:scale-95">
-                  Prepare Strategic Response
-                </button>
               </div>
             </div>
 
