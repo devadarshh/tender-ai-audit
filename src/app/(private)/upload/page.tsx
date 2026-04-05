@@ -18,11 +18,11 @@ export default function UploadPage() {
     const validateAndSetFile = (selectedFile: File) => {
         setError(null);
         if (selectedFile.type !== "application/pdf") {
-            setError("Only PDF files are allowed");
+            setError("Document must be a PDF file.");
             return;
         }
         if (selectedFile.size > MAX_FILE_SIZE) {
-            setError("File size exceeds 50MB limit");
+            setError("Document size exceeds the 50MB construction standard.");
             return;
         }
         setFile(selectedFile);
@@ -40,19 +40,18 @@ export default function UploadPage() {
             const result = await uploadTenderToSupabase(formData, tempProjectId);
             
             if (result.success && result.documentId) {
-                toast.success("Upload Successful", {
-                    description: "Moving to analysis dashboard..."
+                toast.success("Sync Successful", {
+                    description: "Initializing Brickanta AI Audit..."
                 });
-                // Redirect to the analysis page for real-time results
                 router.push(`/analysis/${result.documentId}`);
             }
             else {
-                toast.error("Upload Failed", { description: result.error });
+                toast.error("Process Failed", { description: result.error });
                 setIsUploading(false);
             }
 
         } catch (error) {
-            toast.error("An unexpected error occurred");
+            toast.error("An unexpected error occurred during processing.");
             setIsUploading(false);
         }
     }
@@ -85,13 +84,26 @@ export default function UploadPage() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
-            <div className="w-full max-w-xl bg-white rounded-[2.5rem] shadow-2xl shadow-indigo-100/50 p-10 border border-slate-100">
-                <div className="text-center mb-10">
-                    <h1 className="text-4xl font-black text-slate-900 tracking-tighter italic">Upload Tender</h1>
-                    <p className="text-slate-400 mt-2 font-medium">Select your PDF document for expert AI audit.</p>
+        <div className="min-h-screen bg-brand-bg flex items-center justify-center p-6 font-inter text-brand-dark">
+            <div className="w-full max-w-2xl bg-brand-paper shadow-2xl shadow-brand-dark/10 p-12 border border-brand-dark/5 relative">
+                {/* Brand Decor */}
+                <div className="absolute top-0 left-0 w-2 h-full bg-brand-dark"></div>
+                <div className="absolute top-0 left-0 w-full h-1 bg-brand-accent"></div>
+
+                <div className="mb-12">
+                     <div className="flex items-center gap-2 mb-4">
+                        <div className="w-4 h-4 bg-brand-action"></div>
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] font-tektur opacity-40">Brickanta • Agentic MVP System</span>
+                    </div>
+                    <h1 className="text-5xl font-black font-tektur tracking-tighter italic leading-[0.8] mb-6">
+                        Upload <span className="font-brand-serif font-light text-brand-accent lowercase italic">tender</span>
+                    </h1>
+                    <p className="text-brand-muted text-xs font-medium uppercase tracking-[0.05em] font-tektur">
+                        Input technical PDF documentation for risk-gap assessment.
+                    </p>
                 </div>
 
+                {/* Dropzone Area */}
                 <div
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
@@ -99,10 +111,10 @@ export default function UploadPage() {
                     onClick={() => fileInputRef.current?.click()}
                     className={`
                         relative group cursor-pointer
-                        border-[3px] border-dashed rounded-3xl p-16 transition-all duration-500
+                        border-[2px] border-dotted p-20 transition-all duration-500
                         flex flex-col items-center justify-center gap-6
-                        ${isDragging ? "border-indigo-500 bg-indigo-50/50 scale-[1.03]" : "border-slate-100 hover:border-indigo-300 hover:bg-slate-50"}
-                        ${file ? "border-emerald-200 bg-emerald-50/20" : ""}
+                        ${isDragging ? "border-brand-accent bg-brand-dark/5 scale-[1.01]" : "border-brand-dark/10 hover:border-brand-accent hover:bg-brand-bg/50"}
+                        ${file ? "border-brand-secondary bg-brand-secondary/5" : ""}
                     `}
                 >
                     <input
@@ -114,45 +126,49 @@ export default function UploadPage() {
                     />
                     {!file ? (
                         <>
-                            <div className="w-20 h-20 bg-indigo-100/50 rounded-3xl flex items-center justify-center text-indigo-600 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-500">
-                                <Upload size={40} />
+                            <div className="w-16 h-16 bg-brand-paper border border-brand-dark/10 flex items-center justify-center text-brand-dark/20 group-hover:bg-brand-dark group-hover:text-brand-bg transition-all duration-500">
+                                <Upload size={32} />
                             </div>
-                            <div className="text-center">
-                                <p className="font-black text-slate-800 text-lg">Click to select PDF</p>
-                                <p className="text-xs text-slate-400 mt-1 uppercase font-black tracking-widest">Supports documents up to 50MB</p>
+                            <div className="text-center font-tektur">
+                                <p className="font-black text-brand-dark uppercase tracking-[0.2em] text-[11px]">Select / Drop PDF Audit</p>
+                                <p className="text-[10px] text-brand-muted mt-2 tracking-[0.1em] font-black italic">MAX (50MB) • CONSTRUCTION STANDARD</p>
                             </div>
                         </>
                     ) : (
-                        <div className="flex flex-col items-center gap-3">
-                            <div className="w-20 h-20 bg-emerald-100/50 rounded-3xl flex items-center justify-center text-emerald-600 animate-in zoom-in duration-300">
-                                <FileText size={40} />
+                        <div className="flex flex-col items-center gap-4 animate-in zoom-in duration-500">
+                            <div className="w-16 h-16 bg-brand-dark text-brand-bg flex items-center justify-center">
+                                <FileText size={32} />
                             </div>
-                            <p className="font-black text-slate-800 tracking-tight">{file.name}</p>
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none bg-slate-100 px-3 py-1 rounded-full">
-                                {(file.size / (1024 * 1024)).toFixed(2)} MB • READY
-                            </p>
+                            <div className="text-center">
+                                <p className="font-black text-brand-dark tracking-tighter uppercase font-tektur italic mb-1">{file.name}</p>
+                                <span className="text-[9px] font-black text-brand-secondary uppercase tracking-widest px-3 py-1 bg-brand-bg border border-brand-dark/5">
+                                    {(file.size / (1024 * 1024)).toFixed(2)} MB • READY FOR ANALYSIS
+                                </span>
+                            </div>
                         </div>
                     )}
                 </div>
 
-                <div className="mt-10 space-y-4">
+                {/* Info and Errors */}
+                <div className="mt-12 space-y-4">
                     {error && (
-                        <div className="flex items-center gap-3 text-rose-500 bg-rose-50 p-5 rounded-2xl text-sm font-bold border border-rose-100 animate-in slide-in-from-top-2">
-                            <AlertCircle size={20} />
-                            <span>{error}</span>
+                        <div className="flex items-center gap-3 text-brand-action bg-brand-paper p-5 border-l-4 border-brand-action text-[10px] uppercase font-black tracking-widest animate-in slide-in-from-top-2">
+                            <AlertCircle size={16} />
+                            <span>CRITICAL ERROR: {error}</span>
                         </div>
                     )}
                     {file && !error && (
-                        <div className="flex items-center justify-between bg-slate-50 p-5 rounded-2xl border border-slate-100 animate-in slide-in-from-bottom-2">
+                        <div className="flex items-center justify-between bg-brand-bg p-5 border border-brand-dark/5">
                             <div className="flex items-center gap-4">
-                                <CheckCircle2 size={24} className="text-emerald-500" />
-                                <span className="text-sm font-bold text-slate-700 font-mono italic">Document Verified</span>
+                                <CheckCircle2 size={18} className="text-brand-accent" />
+                                <span className="text-[10px] font-black text-brand-dark uppercase tracking-widest font-tektur leading-none shrink-0 border-r border-brand-dark/10 pr-4">Structure Verified</span>
+                                <span className="text-[10px] text-brand-muted truncate block max-w-[200px]">CRC SHA-2 Sequence VALIDATED</span>
                             </div>
                             <button
                                 onClick={(e) => { e.stopPropagation(); removeFile(); }}
-                                className="p-2 hover:bg-slate-200 rounded-full transition-colors text-slate-400"
+                                className="p-2 hover:bg-brand-dark hover:text-brand-bg transition-colors text-brand-muted"
                             >
-                                <X size={20} />
+                                <X size={16} />
                             </button>
                         </div>
                     )}
@@ -160,19 +176,20 @@ export default function UploadPage() {
                         onClick={handleUpload}
                         disabled={!file || !!error || isUploading}
                         className={`
-                            w-full py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all duration-500
-                            ${!file || !!error ? "bg-slate-100 text-slate-300 cursor-not-allowed" : "bg-slate-900 text-white hover:bg-indigo-700 hover:shadow-2xl hover:shadow-indigo-200 hover:-translate-y-1 active:scale-95"}
-                            flex items-center justify-center gap-3
+                            w-full py-6 font-black text-xs uppercase tracking-[0.4em] font-tektur transition-all duration-500
+                            ${!file || !!error ? "bg-brand-dark/10 text-brand-dark/40 cursor-not-allowed" : "bg-brand-dark text-brand-bg hover:bg-brand-accent hover:shadow-2xl active:scale-95"}
+                            flex items-center justify-center gap-4 relative overflow-hidden group
                         `}
                     >
                         {isUploading ? (
                             <>
-                                <Loader2 className="animate-spin" size={20} />
-                                Uploading to Vault...
+                                <Loader2 className="animate-spin" size={16} />
+                                Initiating Analysis...
                             </>
                         ) : (
-                            "Initiate AI Audit"
+                            "Initiate Expert Audit"
                         )}
+                        <div className="absolute inset-0 bg-brand-bg/10 -translate-x-full group-hover:translate-x-full transition-transform duration-[1.5s] ease-in-out"></div>
                     </button>
                 </div>
             </div>

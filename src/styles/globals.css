@@ -1,6 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* BRICKANTA DESIGN TOKENS */
+  --color-brand-bg: #FBFBF3;
+  --color-brand-dark: #0C152F;
+  --color-brand-accent: #A65536;
+  --color-brand-muted: #57534E;
+  --color-brand-secondary: #8C704B;
+  --color-brand-action: #FF1E00;
+  --color-brand-paper: #F5F0E6;
+
+  --font-tektur: var(--font-tektur), ui-sans-serif, system-ui;
+  --font-platypi: var(--font-platypi), serif;
+  --font-inter: var(--font-inter), sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-inter);
+    background-color: var(--color-brand-bg);
+    color: var(--color-brand-dark);
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-tektur);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Specific Serif accent for special headings */
+  .font-brand-serif {
+    font-family: var(--font-platypi);
+  }
 }
