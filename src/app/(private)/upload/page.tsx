@@ -1,33 +1,53 @@
-"use client";
-import React, { useState, useRef } from "react";
+"use client"
+import { useState, useRef } from "react";
 import { Upload, FileText, X, CheckCircle2, AlertCircle } from "lucide-react";
+import { toast } from "sonner";
+
 export default function UploadPage() {
     const [file, setFile] = useState<File | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isDragging, setIsDragging] = useState(false);
-    const [isUploading, setIsUploading] = useState(false); // For future backend
+    const [isUploading, setIsUploading] = useState(false);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
+    const MAX_FILE_SIZE = 50 * 1024 * 1024;
+
+
     const validateAndSetFile = (selectedFile: File) => {
         setError(null);
 
-        // 1. Check if it's a PDF
         if (selectedFile.type !== "application/pdf") {
-            setError("Only PDF files are allowed.");
+            setError("Only PDF files are allowed");
             return;
         }
-        // 2. Check size
         if (selectedFile.size > MAX_FILE_SIZE) {
-            setError("File size exceeds 50MB limit.");
+            setError("File size exceeds 50MB limit");
             return;
+
         }
         setFile(selectedFile);
+    }
+    const handleUpload = async () => {
+        if (!file) return;
+        setIsUploading(true);
+        setTimeout(() => {
+            setIsUploading(false);
+
+            toast.success("Upload Successful", {
+                description: `${file.name} has been uploaded and analysis started.`,
+                duration: 4000,
+            });
+
+            setFile(null);
+            if (fileInputRef.current) fileInputRef.current.value = "";
+        }, 2000);
     };
+
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault();
         setIsDragging(true);
-    };
+    }
+
     const handleDragLeave = () => {
         setIsDragging(false);
     };
@@ -37,15 +57,18 @@ export default function UploadPage() {
         const droppedFile = e.dataTransfer.files?.[0];
         if (droppedFile) validateAndSetFile(droppedFile);
     };
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedFile = e.target.files?.[0];
+
+    const handleFileChange = (error: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = error.target.files?.[0];
         if (selectedFile) validateAndSetFile(selectedFile);
     };
+
     const removeFile = () => {
         setFile(null);
         setError(null);
         if (fileInputRef.current) fileInputRef.current.value = "";
     };
+
     return (
         <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
             <div className="w-full max-w-xl bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-8 border border-slate-100">
@@ -128,5 +151,6 @@ export default function UploadPage() {
                 </div>
             </div>
         </div>
-    );
+    )
 }
+
