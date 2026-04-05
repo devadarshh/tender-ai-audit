@@ -216,89 +216,117 @@ export default function AnalysisPage() {
                 Document data is {data.completenessScore}% resolved against Brickanta's standards.
               </p>
             </div>
+          </div>          <div className="border-b-2 border-brand-dark/10 pb-6 mb-12 flex items-center justify-between">
+            <h2 className="text-4xl font-black font-tektur uppercase tracking-tighter italic">Gap <span className="font-brand-serif italic font-light lowercase">analysis</span></h2>
+            <div className="flex items-center gap-4">
+               <div className="flex items-center gap-3 bg-brand-dark text-brand-paper px-4 py-2 rounded-xs">
+                  <span className="w-2 h-2 rounded-full bg-brand-action animate-pulse"></span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] font-tektur italic">Live AI Sync</span>
+               </div>
+            </div>
           </div>
 
-
-
           {/* Bottom Level Analytics Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            <div className="lg:col-span-2 space-y-10">
-              <div className="flex items-center justify-between border-b border-brand-dark/10 pb-4">
-                <h2 className="text-3xl font-black font-tektur uppercase tracking-tighter">Gap <span className="font-brand-serif italic font-light lowercase">Analysis</span></h2>
-                <div className="flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-brand-action animate-pulse"></span>
-                  <span className="text-[11px] font-black opacity-60 uppercase tracking-widest font-tektur">Live AI Sync</span>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                <div className="space-y-4 bg-brand-paper/50 p-6 rounded border border-brand-dark/5">
-                  <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-6 block border-b border-brand-dark/5 pb-2">Identified Scope Gaps</h3>
-                  {(data.scopeGaps || []).map((gap, i) => (
-                    <div key={i} className="p-5 bg-brand-bg border border-brand-dark/5 text-[13px] font-bold text-brand-dark leading-relaxed flex items-start gap-4 shadow-sm">
-                      <span className="text-brand-action text-[12px] mt-1 shrink-0">❗</span>
-                      <span>{gap}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="space-y-4">
-                   <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-6 block border-b border-brand-dark/5 pb-2">Risk Inventory</h3>
-                    {(data.risks || []).map((risk, i) => (
-                      <div key={i} className="flex items-start justify-between p-6 bg-brand-paper border border-brand-dark/5 hover:border-brand-accent transition-all cursor-default group shadow-sm">
-                        <div className="flex items-start gap-4 pr-4">
-                          <div className={`w-8 h-8 rounded-xs flex items-center justify-center shrink-0 mt-0.5 ${risk.severity === 'High' ? 'bg-brand-action/10 text-brand-action' : 'bg-brand-accent/10 text-brand-accent'}`}>
-                            <AlertTriangle size={16}/>
-                          </div>
-                          <div className="flex flex-col gap-1.5">
-                            <p className="text-[13px] font-bold font-inter text-brand-dark leading-relaxed">{risk.issue}</p>
-                            <span className="text-[11px] font-black text-brand-muted uppercase tracking-[0.1em] opacity-80">{risk.category}</span>
-                          </div>
-                        </div>
-                        <span className={`px-4 py-2 shrink-0 rounded-sm text-[10px] font-black uppercase tracking-widest ${SEVERITY_COLORS[risk.severity as keyof typeof SEVERITY_COLORS]}`}>
-                          {risk.severity}
-                        </span>
-                      </div>
-                    ))}
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 items-start">
+            
+            {/* Scope Gaps - Column 1 */}
+            <div className="lg:col-span-1 space-y-6">
+              <h3 className="text-[11px] font-black text-brand-muted uppercase tracking-[0.2em] mb-8 pb-3 border-b border-brand-dark/5 font-tektur italic">01. Identified Gaps</h3>
+              <div className="space-y-4">
+                {(data.scopeGaps || []).map((gap, i) => (
+                  <div key={i} className="p-6 bg-brand-paper border border-brand-dark/5 text-[13px] font-bold text-brand-dark leading-relaxed flex items-start gap-4 hover:shadow-xl hover:border-brand-accent/20 transition-all group relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-1 h-full bg-brand-action/20 group-hover:bg-brand-action transition-colors"></div>
+                    <span className="text-brand-action text-[14px] mt-0.5 shrink-0">❗</span>
+                    <span>{gap}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="space-y-8">
-              <div className="bg-brand-bg p-8 border border-brand-dark/10 h-[280px] shadow-sm flex flex-col justify-between">
-                <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-4 font-tektur group flex items-center gap-2">
-                  <TrendingUp size={12}/> Risk Matrix
-                </h3>
-                <div className="h-[200px] w-full">
+            {/* Risk Inventory - Column 2 */}
+            <div className="lg:col-span-2 space-y-6">
+              <h3 className="text-[11px] font-black text-brand-muted uppercase tracking-[0.2em] mb-8 pb-3 border-b border-brand-dark/5 font-tektur italic">02. Risk Inventory</h3>
+              <div className="grid grid-cols-1 gap-4">
+                {(data.risks || []).map((risk, i) => (
+                  <div key={i} className="flex items-start justify-between p-7 bg-brand-paper border border-brand-dark/5 hover:border-brand-accent transition-all cursor-default group shadow-sm hover:shadow-2xl">
+                    <div className="flex items-start gap-5 pr-6">
+                      <div className={`w-10 h-10 rounded-xs flex items-center justify-center shrink-0 mt-0.5 ${risk.severity === 'High' ? 'bg-brand-action/10 text-brand-action' : 'bg-brand-accent/10 text-brand-accent'}`}>
+                        <AlertTriangle size={20}/>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <p className="text-[14px] font-bold font-inter text-brand-dark leading-relaxed">{risk.issue}</p>
+                        <div className="flex items-center gap-3">
+                          <span className="text-[10px] font-black text-brand-muted uppercase tracking-[0.2em] opacity-80">{risk.category}</span>
+                          <span className="w-1 h-1 rounded-full bg-brand-dark/20"></span>
+                          <span className="text-[9px] font-black text-brand-muted/40 uppercase tracking-widest font-mono">SEQ-RISK-0{i+1}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <span className={`px-5 py-2.5 shrink-0 rounded-sm text-[10px] font-black uppercase tracking-[0.2em] ${SEVERITY_COLORS[risk.severity as keyof typeof SEVERITY_COLORS]}`}>
+                      {risk.severity}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Visual Analytics - Column 3 */}
+            <div className="lg:col-span-1 space-y-10">
+              <h3 className="text-[11px] font-black text-brand-muted uppercase tracking-[0.2em] mb-8 pb-3 border-b border-brand-dark/5 font-tektur italic">03. Statistics</h3>
+              
+              <div className="bg-brand-bg p-8 border border-brand-dark/10 shadow-sm flex flex-col justify-between group hover:border-brand-dark/30 transition-all">
+                <div className="flex justify-between items-start mb-6">
+                  <h4 className="text-[10px] font-black text-brand-muted uppercase tracking-widest font-tektur flex items-center gap-2">
+                    <TrendingUp size={12}/> Risk Matrix
+                  </h4>
+                  <span className="text-[9px] font-black font-mono text-brand-accent px-2 py-0.5 bg-brand-accent/5 rounded-full">
+                    {riskData.reduce((acc, curr) => acc + (curr.value as number), 0)} Total Issues Found
+                  </span>
+                </div>
+                <div className="h-[180px] w-full">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={riskData} margin={{ top: 0, right: 30, left: -20, bottom: 0 }}>
+                    <BarChart data={riskData} margin={{ top: 20, right: 10, left: -40, bottom: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E6E1D7" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 9, fontWeight: 900, fill: '#9C9B98', letterSpacing: 1}} />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 8, fontWeight: 900, fill: '#9C9B98', letterSpacing: 1}} />
                       <YAxis hide />
-                      <Tooltip cursor={{fill: 'rgba(12, 21, 47, 0.05)'}} contentStyle={{borderRadius: '0px', border: 'none', backgroundColor: '#0C152F', color: '#FBFBF3', fontSize: '10px'}} />
-                      <Bar dataKey="value" fill={BRAND_COLORS.dark} radius={[0, 0, 0, 0]} barSize={20} />
+                      <Tooltip 
+                        cursor={{fill: 'rgba(12, 21, 47, 0.05)'}} 
+                        content={({ active, payload }) => {
+                          if (active && payload && payload.length) {
+                            return (
+                              <div className="bg-brand-dark text-brand-bg p-3 shadow-2xl border border-brand-accent/20">
+                                <p className="text-[10px] font-black uppercase tracking-widest mb-1">{payload[0]!.payload.name}</p>
+                                <p className="text-xl font-black font-tektur italic text-brand-accent">{payload[0]!.value} Risks</p>
+                              </div>
+                            );
+                          }
+                          return null;
+                        }}
+                      />
+                      <Bar dataKey="value" fill={BRAND_COLORS.dark} radius={[0, 0, 0, 0]} barSize={35} label={{ position: 'top', fill: '#A65536', fontSize: 11, fontWeight: 900, offset: 10, formatter: (val: any) => val > 0 ? val : '' }} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
               </div>
 
-              <div className="bg-brand-paper p-8 border border-brand-dark/5 shadow-sm">
-                <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-6 font-tektur">Financial Signals</h3>
-                <div className="h-[250px] w-full">
+              <div className="bg-brand-paper p-8 border border-brand-dark/5 shadow-sm group hover:border-brand-accent/20 transition-all">
+                <h4 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-6 font-tektur">Financial Signals</h4>
+                <div className="h-[220px] w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart margin={{ top: 0, bottom: 20 }}>
-                      <Pie data={costData} innerRadius={60} outerRadius={85} paddingAngle={0} dataKey="value" stroke="none" cx="50%" cy="45%">
+                      <Pie data={costData} innerRadius={55} outerRadius={75} paddingAngle={2} dataKey="value" stroke="none" cx="50%" cy="45%">
                         {costData.map((_, index) => (
                           <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
                         ))}
                       </Pie>
                       <Tooltip />
-                      <Legend verticalAlign="bottom" iconType="rect" wrapperStyle={{fontSize: '9px', fontWeight: 900, paddingTop: '30px', textTransform: 'uppercase', letterSpacing: 1}} />
+                      <Legend verticalAlign="bottom" iconType="rect" wrapperStyle={{fontSize: '8px', fontWeight: 900, paddingTop: '20px', textTransform: 'uppercase', letterSpacing: 1.5}} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
