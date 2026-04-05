@@ -139,8 +139,7 @@ OUTPUT FORMAT (STRICT)
   "confidence": {
     "level": "Low | Medium | High",
     "score": number
-  },
-  "completeness_score": number
+  }
 }
 `;
 
@@ -166,7 +165,7 @@ OUTPUT FORMAT (STRICT)
       costBreakdown: parsedData.cost_breakdown,
       recommendation: parsedData.recommendation,
       confidence: parsedData.confidence,
-      completenessScore: parsedData.completeness_score,
+      completenessScore: parsedData.confidence.score,
     },
     create: {
       documentId: documentId,
@@ -178,7 +177,7 @@ OUTPUT FORMAT (STRICT)
       costBreakdown: parsedData.cost_breakdown,
       recommendation: parsedData.recommendation,
       confidence: parsedData.confidence,
-      completenessScore: parsedData.completeness_score,
+      completenessScore: parsedData.confidence.score,
     }
   });
 }

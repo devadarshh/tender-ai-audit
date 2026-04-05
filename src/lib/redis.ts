@@ -46,7 +46,7 @@ if (!isValidUrl) {
         redis = new IORedis(trimmedUrl, {
             maxRetriesPerRequest: null,
             enableReadyCheck: false,
-            lazyConnect: true,
+            lazyConnect: false,
         });
 
         redis.on("error", (err: Error & { command?: { name?: string } }) => {

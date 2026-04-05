@@ -43,6 +43,11 @@ export const pdfWorker = new Worker<FileJobData>(
 
             if (!docRecord) throw new Error(`Document ${documentId} not found.`);
 
+            await prisma.document.update({
+                where: { id: documentId },
+                data: { status: "downloading" }
+            });
+
             console.log(`📦 Status: Downloading ${docRecord.fileName}...`);
             const { data: blob, error: downloadError } = await supabase.storage
                 .from("Files")
@@ -58,7 +63,7 @@ export const pdfWorker = new Worker<FileJobData>(
 
             await prisma.document.update({
                 where: { id: documentId },
-                data: { status: "processing" }
+                data: { status: "embedding" }
             });
 
             const chunks = await splitter.splitDocuments([
@@ -69,20 +74,39 @@ export const pdfWorker = new Worker<FileJobData>(
             ]);
 
             console.log(`🧠 Status: Generating embeddings for ${chunks.length} chunks...`);
-            const embeddings = (await hf.featureExtraction({
-                model: "sentence-transformers/all-MiniLM-L6-v2",
-                inputs: chunks.map((c) => c.pageContent),
-            })) as number[][];
+            
+            // --- SENIOR ENGINEER FIX: Batching Embeddings ---
+            // Large documents will timeout the HF API if sent in one payload.
+            const BATCH_SIZE = 25;
+            const points = [];
+            
+            for (let i = 0; i < chunks.length; i += BATCH_SIZE) {
+                const batchChunks = chunks.slice(i, i + BATCH_SIZE);
+                console.log(`   └> Progress: ${i}/${chunks.length} chunks...`);
+                
+                const batchEmbeddings = (await hf.featureExtraction({
+                    model: "sentence-transformers/all-MiniLM-L6-v2",
+                    inputs: batchChunks.map((c) => c.pageContent),
+                })) as number[][];
 
-            const points = chunks.map((chunk, i) => ({
-                id: uuidv4(),
-                vector: embeddings[i]!,
-                payload: { ...chunk.metadata, content: chunk.pageContent },
-            }));
+                const batchPoints = batchChunks.map((chunk, j) => ({
+                    id: uuidv4(),
+                    vector: batchEmbeddings[j]!,
+                    payload: { ...chunk.metadata, content: chunk.pageContent },
+                }));
+                
+                points.push(...batchPoints);
+            }
 
+            console.log(`💾 STATUS: Storing ${points.length} points in Qdrant...`);
             await qdrantClient.upsert(COLLECTION_NAME, { points });
             
             // --- AUTOMATIC AI ANALYSIS STAGE ---
+            await prisma.document.update({
+                where: { id: documentId },
+                data: { status: "analyzing" }
+            });
+
             console.log(`🔍 AI Status: Analyzing ${docRecord.fileName} for construction risks...`);
             const analysisContext = pdfData.text.slice(0, 30000); 
             await runConstructionAnalysis(documentId, analysisContext);
@@ -100,7 +124,11 @@ export const pdfWorker = new Worker<FileJobData>(
             throw err;
         }
     },
-    { connection: redis as any, concurrency: 5 }
+    { connection: redis as any, concurrency: 2 }
 );
 
+// Explicit Event Listeners for Better Terminal Visibility
 pdfWorker.on("ready", () => console.log("✅ Worker engine online."));
+pdfWorker.on("active", (job) => console.log(`👉 Job ${job.id} picked up by this worker.`));
+pdfWorker.on("failed", (job, err) => console.error(`🚨 Job ${job?.id} FAILED:`, err.message));
+pdfWorker.on("error", (err) => console.error(`⚠️ Worker Error:`, err.message));

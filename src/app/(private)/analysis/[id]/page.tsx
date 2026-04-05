@@ -146,10 +146,10 @@ export default function AnalysisPage() {
             <p className="text-[12px] font-black text-brand-muted uppercase tracking-widest font-tektur text-right opacity-60">Confidence Level</p>
             <div className="flex items-center gap-4">
                <span className={`text-2xl font-black font-tektur italic ${confColorText}`}>
-                  {data.confidence?.score}%
+                  {data.completenessScore}%
                 </span>
                 <div className="w-32 h-1 bg-brand-dark/5 overflow-hidden">
-                  <div className={`h-full transition-all duration-[2s] ${confColorBg}`} style={{ width: `${data.confidence?.score}%` }}></div>
+                  <div className={`h-full transition-all duration-[2s] ${confColorBg}`} style={{ width: `${data.completenessScore}%` }}></div>
                 </div>
             </div>
           </div>
@@ -235,7 +235,7 @@ export default function AnalysisPage() {
                 <div className="space-y-4 bg-brand-paper/50 p-6 rounded border border-brand-dark/5">
                   <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-6 block border-b border-brand-dark/5 pb-2">Identified Scope Gaps</h3>
                   {(data.scopeGaps || []).map((gap, i) => (
-                    <div key={i} className="p-5 bg-brand-bg border border-brand-dark/5 text-[13px] font-inter font-medium text-brand-dark/90 leading-relaxed flex items-start gap-4 shadow-sm">
+                    <div key={i} className="p-5 bg-brand-bg border border-brand-dark/5 text-[13px] font-bold text-brand-dark leading-relaxed flex items-start gap-4 shadow-sm">
                       <span className="text-brand-action text-[12px] mt-1 shrink-0">❗</span>
                       <span>{gap}</span>
                     </div>
@@ -245,17 +245,17 @@ export default function AnalysisPage() {
                 <div className="space-y-4">
                    <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-6 block border-b border-brand-dark/5 pb-2">Risk Inventory</h3>
                     {(data.risks || []).map((risk, i) => (
-                      <div key={i} className="flex items-center justify-between p-6 bg-brand-paper border border-brand-dark/5 hover:border-brand-accent transition-all cursor-default group shadow-sm">
-                        <div className="flex items-center gap-4">
-                          <div className={`w-8 h-8 rounded-xs flex items-center justify-center ${risk.severity === 'High' ? 'bg-brand-action/10 text-brand-action' : 'bg-brand-accent/10 text-brand-accent'}`}>
+                      <div key={i} className="flex items-start justify-between p-6 bg-brand-paper border border-brand-dark/5 hover:border-brand-accent transition-all cursor-default group shadow-sm">
+                        <div className="flex items-start gap-4 pr-4">
+                          <div className={`w-8 h-8 rounded-xs flex items-center justify-center shrink-0 mt-0.5 ${risk.severity === 'High' ? 'bg-brand-action/10 text-brand-action' : 'bg-brand-accent/10 text-brand-accent'}`}>
                             <AlertTriangle size={16}/>
                           </div>
-                          <div>
-                            <p className="text-[13px] font-black uppercase font-tektur text-brand-dark tracking-tight leading-none mb-1">{risk.issue}</p>
-                            <span className="text-[11px] font-black text-brand-muted uppercase tracking-[0.1em] opacity-60">{risk.category}</span>
+                          <div className="flex flex-col gap-1.5">
+                            <p className="text-[13px] font-bold font-inter text-brand-dark leading-relaxed">{risk.issue}</p>
+                            <span className="text-[11px] font-black text-brand-muted uppercase tracking-[0.1em] opacity-80">{risk.category}</span>
                           </div>
                         </div>
-                        <span className={`px-4 py-2 rounded-sm text-[10px] font-black uppercase tracking-widest ${SEVERITY_COLORS[risk.severity as keyof typeof SEVERITY_COLORS]}`}>
+                        <span className={`px-4 py-2 shrink-0 rounded-sm text-[10px] font-black uppercase tracking-widest ${SEVERITY_COLORS[risk.severity as keyof typeof SEVERITY_COLORS]}`}>
                           {risk.severity}
                         </span>
                       </div>

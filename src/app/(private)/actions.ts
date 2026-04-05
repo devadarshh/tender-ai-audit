@@ -38,7 +38,11 @@ export async function uploadTenderToSupabase(formData: FormData, projectId: stri
         });
 
         // 3. Queue the background processing job
-        // Senior Tip: Always log when adding to queue to verify producer is working
+        await prisma.document.update({
+            where: { id: doc.id },
+            data: { status: "queued" }
+        });
+
         console.log(`📡 Adding document ${doc.id} to file-upload-queue...`);
         
         await fileQueue.add("process-pdf", {
