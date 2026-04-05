@@ -155,51 +155,74 @@ export default function AnalysisPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-          
-          <div className="lg:col-span-3 space-y-12">
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="bg-brand-paper p-8 rounded-sm border-l-4 border-brand-dark h-full relative group hover:shadow-2xl hover:shadow-brand-dark/5 transition-all">
+        <div className="space-y-12">
+          {/* Expert Verdict Dedicated Area */}
+          <div className="bg-brand-dark p-12 py-16 rounded-sm text-brand-bg relative flex flex-col overflow-hidden shadow-2xl">
+            <div className="absolute -top-20 -right-10 p-20 opacity-5 rotate-12 scale-150"><Target size={400}/></div>
+            <div className="relative z-10 w-full max-w-5xl">
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="text-brand-accent"><Zap size={24}/></div>
-                  <h2 className="text-xl font-black font-tektur tracking-tight uppercase">Snapshot</h2>
+                  <div className="text-brand-accent font-tektur italic font-bold tracking-wider text-xl uppercase">Expert Verdict</div>
                 </div>
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3 bg-brand-dark/5 p-3 rounded">
-                    <Clock size={16} className="text-brand-secondary"/>
-                    <span className="text-[13px] uppercase font-black tracking-widest">Est. Timeline: {data.projectSnapshot?.timeline || "N/A"}</span>
-                  </div>
-                  <div className="space-y-4">
-                    <p className="text-[12px] font-black text-brand-muted uppercase tracking-widest mb-2">Documented Scope</p>
-                    <ul className="space-y-4">
-                      {(data.projectSnapshot?.scope || []).map((item: string, i: number) => (
-                        <li key={i} className="text-[13px] text-brand-dark flex items-start gap-4 font-bold leading-relaxed">
-                          <span className="w-2 h-2 rounded-full bg-brand-accent mt-1.5 shrink-0"></span>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <div>
+                  <p className="font-brand-serif text-2xl font-light leading-[1.6] italic text-brand-paper/95">
+                    "{data.recommendation}"
+                  </p>
                 </div>
-              </div>
+            </div>
+          </div>
 
-              <div className="bg-brand-dark p-10 py-12 rounded-sm text-brand-bg relative flex flex-col justify-between overflow-hidden shadow-2xl">
-                <div className="absolute -top-10 -right-10 p-20 opacity-5 rotate-12 scale-150"><Target size={300}/></div>
-                <div className="relative">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="text-brand-accent font-tektur italic font-bold">Expert Verdict</div>
-                    </div>
-                    <div className="overflow-y-auto max-h-[300px] pr-4 custom-scrollbar">
-                      <p className="font-inter text-lg font-medium leading-relaxed italic text-brand-paper/90">
-                        "{data.recommendation}"
-                      </p>
-                    </div>
+          {/* Top Level Metric Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            <div className="bg-brand-paper p-8 rounded-sm border-l-4 border-brand-dark h-full relative group hover:shadow-2xl hover:shadow-brand-dark/5 transition-all">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="text-brand-accent"><Zap size={24}/></div>
+                <h2 className="text-xl font-black font-tektur tracking-tight uppercase">Snapshot</h2>
+              </div>
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 bg-brand-dark/5 p-3 rounded">
+                  <Clock size={16} className="text-brand-secondary"/>
+                  <span className="text-[13px] uppercase font-black tracking-widest">Est. Timeline: {data.projectSnapshot?.timeline || "N/A"}</span>
+                </div>
+                <div className="space-y-4">
+                  <p className="text-[12px] font-black text-brand-muted uppercase tracking-widest mb-2">Documented Scope</p>
+                  <ul className="space-y-4">
+                    {(data.projectSnapshot?.scope || []).map((item: string, i: number) => (
+                      <li key={i} className="text-[13px] text-brand-dark flex items-start gap-4 font-bold leading-relaxed">
+                        <span className="w-2 h-2 rounded-full bg-brand-accent mt-1.5 shrink-0"></span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-10">
+            <div className="bg-brand-paper p-8 rounded-sm border border-brand-dark/5 flex flex-col items-center h-full justify-center shadow-sm">
+              <div className="self-start mb-6">
+                <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest font-tektur">Document Integrity</h3>
+              </div>
+              <div className="relative w-full h-[180px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadialBarChart cx="50%" cy="50%" innerRadius="70%" outerRadius="100%" barSize={15} data={radialData} startAngle={90} endAngle={-270}>
+                    <RadialBar background dataKey="value" cornerRadius={0} />
+                  </RadialBarChart>
+                </ResponsiveContainer>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center mt-2">
+                  <p className="text-4xl font-black text-brand-dark tracking-tighter font-tektur">{data.completenessScore}%</p>
+                  <p className="text-[10px] font-black text-brand-muted uppercase tracking-widest scale-75 font-tektur">Ready</p>
+                </div>
+              </div>
+              <p className="text-[11px] text-brand-muted text-center font-medium mt-4 leading-relaxed">
+                Document data is {data.completenessScore}% resolved against Brickanta's standards.
+              </p>
+            </div>
+          </div>
+
+
+
+          {/* Bottom Level Analytics Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <div className="lg:col-span-2 space-y-10">
               <div className="flex items-center justify-between border-b border-brand-dark/10 pb-4">
                 <h2 className="text-3xl font-black font-tektur uppercase tracking-tighter">Gap <span className="font-brand-serif italic font-light lowercase">Analysis</span></h2>
                 <div className="flex items-center gap-3">
@@ -212,7 +235,7 @@ export default function AnalysisPage() {
                 <div className="space-y-4 bg-brand-paper/50 p-6 rounded border border-brand-dark/5">
                   <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-6 block border-b border-brand-dark/5 pb-2">Identified Scope Gaps</h3>
                   {(data.scopeGaps || []).map((gap, i) => (
-                    <div key={i} className="p-5 bg-brand-bg border border-brand-dark/5 text-[13px] font-inter font-medium text-brand-dark/90 leading-relaxed flex items-start gap-4">
+                    <div key={i} className="p-5 bg-brand-bg border border-brand-dark/5 text-[13px] font-inter font-medium text-brand-dark/90 leading-relaxed flex items-start gap-4 shadow-sm">
                       <span className="text-brand-action text-[12px] mt-1 shrink-0">❗</span>
                       <span>{gap}</span>
                     </div>
@@ -222,7 +245,7 @@ export default function AnalysisPage() {
                 <div className="space-y-4">
                    <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-6 block border-b border-brand-dark/5 pb-2">Risk Inventory</h3>
                     {(data.risks || []).map((risk, i) => (
-                      <div key={i} className="flex items-center justify-between p-6 bg-brand-paper border border-brand-dark/5 hover:border-brand-accent transition-all cursor-default group">
+                      <div key={i} className="flex items-center justify-between p-6 bg-brand-paper border border-brand-dark/5 hover:border-brand-accent transition-all cursor-default group shadow-sm">
                         <div className="flex items-center gap-4">
                           <div className={`w-8 h-8 rounded-xs flex items-center justify-center ${risk.severity === 'High' ? 'bg-brand-action/10 text-brand-action' : 'bg-brand-accent/10 text-brand-accent'}`}>
                             <AlertTriangle size={16}/>
@@ -240,61 +263,40 @@ export default function AnalysisPage() {
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="space-y-12 h-fit">
-            
-            <div className="bg-brand-paper p-8 rounded-sm border border-brand-dark/5 flex flex-col items-center">
-              <div className="self-start mb-10">
-                <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest font-tektur">Document Integrity</h3>
-              </div>
-              <div className="relative w-full h-[200px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <RadialBarChart cx="50%" cy="50%" innerRadius="70%" outerRadius="100%" barSize={15} data={radialData} startAngle={90} endAngle={-270}>
-                    <RadialBar background dataKey="value" cornerRadius={0} />
-                  </RadialBarChart>
-                </ResponsiveContainer>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center mt-2">
-                  <p className="text-4xl font-black text-brand-dark tracking-tighter font-tektur">{data.completenessScore}%</p>
-                  <p className="text-[10px] font-black text-brand-muted uppercase tracking-widest scale-75 font-tektur">Ready</p>
+            <div className="space-y-8">
+              <div className="bg-brand-bg p-8 border border-brand-dark/10 h-[280px] shadow-sm flex flex-col justify-between">
+                <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-4 font-tektur group flex items-center gap-2">
+                  <TrendingUp size={12}/> Risk Matrix
+                </h3>
+                <div className="h-[200px] w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={riskData} margin={{ top: 0, right: 30, left: -20, bottom: 0 }}>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E6E1D7" />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 9, fontWeight: 900, fill: '#9C9B98', letterSpacing: 1}} />
+                      <YAxis hide />
+                      <Tooltip cursor={{fill: 'rgba(12, 21, 47, 0.05)'}} contentStyle={{borderRadius: '0px', border: 'none', backgroundColor: '#0C152F', color: '#FBFBF3', fontSize: '10px'}} />
+                      <Bar dataKey="value" fill={BRAND_COLORS.dark} radius={[0, 0, 0, 0]} barSize={20} />
+                    </BarChart>
+                  </ResponsiveContainer>
                 </div>
               </div>
-              <p className="text-[11px] text-brand-muted text-center font-medium mt-6 leading-relaxed">
-                Document data is {data.completenessScore}% resolved against Brickanta's construction standards.
-              </p>
-            </div>
 
-            <div className="bg-brand-bg p-8 border border-brand-dark/10 h-72">
-              <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-8 font-tektur group flex items-center gap-2">
-                <TrendingUp size={12}/> Risk Matrix
-              </h3>
-              <div className="h-[200px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={riskData} margin={{ top: 0, right: 30, left: -20, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E6E1D7" />
-                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 9, fontWeight: 900, fill: '#9C9B98', letterSpacing: 1}} />
-                    <YAxis hide />
-                    <Tooltip cursor={{fill: 'rgba(12, 21, 47, 0.05)'}} contentStyle={{borderRadius: '0px', border: 'none', backgroundColor: '#0C152F', color: '#FBFBF3', fontSize: '10px'}} />
-                    <Bar dataKey="value" fill={BRAND_COLORS.dark} radius={[0, 0, 0, 0]} barSize={20} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-            <div className="bg-brand-paper p-8 border border-brand-dark/5">
-              <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-8 font-tektur">Financial Signals</h3>
-              <div className="h-[180px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie data={costData} innerRadius={60} outerRadius={85} paddingAngle={0} dataKey="value" stroke="none">
-                      {costData.map((_, index) => (
-                        <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                    <Legend verticalAlign="bottom" iconType="rect" wrapperStyle={{fontSize: '9px', fontWeight: 900, paddingTop: '30px', textTransform: 'uppercase', letterSpacing: 1}} />
-                  </PieChart>
-                </ResponsiveContainer>
+              <div className="bg-brand-paper p-8 border border-brand-dark/5 shadow-sm">
+                <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-6 font-tektur">Financial Signals</h3>
+                <div className="h-[250px] w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart margin={{ top: 0, bottom: 20 }}>
+                      <Pie data={costData} innerRadius={60} outerRadius={85} paddingAngle={0} dataKey="value" stroke="none" cx="50%" cy="45%">
+                        {costData.map((_, index) => (
+                          <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                      <Legend verticalAlign="bottom" iconType="rect" wrapperStyle={{fontSize: '9px', fontWeight: 900, paddingTop: '30px', textTransform: 'uppercase', letterSpacing: 1}} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
               </div>
             </div>
           </div>
