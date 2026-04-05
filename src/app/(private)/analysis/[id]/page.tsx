@@ -95,10 +95,11 @@ export default function AnalysisPage() {
 
   // Formatting for Recharts
   const riskData = Object.entries(data.riskSummary || {}).map(([name, value]) => ({ name, value }));
-  const costData = Object.entries(data.costBreakdown || {}).map(([name, value]) => ({ 
-    name, 
-    value: typeof value === 'number' ? value : parseFloat(String(value).replace(/[^0-9.]/g, '')) || 10
-  }));
+  const costData = Object.entries(data.costBreakdown || {}).map(([name, value]) => {
+    let parsed = typeof value === 'number' ? value : parseFloat(String(value).replace(/[^0-9.]/g, ''));
+    if (!parsed || parsed <= 0) parsed = 25; // Fallback to 25% equal parts if AI yields '0'
+    return { name, value: parsed };
+  });
   const radialData = [{ name: 'Completeness', value: data.completenessScore || 0, fill: BRAND_COLORS.accent }];
 
   const confidenceLevel = data.confidence?.level || 'Medium';
@@ -211,9 +212,9 @@ export default function AnalysisPage() {
                 <div className="space-y-4 bg-brand-paper/50 p-6 rounded border border-brand-dark/5">
                   <h3 className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-6 block border-b border-brand-dark/5 pb-2">Identified Scope Gaps</h3>
                   {(data.scopeGaps || []).map((gap, i) => (
-                    <div key={i} className="p-5 bg-brand-bg border border-brand-dark/5 text-[11px] font-medium leading-relaxed flex items-center gap-4">
-                      <span className="text-brand-action text-xs">❗</span>
-                      {gap}
+                    <div key={i} className="p-5 bg-brand-bg border border-brand-dark/5 text-[13px] font-inter font-medium text-brand-dark/90 leading-relaxed flex items-start gap-4">
+                      <span className="text-brand-action text-[12px] mt-1 shrink-0">❗</span>
+                      <span>{gap}</span>
                     </div>
                   ))}
                 </div>
