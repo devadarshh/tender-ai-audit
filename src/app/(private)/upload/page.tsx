@@ -1,5 +1,6 @@
 "use client"
 import { useState, useRef } from "react";
+import { uploadTenderToSupabase } from "../actions";
 import { Upload, FileText, X, CheckCircle2, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 
@@ -30,18 +31,27 @@ export default function UploadPage() {
     const handleUpload = async () => {
         if (!file) return;
         setIsUploading(true);
-        setTimeout(() => {
-            setIsUploading(false);
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+            const result = await uploadTenderToSupabase(formData);
+            if (result.success) {
+                toast.success("Upload Successful", {
+                    description: "Your file is now securely stored in supabase"
+                });
+                setFile(null);
+            }
+            else {
+                toast.error("Upload Failed", { description: result.error });
+            }
 
-            toast.success("Upload Successful", {
-                description: `${file.name} has been uploaded and analysis started.`,
-                duration: 4000,
-            });
-
-            setFile(null);
-            if (fileInputRef.current) fileInputRef.current.value = "";
-        }, 2000);
-    };
+        } catch (error) {
+            toast.error("An unexpected error occurred");
+        }
+        finally {
+            setIsUploading(false)
+        }
+    }
 
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault();
@@ -140,6 +150,7 @@ export default function UploadPage() {
                         </div>
                     )}
                     <button
+                        onClick={handleUpload}
                         disabled={!file || !!error || isUploading}
                         className={`
               w-full py-4 rounded-2xl font-bold text-white transition-all duration-300
