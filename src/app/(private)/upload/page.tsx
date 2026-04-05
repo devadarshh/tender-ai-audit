@@ -34,7 +34,11 @@ export default function UploadPage() {
         try {
             const formData = new FormData();
             formData.append("file", file);
-            const result = await uploadTenderToSupabase(formData);
+
+            // TODO: In a real app, get the actual project ID from the URL or state
+            const tempProjectId = "dev-project-id";
+
+            const result = await uploadTenderToSupabase(formData, tempProjectId);
             if (result.success) {
                 toast.success("Upload Successful", {
                     description: "Your file is now securely stored in supabase"

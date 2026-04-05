@@ -166,83 +166,23 @@ exports.Prisma.PostScalarFieldEnum = {
   createdById: 'createdById'
 };
 
-exports.Prisma.ProjectScalarFieldEnum = {
+exports.Prisma.FileScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  userId: 'userId',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.DocumentScalarFieldEnum = {
-  id: 'id',
-  projectId: 'projectId',
-  fileUrl: 'fileUrl',
-  fileName: 'fileName',
-  status: 'status',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.AnalysisScalarFieldEnum = {
-  id: 'id',
-  documentId: 'documentId',
-  rawJson: 'rawJson',
-  summary: 'summary',
+  supabasePath: 'supabasePath',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   confidence: 'confidence',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.MissingItemScalarFieldEnum = {
-  id: 'id',
-  analysisId: 'analysisId',
-  category: 'category',
-  title: 'title',
-  description: 'description',
-  severity: 'severity',
-  page: 'page'
-};
-
-exports.Prisma.RiskScalarFieldEnum = {
-  id: 'id',
-  analysisId: 'analysisId',
-  category: 'category',
-  title: 'title',
-  description: 'description',
-  impact: 'impact',
-  severity: 'severity'
-};
-
-exports.Prisma.CompletenessScalarFieldEnum = {
-  id: 'id',
-  analysisId: 'analysisId',
-  electrical: 'electrical',
-  plumbing: 'plumbing',
-  hvac: 'hvac',
-  structural: 'structural',
-  safety: 'safety',
-  documentation: 'documentation'
-};
-
-exports.Prisma.GraphMetricScalarFieldEnum = {
-  id: 'id',
-  analysisId: 'analysisId',
-  riskLow: 'riskLow',
-  riskMedium: 'riskMedium',
-  riskHigh: 'riskHigh',
-  missingElectrical: 'missingElectrical',
-  missingPlumbing: 'missingPlumbing',
-  missingHVAC: 'missingHVAC',
-  missingStructural: 'missingStructural',
-  missingSafety: 'missingSafety',
-  missingDocs: 'missingDocs'
+  durationMinutes: 'durationMinutes',
+  missingItems: 'missingItems',
+  risks: 'risks',
+  summary: 'summary',
+  status: 'status'
 };
 
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
-};
-
-exports.Prisma.JsonNullValueInput = {
-  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -254,13 +194,12 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
+exports.ProcessingStatus = exports.$Enums.ProcessingStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  READY: 'READY',
+  ERROR: 'ERROR'
 };
-
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -268,13 +207,7 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   VerificationToken: 'VerificationToken',
   Post: 'Post',
-  Project: 'Project',
-  Document: 'Document',
-  Analysis: 'Analysis',
-  MissingItem: 'MissingItem',
-  Risk: 'Risk',
-  Completeness: 'Completeness',
-  GraphMetric: 'GraphMetric'
+  File: 'File'
 };
 
 /**

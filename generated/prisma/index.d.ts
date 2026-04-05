@@ -39,40 +39,29 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
  */
 export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
 /**
- * Model Project
+ * Model File
  * 
  */
-export type Project = $Result.DefaultSelection<Prisma.$ProjectPayload>
+export type File = $Result.DefaultSelection<Prisma.$FilePayload>
+
 /**
- * Model Document
- * 
+ * Enums
  */
-export type Document = $Result.DefaultSelection<Prisma.$DocumentPayload>
-/**
- * Model Analysis
- * 
- */
-export type Analysis = $Result.DefaultSelection<Prisma.$AnalysisPayload>
-/**
- * Model MissingItem
- * 
- */
-export type MissingItem = $Result.DefaultSelection<Prisma.$MissingItemPayload>
-/**
- * Model Risk
- * 
- */
-export type Risk = $Result.DefaultSelection<Prisma.$RiskPayload>
-/**
- * Model Completeness
- * 
- */
-export type Completeness = $Result.DefaultSelection<Prisma.$CompletenessPayload>
-/**
- * Model GraphMetric
- * 
- */
-export type GraphMetric = $Result.DefaultSelection<Prisma.$GraphMetricPayload>
+export namespace $Enums {
+  export const ProcessingStatus: {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  READY: 'READY',
+  ERROR: 'ERROR'
+};
+
+export type ProcessingStatus = (typeof ProcessingStatus)[keyof typeof ProcessingStatus]
+
+}
+
+export type ProcessingStatus = $Enums.ProcessingStatus
+
+export const ProcessingStatus: typeof $Enums.ProcessingStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -243,74 +232,14 @@ export class PrismaClient<
   get post(): Prisma.PostDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.project`: Exposes CRUD operations for the **Project** model.
+   * `prisma.file`: Exposes CRUD operations for the **File** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Projects
-    * const projects = await prisma.project.findMany()
+    * // Fetch zero or more Files
+    * const files = await prisma.file.findMany()
     * ```
     */
-  get project(): Prisma.ProjectDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.document`: Exposes CRUD operations for the **Document** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Documents
-    * const documents = await prisma.document.findMany()
-    * ```
-    */
-  get document(): Prisma.DocumentDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.analysis`: Exposes CRUD operations for the **Analysis** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Analyses
-    * const analyses = await prisma.analysis.findMany()
-    * ```
-    */
-  get analysis(): Prisma.AnalysisDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.missingItem`: Exposes CRUD operations for the **MissingItem** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more MissingItems
-    * const missingItems = await prisma.missingItem.findMany()
-    * ```
-    */
-  get missingItem(): Prisma.MissingItemDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.risk`: Exposes CRUD operations for the **Risk** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Risks
-    * const risks = await prisma.risk.findMany()
-    * ```
-    */
-  get risk(): Prisma.RiskDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.completeness`: Exposes CRUD operations for the **Completeness** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Completenesses
-    * const completenesses = await prisma.completeness.findMany()
-    * ```
-    */
-  get completeness(): Prisma.CompletenessDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.graphMetric`: Exposes CRUD operations for the **GraphMetric** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more GraphMetrics
-    * const graphMetrics = await prisma.graphMetric.findMany()
-    * ```
-    */
-  get graphMetric(): Prisma.GraphMetricDelegate<ExtArgs, ClientOptions>;
+  get file(): Prisma.FileDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -757,13 +686,7 @@ export namespace Prisma {
     Session: 'Session',
     VerificationToken: 'VerificationToken',
     Post: 'Post',
-    Project: 'Project',
-    Document: 'Document',
-    Analysis: 'Analysis',
-    MissingItem: 'MissingItem',
-    Risk: 'Risk',
-    Completeness: 'Completeness',
-    GraphMetric: 'GraphMetric'
+    File: 'File'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -782,7 +705,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "post" | "project" | "document" | "analysis" | "missingItem" | "risk" | "completeness" | "graphMetric"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "post" | "file"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1156,521 +1079,77 @@ export namespace Prisma {
           }
         }
       }
-      Project: {
-        payload: Prisma.$ProjectPayload<ExtArgs>
-        fields: Prisma.ProjectFieldRefs
+      File: {
+        payload: Prisma.$FilePayload<ExtArgs>
+        fields: Prisma.FileFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.ProjectFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload> | null
+            args: Prisma.FileFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilePayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.ProjectFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+            args: Prisma.FileFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilePayload>
           }
           findFirst: {
-            args: Prisma.ProjectFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload> | null
+            args: Prisma.FileFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilePayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.ProjectFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+            args: Prisma.FileFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilePayload>
           }
           findMany: {
-            args: Prisma.ProjectFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
+            args: Prisma.FileFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilePayload>[]
           }
           create: {
-            args: Prisma.ProjectCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+            args: Prisma.FileCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilePayload>
           }
           createMany: {
-            args: Prisma.ProjectCreateManyArgs<ExtArgs>
+            args: Prisma.FileCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.ProjectCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
+            args: Prisma.FileCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilePayload>[]
           }
           delete: {
-            args: Prisma.ProjectDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+            args: Prisma.FileDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilePayload>
           }
           update: {
-            args: Prisma.ProjectUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+            args: Prisma.FileUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilePayload>
           }
           deleteMany: {
-            args: Prisma.ProjectDeleteManyArgs<ExtArgs>
+            args: Prisma.FileDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.ProjectUpdateManyArgs<ExtArgs>
+            args: Prisma.FileUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.ProjectUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
+            args: Prisma.FileUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilePayload>[]
           }
           upsert: {
-            args: Prisma.ProjectUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+            args: Prisma.FileUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilePayload>
           }
           aggregate: {
-            args: Prisma.ProjectAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateProject>
+            args: Prisma.FileAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFile>
           }
           groupBy: {
-            args: Prisma.ProjectGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ProjectGroupByOutputType>[]
+            args: Prisma.FileGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FileGroupByOutputType>[]
           }
           count: {
-            args: Prisma.ProjectCountArgs<ExtArgs>
-            result: $Utils.Optional<ProjectCountAggregateOutputType> | number
-          }
-        }
-      }
-      Document: {
-        payload: Prisma.$DocumentPayload<ExtArgs>
-        fields: Prisma.DocumentFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.DocumentFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DocumentPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.DocumentFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DocumentPayload>
-          }
-          findFirst: {
-            args: Prisma.DocumentFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DocumentPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.DocumentFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DocumentPayload>
-          }
-          findMany: {
-            args: Prisma.DocumentFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DocumentPayload>[]
-          }
-          create: {
-            args: Prisma.DocumentCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DocumentPayload>
-          }
-          createMany: {
-            args: Prisma.DocumentCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.DocumentCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DocumentPayload>[]
-          }
-          delete: {
-            args: Prisma.DocumentDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DocumentPayload>
-          }
-          update: {
-            args: Prisma.DocumentUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DocumentPayload>
-          }
-          deleteMany: {
-            args: Prisma.DocumentDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.DocumentUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.DocumentUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DocumentPayload>[]
-          }
-          upsert: {
-            args: Prisma.DocumentUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DocumentPayload>
-          }
-          aggregate: {
-            args: Prisma.DocumentAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDocument>
-          }
-          groupBy: {
-            args: Prisma.DocumentGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DocumentGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.DocumentCountArgs<ExtArgs>
-            result: $Utils.Optional<DocumentCountAggregateOutputType> | number
-          }
-        }
-      }
-      Analysis: {
-        payload: Prisma.$AnalysisPayload<ExtArgs>
-        fields: Prisma.AnalysisFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.AnalysisFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AnalysisPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.AnalysisFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AnalysisPayload>
-          }
-          findFirst: {
-            args: Prisma.AnalysisFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AnalysisPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.AnalysisFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AnalysisPayload>
-          }
-          findMany: {
-            args: Prisma.AnalysisFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AnalysisPayload>[]
-          }
-          create: {
-            args: Prisma.AnalysisCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AnalysisPayload>
-          }
-          createMany: {
-            args: Prisma.AnalysisCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.AnalysisCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AnalysisPayload>[]
-          }
-          delete: {
-            args: Prisma.AnalysisDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AnalysisPayload>
-          }
-          update: {
-            args: Prisma.AnalysisUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AnalysisPayload>
-          }
-          deleteMany: {
-            args: Prisma.AnalysisDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.AnalysisUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.AnalysisUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AnalysisPayload>[]
-          }
-          upsert: {
-            args: Prisma.AnalysisUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AnalysisPayload>
-          }
-          aggregate: {
-            args: Prisma.AnalysisAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAnalysis>
-          }
-          groupBy: {
-            args: Prisma.AnalysisGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AnalysisGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.AnalysisCountArgs<ExtArgs>
-            result: $Utils.Optional<AnalysisCountAggregateOutputType> | number
-          }
-        }
-      }
-      MissingItem: {
-        payload: Prisma.$MissingItemPayload<ExtArgs>
-        fields: Prisma.MissingItemFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.MissingItemFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MissingItemPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.MissingItemFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MissingItemPayload>
-          }
-          findFirst: {
-            args: Prisma.MissingItemFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MissingItemPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.MissingItemFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MissingItemPayload>
-          }
-          findMany: {
-            args: Prisma.MissingItemFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MissingItemPayload>[]
-          }
-          create: {
-            args: Prisma.MissingItemCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MissingItemPayload>
-          }
-          createMany: {
-            args: Prisma.MissingItemCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.MissingItemCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MissingItemPayload>[]
-          }
-          delete: {
-            args: Prisma.MissingItemDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MissingItemPayload>
-          }
-          update: {
-            args: Prisma.MissingItemUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MissingItemPayload>
-          }
-          deleteMany: {
-            args: Prisma.MissingItemDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.MissingItemUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.MissingItemUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MissingItemPayload>[]
-          }
-          upsert: {
-            args: Prisma.MissingItemUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MissingItemPayload>
-          }
-          aggregate: {
-            args: Prisma.MissingItemAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMissingItem>
-          }
-          groupBy: {
-            args: Prisma.MissingItemGroupByArgs<ExtArgs>
-            result: $Utils.Optional<MissingItemGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.MissingItemCountArgs<ExtArgs>
-            result: $Utils.Optional<MissingItemCountAggregateOutputType> | number
-          }
-        }
-      }
-      Risk: {
-        payload: Prisma.$RiskPayload<ExtArgs>
-        fields: Prisma.RiskFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.RiskFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RiskPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.RiskFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
-          }
-          findFirst: {
-            args: Prisma.RiskFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RiskPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.RiskFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
-          }
-          findMany: {
-            args: Prisma.RiskFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RiskPayload>[]
-          }
-          create: {
-            args: Prisma.RiskCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
-          }
-          createMany: {
-            args: Prisma.RiskCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.RiskCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RiskPayload>[]
-          }
-          delete: {
-            args: Prisma.RiskDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
-          }
-          update: {
-            args: Prisma.RiskUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
-          }
-          deleteMany: {
-            args: Prisma.RiskDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.RiskUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.RiskUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RiskPayload>[]
-          }
-          upsert: {
-            args: Prisma.RiskUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
-          }
-          aggregate: {
-            args: Prisma.RiskAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateRisk>
-          }
-          groupBy: {
-            args: Prisma.RiskGroupByArgs<ExtArgs>
-            result: $Utils.Optional<RiskGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.RiskCountArgs<ExtArgs>
-            result: $Utils.Optional<RiskCountAggregateOutputType> | number
-          }
-        }
-      }
-      Completeness: {
-        payload: Prisma.$CompletenessPayload<ExtArgs>
-        fields: Prisma.CompletenessFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.CompletenessFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CompletenessPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.CompletenessFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CompletenessPayload>
-          }
-          findFirst: {
-            args: Prisma.CompletenessFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CompletenessPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.CompletenessFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CompletenessPayload>
-          }
-          findMany: {
-            args: Prisma.CompletenessFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CompletenessPayload>[]
-          }
-          create: {
-            args: Prisma.CompletenessCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CompletenessPayload>
-          }
-          createMany: {
-            args: Prisma.CompletenessCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.CompletenessCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CompletenessPayload>[]
-          }
-          delete: {
-            args: Prisma.CompletenessDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CompletenessPayload>
-          }
-          update: {
-            args: Prisma.CompletenessUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CompletenessPayload>
-          }
-          deleteMany: {
-            args: Prisma.CompletenessDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.CompletenessUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.CompletenessUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CompletenessPayload>[]
-          }
-          upsert: {
-            args: Prisma.CompletenessUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CompletenessPayload>
-          }
-          aggregate: {
-            args: Prisma.CompletenessAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateCompleteness>
-          }
-          groupBy: {
-            args: Prisma.CompletenessGroupByArgs<ExtArgs>
-            result: $Utils.Optional<CompletenessGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.CompletenessCountArgs<ExtArgs>
-            result: $Utils.Optional<CompletenessCountAggregateOutputType> | number
-          }
-        }
-      }
-      GraphMetric: {
-        payload: Prisma.$GraphMetricPayload<ExtArgs>
-        fields: Prisma.GraphMetricFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.GraphMetricFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GraphMetricPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.GraphMetricFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GraphMetricPayload>
-          }
-          findFirst: {
-            args: Prisma.GraphMetricFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GraphMetricPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.GraphMetricFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GraphMetricPayload>
-          }
-          findMany: {
-            args: Prisma.GraphMetricFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GraphMetricPayload>[]
-          }
-          create: {
-            args: Prisma.GraphMetricCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GraphMetricPayload>
-          }
-          createMany: {
-            args: Prisma.GraphMetricCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.GraphMetricCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GraphMetricPayload>[]
-          }
-          delete: {
-            args: Prisma.GraphMetricDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GraphMetricPayload>
-          }
-          update: {
-            args: Prisma.GraphMetricUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GraphMetricPayload>
-          }
-          deleteMany: {
-            args: Prisma.GraphMetricDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.GraphMetricUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.GraphMetricUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GraphMetricPayload>[]
-          }
-          upsert: {
-            args: Prisma.GraphMetricUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GraphMetricPayload>
-          }
-          aggregate: {
-            args: Prisma.GraphMetricAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateGraphMetric>
-          }
-          groupBy: {
-            args: Prisma.GraphMetricGroupByArgs<ExtArgs>
-            result: $Utils.Optional<GraphMetricGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.GraphMetricCountArgs<ExtArgs>
-            result: $Utils.Optional<GraphMetricCountAggregateOutputType> | number
+            args: Prisma.FileCountArgs<ExtArgs>
+            result: $Utils.Optional<FileCountAggregateOutputType> | number
           }
         }
       }
@@ -1775,13 +1254,7 @@ export namespace Prisma {
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
     post?: PostOmit
-    project?: ProjectOmit
-    document?: DocumentOmit
-    analysis?: AnalysisOmit
-    missingItem?: MissingItemOmit
-    risk?: RiskOmit
-    completeness?: CompletenessOmit
-    graphMetric?: GraphMetricOmit
+    file?: FileOmit
   }
 
   /* Types for Logging */
@@ -1863,16 +1336,14 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     accounts: number
-    sessions: number
     posts: number
-    projects: number
+    sessions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
-    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
-    projects?: boolean | UserCountOutputTypeCountProjectsArgs
+    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   }
 
   // Custom InputTypes
@@ -1896,13 +1367,6 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostWhereInput
   }
@@ -1910,110 +1374,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProjectWhereInput
-  }
-
-
-  /**
-   * Count Type ProjectCountOutputType
-   */
-
-  export type ProjectCountOutputType = {
-    documents: number
-  }
-
-  export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    documents?: boolean | ProjectCountOutputTypeCountDocumentsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ProjectCountOutputType without action
-   */
-  export type ProjectCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProjectCountOutputType
-     */
-    select?: ProjectCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * ProjectCountOutputType without action
-   */
-  export type ProjectCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DocumentWhereInput
-  }
-
-
-  /**
-   * Count Type DocumentCountOutputType
-   */
-
-  export type DocumentCountOutputType = {
-    analyses: number
-  }
-
-  export type DocumentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analyses?: boolean | DocumentCountOutputTypeCountAnalysesArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * DocumentCountOutputType without action
-   */
-  export type DocumentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DocumentCountOutputType
-     */
-    select?: DocumentCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * DocumentCountOutputType without action
-   */
-  export type DocumentCountOutputTypeCountAnalysesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AnalysisWhereInput
-  }
-
-
-  /**
-   * Count Type AnalysisCountOutputType
-   */
-
-  export type AnalysisCountOutputType = {
-    missingItems: number
-    risks: number
-  }
-
-  export type AnalysisCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    missingItems?: boolean | AnalysisCountOutputTypeCountMissingItemsArgs
-    risks?: boolean | AnalysisCountOutputTypeCountRisksArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * AnalysisCountOutputType without action
-   */
-  export type AnalysisCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AnalysisCountOutputType
-     */
-    select?: AnalysisCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * AnalysisCountOutputType without action
-   */
-  export type AnalysisCountOutputTypeCountMissingItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MissingItemWhereInput
-  }
-
-  /**
-   * AnalysisCountOutputType without action
-   */
-  export type AnalysisCountOutputTypeCountRisksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RiskWhereInput
+  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
   }
 
 
@@ -2186,9 +1548,8 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
-    projects?: boolean | User$projectsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2219,9 +1580,8 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
-    projects?: boolean | User$projectsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2231,9 +1591,8 @@ export namespace Prisma {
     name: "User"
     objects: {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
-      sessions: Prisma.$SessionPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
-      projects: Prisma.$ProjectPayload<ExtArgs>[]
+      sessions: Prisma.$SessionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2636,9 +1995,8 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    projects<T extends User$projectsArgs<ExtArgs> = {}>(args?: Subset<T, User$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3085,30 +2443,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.sessions
-   */
-  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Session
-     */
-    omit?: SessionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionInclude<ExtArgs> | null
-    where?: SessionWhereInput
-    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
-    cursor?: SessionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
-  }
-
-  /**
    * User.posts
    */
   export type User$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3133,27 +2467,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.projects
+   * User.sessions
    */
-  export type User$projectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Project
+     * Select specific fields to fetch from the Session
      */
-    select?: ProjectSelect<ExtArgs> | null
+    select?: SessionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Project
+     * Omit specific fields from the Session
      */
-    omit?: ProjectOmit<ExtArgs> | null
+    omit?: SessionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProjectInclude<ExtArgs> | null
-    where?: ProjectWhereInput
-    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
-    cursor?: ProjectWhereUniqueInput
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
   }
 
   /**
@@ -7482,343 +6816,434 @@ export namespace Prisma {
 
 
   /**
-   * Model Project
+   * Model File
    */
 
-  export type AggregateProject = {
-    _count: ProjectCountAggregateOutputType | null
-    _min: ProjectMinAggregateOutputType | null
-    _max: ProjectMaxAggregateOutputType | null
+  export type AggregateFile = {
+    _count: FileCountAggregateOutputType | null
+    _avg: FileAvgAggregateOutputType | null
+    _sum: FileSumAggregateOutputType | null
+    _min: FileMinAggregateOutputType | null
+    _max: FileMaxAggregateOutputType | null
   }
 
-  export type ProjectMinAggregateOutputType = {
+  export type FileAvgAggregateOutputType = {
+    durationMinutes: number | null
+  }
+
+  export type FileSumAggregateOutputType = {
+    durationMinutes: number | null
+  }
+
+  export type FileMinAggregateOutputType = {
     id: string | null
     name: string | null
-    userId: string | null
+    supabasePath: string | null
     createdAt: Date | null
+    updatedAt: Date | null
+    confidence: string | null
+    durationMinutes: number | null
+    summary: string | null
+    status: $Enums.ProcessingStatus | null
   }
 
-  export type ProjectMaxAggregateOutputType = {
+  export type FileMaxAggregateOutputType = {
     id: string | null
     name: string | null
-    userId: string | null
+    supabasePath: string | null
     createdAt: Date | null
+    updatedAt: Date | null
+    confidence: string | null
+    durationMinutes: number | null
+    summary: string | null
+    status: $Enums.ProcessingStatus | null
   }
 
-  export type ProjectCountAggregateOutputType = {
+  export type FileCountAggregateOutputType = {
     id: number
     name: number
-    userId: number
+    supabasePath: number
     createdAt: number
+    updatedAt: number
+    confidence: number
+    durationMinutes: number
+    missingItems: number
+    risks: number
+    summary: number
+    status: number
     _all: number
   }
 
 
-  export type ProjectMinAggregateInputType = {
-    id?: true
-    name?: true
-    userId?: true
-    createdAt?: true
+  export type FileAvgAggregateInputType = {
+    durationMinutes?: true
   }
 
-  export type ProjectMaxAggregateInputType = {
-    id?: true
-    name?: true
-    userId?: true
-    createdAt?: true
+  export type FileSumAggregateInputType = {
+    durationMinutes?: true
   }
 
-  export type ProjectCountAggregateInputType = {
+  export type FileMinAggregateInputType = {
     id?: true
     name?: true
-    userId?: true
+    supabasePath?: true
     createdAt?: true
+    updatedAt?: true
+    confidence?: true
+    durationMinutes?: true
+    summary?: true
+    status?: true
+  }
+
+  export type FileMaxAggregateInputType = {
+    id?: true
+    name?: true
+    supabasePath?: true
+    createdAt?: true
+    updatedAt?: true
+    confidence?: true
+    durationMinutes?: true
+    summary?: true
+    status?: true
+  }
+
+  export type FileCountAggregateInputType = {
+    id?: true
+    name?: true
+    supabasePath?: true
+    createdAt?: true
+    updatedAt?: true
+    confidence?: true
+    durationMinutes?: true
+    missingItems?: true
+    risks?: true
+    summary?: true
+    status?: true
     _all?: true
   }
 
-  export type ProjectAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Project to aggregate.
+     * Filter which File to aggregate.
      */
-    where?: ProjectWhereInput
+    where?: FileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Projects to fetch.
+     * Determine the order of Files to fetch.
      */
-    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
+    orderBy?: FileOrderByWithRelationInput | FileOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: ProjectWhereUniqueInput
+    cursor?: FileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Projects from the position of the cursor.
+     * Take `±n` Files from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Projects.
+     * Skip the first `n` Files.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Projects
+     * Count returned Files
     **/
-    _count?: true | ProjectCountAggregateInputType
+    _count?: true | FileCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FileAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FileSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: ProjectMinAggregateInputType
+    _min?: FileMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: ProjectMaxAggregateInputType
+    _max?: FileMaxAggregateInputType
   }
 
-  export type GetProjectAggregateType<T extends ProjectAggregateArgs> = {
-        [P in keyof T & keyof AggregateProject]: P extends '_count' | 'count'
+  export type GetFileAggregateType<T extends FileAggregateArgs> = {
+        [P in keyof T & keyof AggregateFile]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateProject[P]>
-      : GetScalarType<T[P], AggregateProject[P]>
+        : GetScalarType<T[P], AggregateFile[P]>
+      : GetScalarType<T[P], AggregateFile[P]>
   }
 
 
 
 
-  export type ProjectGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProjectWhereInput
-    orderBy?: ProjectOrderByWithAggregationInput | ProjectOrderByWithAggregationInput[]
-    by: ProjectScalarFieldEnum[] | ProjectScalarFieldEnum
-    having?: ProjectScalarWhereWithAggregatesInput
+  export type FileGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FileWhereInput
+    orderBy?: FileOrderByWithAggregationInput | FileOrderByWithAggregationInput[]
+    by: FileScalarFieldEnum[] | FileScalarFieldEnum
+    having?: FileScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: ProjectCountAggregateInputType | true
-    _min?: ProjectMinAggregateInputType
-    _max?: ProjectMaxAggregateInputType
+    _count?: FileCountAggregateInputType | true
+    _avg?: FileAvgAggregateInputType
+    _sum?: FileSumAggregateInputType
+    _min?: FileMinAggregateInputType
+    _max?: FileMaxAggregateInputType
   }
 
-  export type ProjectGroupByOutputType = {
+  export type FileGroupByOutputType = {
     id: string
     name: string
-    userId: string
+    supabasePath: string
     createdAt: Date
-    _count: ProjectCountAggregateOutputType | null
-    _min: ProjectMinAggregateOutputType | null
-    _max: ProjectMaxAggregateOutputType | null
+    updatedAt: Date
+    confidence: string | null
+    durationMinutes: number | null
+    missingItems: string[]
+    risks: string[]
+    summary: string | null
+    status: $Enums.ProcessingStatus
+    _count: FileCountAggregateOutputType | null
+    _avg: FileAvgAggregateOutputType | null
+    _sum: FileSumAggregateOutputType | null
+    _min: FileMinAggregateOutputType | null
+    _max: FileMaxAggregateOutputType | null
   }
 
-  type GetProjectGroupByPayload<T extends ProjectGroupByArgs> = Prisma.PrismaPromise<
+  type GetFileGroupByPayload<T extends FileGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ProjectGroupByOutputType, T['by']> &
+      PickEnumerable<FileGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ProjectGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof FileGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], ProjectGroupByOutputType[P]>
-            : GetScalarType<T[P], ProjectGroupByOutputType[P]>
+              : GetScalarType<T[P], FileGroupByOutputType[P]>
+            : GetScalarType<T[P], FileGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type ProjectSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type FileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    userId?: boolean
+    supabasePath?: boolean
     createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    documents?: boolean | Project$documentsArgs<ExtArgs>
-    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["project"]>
+    updatedAt?: boolean
+    confidence?: boolean
+    durationMinutes?: boolean
+    missingItems?: boolean
+    risks?: boolean
+    summary?: boolean
+    status?: boolean
+  }, ExtArgs["result"]["file"]>
 
-  export type ProjectSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type FileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    userId?: boolean
+    supabasePath?: boolean
     createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["project"]>
+    updatedAt?: boolean
+    confidence?: boolean
+    durationMinutes?: boolean
+    missingItems?: boolean
+    risks?: boolean
+    summary?: boolean
+    status?: boolean
+  }, ExtArgs["result"]["file"]>
 
-  export type ProjectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type FileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    userId?: boolean
+    supabasePath?: boolean
     createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["project"]>
+    updatedAt?: boolean
+    confidence?: boolean
+    durationMinutes?: boolean
+    missingItems?: boolean
+    risks?: boolean
+    summary?: boolean
+    status?: boolean
+  }, ExtArgs["result"]["file"]>
 
-  export type ProjectSelectScalar = {
+  export type FileSelectScalar = {
     id?: boolean
     name?: boolean
-    userId?: boolean
+    supabasePath?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
+    confidence?: boolean
+    durationMinutes?: boolean
+    missingItems?: boolean
+    risks?: boolean
+    summary?: boolean
+    status?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "userId" | "createdAt", ExtArgs["result"]["project"]>
-  export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    documents?: boolean | Project$documentsArgs<ExtArgs>
-    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type ProjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type ProjectIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
+  export type FileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "supabasePath" | "createdAt" | "updatedAt" | "confidence" | "durationMinutes" | "missingItems" | "risks" | "summary" | "status", ExtArgs["result"]["file"]>
 
-  export type $ProjectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Project"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      documents: Prisma.$DocumentPayload<ExtArgs>[]
-    }
+  export type $FilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "File"
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      userId: string
+      supabasePath: string
       createdAt: Date
-    }, ExtArgs["result"]["project"]>
+      updatedAt: Date
+      confidence: string | null
+      durationMinutes: number | null
+      missingItems: string[]
+      risks: string[]
+      summary: string | null
+      status: $Enums.ProcessingStatus
+    }, ExtArgs["result"]["file"]>
     composites: {}
   }
 
-  type ProjectGetPayload<S extends boolean | null | undefined | ProjectDefaultArgs> = $Result.GetResult<Prisma.$ProjectPayload, S>
+  type FileGetPayload<S extends boolean | null | undefined | FileDefaultArgs> = $Result.GetResult<Prisma.$FilePayload, S>
 
-  type ProjectCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ProjectFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ProjectCountAggregateInputType | true
+  type FileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FileCountAggregateInputType | true
     }
 
-  export interface ProjectDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Project'], meta: { name: 'Project' } }
+  export interface FileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['File'], meta: { name: 'File' } }
     /**
-     * Find zero or one Project that matches the filter.
-     * @param {ProjectFindUniqueArgs} args - Arguments to find a Project
+     * Find zero or one File that matches the filter.
+     * @param {FileFindUniqueArgs} args - Arguments to find a File
      * @example
-     * // Get one Project
-     * const project = await prisma.project.findUnique({
+     * // Get one File
+     * const file = await prisma.file.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends ProjectFindUniqueArgs>(args: SelectSubset<T, ProjectFindUniqueArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends FileFindUniqueArgs>(args: SelectSubset<T, FileFindUniqueArgs<ExtArgs>>): Prisma__FileClient<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Project that matches the filter or throw an error with `error.code='P2025'`
+     * Find one File that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {ProjectFindUniqueOrThrowArgs} args - Arguments to find a Project
+     * @param {FileFindUniqueOrThrowArgs} args - Arguments to find a File
      * @example
-     * // Get one Project
-     * const project = await prisma.project.findUniqueOrThrow({
+     * // Get one File
+     * const file = await prisma.file.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ProjectFindUniqueOrThrowArgs>(args: SelectSubset<T, ProjectFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends FileFindUniqueOrThrowArgs>(args: SelectSubset<T, FileFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FileClient<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Project that matches the filter.
+     * Find the first File that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectFindFirstArgs} args - Arguments to find a Project
+     * @param {FileFindFirstArgs} args - Arguments to find a File
      * @example
-     * // Get one Project
-     * const project = await prisma.project.findFirst({
+     * // Get one File
+     * const file = await prisma.file.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends ProjectFindFirstArgs>(args?: SelectSubset<T, ProjectFindFirstArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends FileFindFirstArgs>(args?: SelectSubset<T, FileFindFirstArgs<ExtArgs>>): Prisma__FileClient<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Project that matches the filter or
+     * Find the first File that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectFindFirstOrThrowArgs} args - Arguments to find a Project
+     * @param {FileFindFirstOrThrowArgs} args - Arguments to find a File
      * @example
-     * // Get one Project
-     * const project = await prisma.project.findFirstOrThrow({
+     * // Get one File
+     * const file = await prisma.file.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends ProjectFindFirstOrThrowArgs>(args?: SelectSubset<T, ProjectFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends FileFindFirstOrThrowArgs>(args?: SelectSubset<T, FileFindFirstOrThrowArgs<ExtArgs>>): Prisma__FileClient<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Projects that matches the filter.
+     * Find zero or more Files that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {FileFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Projects
-     * const projects = await prisma.project.findMany()
+     * // Get all Files
+     * const files = await prisma.file.findMany()
      * 
-     * // Get first 10 Projects
-     * const projects = await prisma.project.findMany({ take: 10 })
+     * // Get first 10 Files
+     * const files = await prisma.file.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const projectWithIdOnly = await prisma.project.findMany({ select: { id: true } })
+     * const fileWithIdOnly = await prisma.file.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends ProjectFindManyArgs>(args?: SelectSubset<T, ProjectFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends FileFindManyArgs>(args?: SelectSubset<T, FileFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Project.
-     * @param {ProjectCreateArgs} args - Arguments to create a Project.
+     * Create a File.
+     * @param {FileCreateArgs} args - Arguments to create a File.
      * @example
-     * // Create one Project
-     * const Project = await prisma.project.create({
+     * // Create one File
+     * const File = await prisma.file.create({
      *   data: {
-     *     // ... data to create a Project
+     *     // ... data to create a File
      *   }
      * })
      * 
      */
-    create<T extends ProjectCreateArgs>(args: SelectSubset<T, ProjectCreateArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends FileCreateArgs>(args: SelectSubset<T, FileCreateArgs<ExtArgs>>): Prisma__FileClient<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Projects.
-     * @param {ProjectCreateManyArgs} args - Arguments to create many Projects.
+     * Create many Files.
+     * @param {FileCreateManyArgs} args - Arguments to create many Files.
      * @example
-     * // Create many Projects
-     * const project = await prisma.project.createMany({
+     * // Create many Files
+     * const file = await prisma.file.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends ProjectCreateManyArgs>(args?: SelectSubset<T, ProjectCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends FileCreateManyArgs>(args?: SelectSubset<T, FileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Projects and returns the data saved in the database.
-     * @param {ProjectCreateManyAndReturnArgs} args - Arguments to create many Projects.
+     * Create many Files and returns the data saved in the database.
+     * @param {FileCreateManyAndReturnArgs} args - Arguments to create many Files.
      * @example
-     * // Create many Projects
-     * const project = await prisma.project.createManyAndReturn({
+     * // Create many Files
+     * const file = await prisma.file.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Projects and only return the `id`
-     * const projectWithIdOnly = await prisma.project.createManyAndReturn({
+     * // Create many Files and only return the `id`
+     * const fileWithIdOnly = await prisma.file.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -7828,28 +7253,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends ProjectCreateManyAndReturnArgs>(args?: SelectSubset<T, ProjectCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends FileCreateManyAndReturnArgs>(args?: SelectSubset<T, FileCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Project.
-     * @param {ProjectDeleteArgs} args - Arguments to delete one Project.
+     * Delete a File.
+     * @param {FileDeleteArgs} args - Arguments to delete one File.
      * @example
-     * // Delete one Project
-     * const Project = await prisma.project.delete({
+     * // Delete one File
+     * const File = await prisma.file.delete({
      *   where: {
-     *     // ... filter to delete one Project
+     *     // ... filter to delete one File
      *   }
      * })
      * 
      */
-    delete<T extends ProjectDeleteArgs>(args: SelectSubset<T, ProjectDeleteArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends FileDeleteArgs>(args: SelectSubset<T, FileDeleteArgs<ExtArgs>>): Prisma__FileClient<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Project.
-     * @param {ProjectUpdateArgs} args - Arguments to update one Project.
+     * Update one File.
+     * @param {FileUpdateArgs} args - Arguments to update one File.
      * @example
-     * // Update one Project
-     * const project = await prisma.project.update({
+     * // Update one File
+     * const file = await prisma.file.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7859,30 +7284,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends ProjectUpdateArgs>(args: SelectSubset<T, ProjectUpdateArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends FileUpdateArgs>(args: SelectSubset<T, FileUpdateArgs<ExtArgs>>): Prisma__FileClient<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Projects.
-     * @param {ProjectDeleteManyArgs} args - Arguments to filter Projects to delete.
+     * Delete zero or more Files.
+     * @param {FileDeleteManyArgs} args - Arguments to filter Files to delete.
      * @example
-     * // Delete a few Projects
-     * const { count } = await prisma.project.deleteMany({
+     * // Delete a few Files
+     * const { count } = await prisma.file.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends ProjectDeleteManyArgs>(args?: SelectSubset<T, ProjectDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends FileDeleteManyArgs>(args?: SelectSubset<T, FileDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Projects.
+     * Update zero or more Files.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {FileUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Projects
-     * const project = await prisma.project.updateMany({
+     * // Update many Files
+     * const file = await prisma.file.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7892,14 +7317,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends ProjectUpdateManyArgs>(args: SelectSubset<T, ProjectUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends FileUpdateManyArgs>(args: SelectSubset<T, FileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Projects and returns the data updated in the database.
-     * @param {ProjectUpdateManyAndReturnArgs} args - Arguments to update many Projects.
+     * Update zero or more Files and returns the data updated in the database.
+     * @param {FileUpdateManyAndReturnArgs} args - Arguments to update many Files.
      * @example
-     * // Update many Projects
-     * const project = await prisma.project.updateManyAndReturn({
+     * // Update many Files
+     * const file = await prisma.file.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7908,8 +7333,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Projects and only return the `id`
-     * const projectWithIdOnly = await prisma.project.updateManyAndReturn({
+     * // Update zero or more Files and only return the `id`
+     * const fileWithIdOnly = await prisma.file.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -7922,56 +7347,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends ProjectUpdateManyAndReturnArgs>(args: SelectSubset<T, ProjectUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends FileUpdateManyAndReturnArgs>(args: SelectSubset<T, FileUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Project.
-     * @param {ProjectUpsertArgs} args - Arguments to update or create a Project.
+     * Create or update one File.
+     * @param {FileUpsertArgs} args - Arguments to update or create a File.
      * @example
-     * // Update or create a Project
-     * const project = await prisma.project.upsert({
+     * // Update or create a File
+     * const file = await prisma.file.upsert({
      *   create: {
-     *     // ... data to create a Project
+     *     // ... data to create a File
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Project we want to update
+     *     // ... the filter for the File we want to update
      *   }
      * })
      */
-    upsert<T extends ProjectUpsertArgs>(args: SelectSubset<T, ProjectUpsertArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends FileUpsertArgs>(args: SelectSubset<T, FileUpsertArgs<ExtArgs>>): Prisma__FileClient<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Projects.
+     * Count the number of Files.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectCountArgs} args - Arguments to filter Projects to count.
+     * @param {FileCountArgs} args - Arguments to filter Files to count.
      * @example
-     * // Count the number of Projects
-     * const count = await prisma.project.count({
+     * // Count the number of Files
+     * const count = await prisma.file.count({
      *   where: {
-     *     // ... the filter for the Projects we want to count
+     *     // ... the filter for the Files we want to count
      *   }
      * })
     **/
-    count<T extends ProjectCountArgs>(
-      args?: Subset<T, ProjectCountArgs>,
+    count<T extends FileCountArgs>(
+      args?: Subset<T, FileCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], ProjectCountAggregateOutputType>
+          : GetScalarType<T['select'], FileCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Project.
+     * Allows you to perform aggregations operations on a File.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {FileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -7991,13 +7416,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ProjectAggregateArgs>(args: Subset<T, ProjectAggregateArgs>): Prisma.PrismaPromise<GetProjectAggregateType<T>>
+    aggregate<T extends FileAggregateArgs>(args: Subset<T, FileAggregateArgs>): Prisma.PrismaPromise<GetFileAggregateType<T>>
 
     /**
-     * Group by Project.
+     * Group by File.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectGroupByArgs} args - Group by arguments.
+     * @param {FileGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -8012,14 +7437,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends ProjectGroupByArgs,
+      T extends FileGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ProjectGroupByArgs['orderBy'] }
-        : { orderBy?: ProjectGroupByArgs['orderBy'] },
+        ? { orderBy: FileGroupByArgs['orderBy'] }
+        : { orderBy?: FileGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -8068,23 +7493,21 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ProjectGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProjectGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, FileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Project model
+   * Fields of the File model
    */
-  readonly fields: ProjectFieldRefs;
+  readonly fields: FileFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Project.
+   * The delegate class that acts as a "Promise-like" for File.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__FileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    documents<T extends Project$documentsArgs<ExtArgs> = {}>(args?: Subset<T, Project$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8111,7305 +7534,383 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Project model
+   * Fields of the File model
    */
-  interface ProjectFieldRefs {
-    readonly id: FieldRef<"Project", 'String'>
-    readonly name: FieldRef<"Project", 'String'>
-    readonly userId: FieldRef<"Project", 'String'>
-    readonly createdAt: FieldRef<"Project", 'DateTime'>
+  interface FileFieldRefs {
+    readonly id: FieldRef<"File", 'String'>
+    readonly name: FieldRef<"File", 'String'>
+    readonly supabasePath: FieldRef<"File", 'String'>
+    readonly createdAt: FieldRef<"File", 'DateTime'>
+    readonly updatedAt: FieldRef<"File", 'DateTime'>
+    readonly confidence: FieldRef<"File", 'String'>
+    readonly durationMinutes: FieldRef<"File", 'Float'>
+    readonly missingItems: FieldRef<"File", 'String[]'>
+    readonly risks: FieldRef<"File", 'String[]'>
+    readonly summary: FieldRef<"File", 'String'>
+    readonly status: FieldRef<"File", 'ProcessingStatus'>
   }
     
 
   // Custom InputTypes
   /**
-   * Project findUnique
+   * File findUnique
    */
-  export type ProjectFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Project
+     * Select specific fields to fetch from the File
      */
-    select?: ProjectSelect<ExtArgs> | null
+    select?: FileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Project
+     * Omit specific fields from the File
      */
-    omit?: ProjectOmit<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which File to fetch.
      */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter, which Project to fetch.
-     */
-    where: ProjectWhereUniqueInput
+    where: FileWhereUniqueInput
   }
 
   /**
-   * Project findUniqueOrThrow
+   * File findUniqueOrThrow
    */
-  export type ProjectFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Project
+     * Select specific fields to fetch from the File
      */
-    select?: ProjectSelect<ExtArgs> | null
+    select?: FileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Project
+     * Omit specific fields from the File
      */
-    omit?: ProjectOmit<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which File to fetch.
      */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter, which Project to fetch.
-     */
-    where: ProjectWhereUniqueInput
+    where: FileWhereUniqueInput
   }
 
   /**
-   * Project findFirst
+   * File findFirst
    */
-  export type ProjectFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Project
+     * Select specific fields to fetch from the File
      */
-    select?: ProjectSelect<ExtArgs> | null
+    select?: FileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Project
+     * Omit specific fields from the File
      */
-    omit?: ProjectOmit<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which File to fetch.
      */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter, which Project to fetch.
-     */
-    where?: ProjectWhereInput
+    where?: FileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Projects to fetch.
+     * Determine the order of Files to fetch.
      */
-    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
+    orderBy?: FileOrderByWithRelationInput | FileOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Projects.
+     * Sets the position for searching for Files.
      */
-    cursor?: ProjectWhereUniqueInput
+    cursor?: FileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Projects from the position of the cursor.
+     * Take `±n` Files from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Projects.
+     * Skip the first `n` Files.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Projects.
+     * Filter by unique combinations of Files.
      */
-    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
+    distinct?: FileScalarFieldEnum | FileScalarFieldEnum[]
   }
 
   /**
-   * Project findFirstOrThrow
+   * File findFirstOrThrow
    */
-  export type ProjectFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Project
+     * Select specific fields to fetch from the File
      */
-    select?: ProjectSelect<ExtArgs> | null
+    select?: FileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Project
+     * Omit specific fields from the File
      */
-    omit?: ProjectOmit<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which File to fetch.
      */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter, which Project to fetch.
-     */
-    where?: ProjectWhereInput
+    where?: FileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Projects to fetch.
+     * Determine the order of Files to fetch.
      */
-    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
+    orderBy?: FileOrderByWithRelationInput | FileOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Projects.
+     * Sets the position for searching for Files.
      */
-    cursor?: ProjectWhereUniqueInput
+    cursor?: FileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Projects from the position of the cursor.
+     * Take `±n` Files from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Projects.
+     * Skip the first `n` Files.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Projects.
+     * Filter by unique combinations of Files.
      */
-    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
+    distinct?: FileScalarFieldEnum | FileScalarFieldEnum[]
   }
 
   /**
-   * Project findMany
+   * File findMany
    */
-  export type ProjectFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Project
+     * Select specific fields to fetch from the File
      */
-    select?: ProjectSelect<ExtArgs> | null
+    select?: FileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Project
+     * Omit specific fields from the File
      */
-    omit?: ProjectOmit<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Files to fetch.
      */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter, which Projects to fetch.
-     */
-    where?: ProjectWhereInput
+    where?: FileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Projects to fetch.
+     * Determine the order of Files to fetch.
      */
-    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
+    orderBy?: FileOrderByWithRelationInput | FileOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Projects.
+     * Sets the position for listing Files.
      */
-    cursor?: ProjectWhereUniqueInput
+    cursor?: FileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Projects from the position of the cursor.
+     * Take `±n` Files from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Projects.
+     * Skip the first `n` Files.
      */
     skip?: number
-    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
+    distinct?: FileScalarFieldEnum | FileScalarFieldEnum[]
   }
 
   /**
-   * Project create
+   * File create
    */
-  export type ProjectCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Project
+     * Select specific fields to fetch from the File
      */
-    select?: ProjectSelect<ExtArgs> | null
+    select?: FileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Project
+     * Omit specific fields from the File
      */
-    omit?: ProjectOmit<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The data needed to create a File.
      */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Project.
-     */
-    data: XOR<ProjectCreateInput, ProjectUncheckedCreateInput>
+    data: XOR<FileCreateInput, FileUncheckedCreateInput>
   }
 
   /**
-   * Project createMany
+   * File createMany
    */
-  export type ProjectCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Projects.
+     * The data used to create many Files.
      */
-    data: ProjectCreateManyInput | ProjectCreateManyInput[]
+    data: FileCreateManyInput | FileCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Project createManyAndReturn
+   * File createManyAndReturn
    */
-  export type ProjectCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Project
+     * Select specific fields to fetch from the File
      */
-    select?: ProjectSelectCreateManyAndReturn<ExtArgs> | null
+    select?: FileSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Project
+     * Omit specific fields from the File
      */
-    omit?: ProjectOmit<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
     /**
-     * The data used to create many Projects.
+     * The data used to create many Files.
      */
-    data: ProjectCreateManyInput | ProjectCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Project update
-   */
-  export type ProjectUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Project.
-     */
-    data: XOR<ProjectUpdateInput, ProjectUncheckedUpdateInput>
-    /**
-     * Choose, which Project to update.
-     */
-    where: ProjectWhereUniqueInput
-  }
-
-  /**
-   * Project updateMany
-   */
-  export type ProjectUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Projects.
-     */
-    data: XOR<ProjectUpdateManyMutationInput, ProjectUncheckedUpdateManyInput>
-    /**
-     * Filter which Projects to update
-     */
-    where?: ProjectWhereInput
-    /**
-     * Limit how many Projects to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Project updateManyAndReturn
-   */
-  export type ProjectUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * The data used to update Projects.
-     */
-    data: XOR<ProjectUpdateManyMutationInput, ProjectUncheckedUpdateManyInput>
-    /**
-     * Filter which Projects to update
-     */
-    where?: ProjectWhereInput
-    /**
-     * Limit how many Projects to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Project upsert
-   */
-  export type ProjectUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Project to update in case it exists.
-     */
-    where: ProjectWhereUniqueInput
-    /**
-     * In case the Project found by the `where` argument doesn't exist, create a new Project with this data.
-     */
-    create: XOR<ProjectCreateInput, ProjectUncheckedCreateInput>
-    /**
-     * In case the Project was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ProjectUpdateInput, ProjectUncheckedUpdateInput>
-  }
-
-  /**
-   * Project delete
-   */
-  export type ProjectDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter which Project to delete.
-     */
-    where: ProjectWhereUniqueInput
-  }
-
-  /**
-   * Project deleteMany
-   */
-  export type ProjectDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Projects to delete
-     */
-    where?: ProjectWhereInput
-    /**
-     * Limit how many Projects to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Project.documents
-   */
-  export type Project$documentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Document
-     */
-    select?: DocumentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Document
-     */
-    omit?: DocumentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DocumentInclude<ExtArgs> | null
-    where?: DocumentWhereInput
-    orderBy?: DocumentOrderByWithRelationInput | DocumentOrderByWithRelationInput[]
-    cursor?: DocumentWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: DocumentScalarFieldEnum | DocumentScalarFieldEnum[]
-  }
-
-  /**
-   * Project without action
-   */
-  export type ProjectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Document
-   */
-
-  export type AggregateDocument = {
-    _count: DocumentCountAggregateOutputType | null
-    _min: DocumentMinAggregateOutputType | null
-    _max: DocumentMaxAggregateOutputType | null
-  }
-
-  export type DocumentMinAggregateOutputType = {
-    id: string | null
-    projectId: string | null
-    fileUrl: string | null
-    fileName: string | null
-    status: string | null
-    createdAt: Date | null
-  }
-
-  export type DocumentMaxAggregateOutputType = {
-    id: string | null
-    projectId: string | null
-    fileUrl: string | null
-    fileName: string | null
-    status: string | null
-    createdAt: Date | null
-  }
-
-  export type DocumentCountAggregateOutputType = {
-    id: number
-    projectId: number
-    fileUrl: number
-    fileName: number
-    status: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type DocumentMinAggregateInputType = {
-    id?: true
-    projectId?: true
-    fileUrl?: true
-    fileName?: true
-    status?: true
-    createdAt?: true
-  }
-
-  export type DocumentMaxAggregateInputType = {
-    id?: true
-    projectId?: true
-    fileUrl?: true
-    fileName?: true
-    status?: true
-    createdAt?: true
-  }
-
-  export type DocumentCountAggregateInputType = {
-    id?: true
-    projectId?: true
-    fileUrl?: true
-    fileName?: true
-    status?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type DocumentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Document to aggregate.
-     */
-    where?: DocumentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Documents to fetch.
-     */
-    orderBy?: DocumentOrderByWithRelationInput | DocumentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: DocumentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Documents from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Documents.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Documents
-    **/
-    _count?: true | DocumentCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: DocumentMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: DocumentMaxAggregateInputType
-  }
-
-  export type GetDocumentAggregateType<T extends DocumentAggregateArgs> = {
-        [P in keyof T & keyof AggregateDocument]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateDocument[P]>
-      : GetScalarType<T[P], AggregateDocument[P]>
-  }
-
-
-
-
-  export type DocumentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DocumentWhereInput
-    orderBy?: DocumentOrderByWithAggregationInput | DocumentOrderByWithAggregationInput[]
-    by: DocumentScalarFieldEnum[] | DocumentScalarFieldEnum
-    having?: DocumentScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: DocumentCountAggregateInputType | true
-    _min?: DocumentMinAggregateInputType
-    _max?: DocumentMaxAggregateInputType
-  }
-
-  export type DocumentGroupByOutputType = {
-    id: string
-    projectId: string
-    fileUrl: string
-    fileName: string
-    status: string
-    createdAt: Date
-    _count: DocumentCountAggregateOutputType | null
-    _min: DocumentMinAggregateOutputType | null
-    _max: DocumentMaxAggregateOutputType | null
-  }
-
-  type GetDocumentGroupByPayload<T extends DocumentGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<DocumentGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof DocumentGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], DocumentGroupByOutputType[P]>
-            : GetScalarType<T[P], DocumentGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type DocumentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    projectId?: boolean
-    fileUrl?: boolean
-    fileName?: boolean
-    status?: boolean
-    createdAt?: boolean
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-    analyses?: boolean | Document$analysesArgs<ExtArgs>
-    _count?: boolean | DocumentCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["document"]>
-
-  export type DocumentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    projectId?: boolean
-    fileUrl?: boolean
-    fileName?: boolean
-    status?: boolean
-    createdAt?: boolean
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["document"]>
-
-  export type DocumentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    projectId?: boolean
-    fileUrl?: boolean
-    fileName?: boolean
-    status?: boolean
-    createdAt?: boolean
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["document"]>
-
-  export type DocumentSelectScalar = {
-    id?: boolean
-    projectId?: boolean
-    fileUrl?: boolean
-    fileName?: boolean
-    status?: boolean
-    createdAt?: boolean
-  }
-
-  export type DocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "fileUrl" | "fileName" | "status" | "createdAt", ExtArgs["result"]["document"]>
-  export type DocumentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-    analyses?: boolean | Document$analysesArgs<ExtArgs>
-    _count?: boolean | DocumentCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type DocumentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-  }
-  export type DocumentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-  }
-
-  export type $DocumentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Document"
-    objects: {
-      project: Prisma.$ProjectPayload<ExtArgs>
-      analyses: Prisma.$AnalysisPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      projectId: string
-      fileUrl: string
-      fileName: string
-      status: string
-      createdAt: Date
-    }, ExtArgs["result"]["document"]>
-    composites: {}
-  }
-
-  type DocumentGetPayload<S extends boolean | null | undefined | DocumentDefaultArgs> = $Result.GetResult<Prisma.$DocumentPayload, S>
-
-  type DocumentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<DocumentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: DocumentCountAggregateInputType | true
-    }
-
-  export interface DocumentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Document'], meta: { name: 'Document' } }
-    /**
-     * Find zero or one Document that matches the filter.
-     * @param {DocumentFindUniqueArgs} args - Arguments to find a Document
-     * @example
-     * // Get one Document
-     * const document = await prisma.document.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends DocumentFindUniqueArgs>(args: SelectSubset<T, DocumentFindUniqueArgs<ExtArgs>>): Prisma__DocumentClient<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Document that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {DocumentFindUniqueOrThrowArgs} args - Arguments to find a Document
-     * @example
-     * // Get one Document
-     * const document = await prisma.document.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends DocumentFindUniqueOrThrowArgs>(args: SelectSubset<T, DocumentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DocumentClient<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Document that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DocumentFindFirstArgs} args - Arguments to find a Document
-     * @example
-     * // Get one Document
-     * const document = await prisma.document.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends DocumentFindFirstArgs>(args?: SelectSubset<T, DocumentFindFirstArgs<ExtArgs>>): Prisma__DocumentClient<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Document that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DocumentFindFirstOrThrowArgs} args - Arguments to find a Document
-     * @example
-     * // Get one Document
-     * const document = await prisma.document.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends DocumentFindFirstOrThrowArgs>(args?: SelectSubset<T, DocumentFindFirstOrThrowArgs<ExtArgs>>): Prisma__DocumentClient<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Documents that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DocumentFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Documents
-     * const documents = await prisma.document.findMany()
-     * 
-     * // Get first 10 Documents
-     * const documents = await prisma.document.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const documentWithIdOnly = await prisma.document.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends DocumentFindManyArgs>(args?: SelectSubset<T, DocumentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Document.
-     * @param {DocumentCreateArgs} args - Arguments to create a Document.
-     * @example
-     * // Create one Document
-     * const Document = await prisma.document.create({
-     *   data: {
-     *     // ... data to create a Document
-     *   }
-     * })
-     * 
-     */
-    create<T extends DocumentCreateArgs>(args: SelectSubset<T, DocumentCreateArgs<ExtArgs>>): Prisma__DocumentClient<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Documents.
-     * @param {DocumentCreateManyArgs} args - Arguments to create many Documents.
-     * @example
-     * // Create many Documents
-     * const document = await prisma.document.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends DocumentCreateManyArgs>(args?: SelectSubset<T, DocumentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Documents and returns the data saved in the database.
-     * @param {DocumentCreateManyAndReturnArgs} args - Arguments to create many Documents.
-     * @example
-     * // Create many Documents
-     * const document = await prisma.document.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Documents and only return the `id`
-     * const documentWithIdOnly = await prisma.document.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends DocumentCreateManyAndReturnArgs>(args?: SelectSubset<T, DocumentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Document.
-     * @param {DocumentDeleteArgs} args - Arguments to delete one Document.
-     * @example
-     * // Delete one Document
-     * const Document = await prisma.document.delete({
-     *   where: {
-     *     // ... filter to delete one Document
-     *   }
-     * })
-     * 
-     */
-    delete<T extends DocumentDeleteArgs>(args: SelectSubset<T, DocumentDeleteArgs<ExtArgs>>): Prisma__DocumentClient<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Document.
-     * @param {DocumentUpdateArgs} args - Arguments to update one Document.
-     * @example
-     * // Update one Document
-     * const document = await prisma.document.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends DocumentUpdateArgs>(args: SelectSubset<T, DocumentUpdateArgs<ExtArgs>>): Prisma__DocumentClient<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Documents.
-     * @param {DocumentDeleteManyArgs} args - Arguments to filter Documents to delete.
-     * @example
-     * // Delete a few Documents
-     * const { count } = await prisma.document.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends DocumentDeleteManyArgs>(args?: SelectSubset<T, DocumentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Documents.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DocumentUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Documents
-     * const document = await prisma.document.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends DocumentUpdateManyArgs>(args: SelectSubset<T, DocumentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Documents and returns the data updated in the database.
-     * @param {DocumentUpdateManyAndReturnArgs} args - Arguments to update many Documents.
-     * @example
-     * // Update many Documents
-     * const document = await prisma.document.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Documents and only return the `id`
-     * const documentWithIdOnly = await prisma.document.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends DocumentUpdateManyAndReturnArgs>(args: SelectSubset<T, DocumentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Document.
-     * @param {DocumentUpsertArgs} args - Arguments to update or create a Document.
-     * @example
-     * // Update or create a Document
-     * const document = await prisma.document.upsert({
-     *   create: {
-     *     // ... data to create a Document
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Document we want to update
-     *   }
-     * })
-     */
-    upsert<T extends DocumentUpsertArgs>(args: SelectSubset<T, DocumentUpsertArgs<ExtArgs>>): Prisma__DocumentClient<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Documents.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DocumentCountArgs} args - Arguments to filter Documents to count.
-     * @example
-     * // Count the number of Documents
-     * const count = await prisma.document.count({
-     *   where: {
-     *     // ... the filter for the Documents we want to count
-     *   }
-     * })
-    **/
-    count<T extends DocumentCountArgs>(
-      args?: Subset<T, DocumentCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], DocumentCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Document.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DocumentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends DocumentAggregateArgs>(args: Subset<T, DocumentAggregateArgs>): Prisma.PrismaPromise<GetDocumentAggregateType<T>>
-
-    /**
-     * Group by Document.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DocumentGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends DocumentGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: DocumentGroupByArgs['orderBy'] }
-        : { orderBy?: DocumentGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, DocumentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDocumentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Document model
-   */
-  readonly fields: DocumentFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Document.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    analyses<T extends Document$analysesArgs<ExtArgs> = {}>(args?: Subset<T, Document$analysesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Document model
-   */
-  interface DocumentFieldRefs {
-    readonly id: FieldRef<"Document", 'String'>
-    readonly projectId: FieldRef<"Document", 'String'>
-    readonly fileUrl: FieldRef<"Document", 'String'>
-    readonly fileName: FieldRef<"Document", 'String'>
-    readonly status: FieldRef<"Document", 'String'>
-    readonly createdAt: FieldRef<"Document", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Document findUnique
-   */
-  export type DocumentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Document
-     */
-    select?: DocumentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Document
-     */
-    omit?: DocumentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DocumentInclude<ExtArgs> | null
-    /**
-     * Filter, which Document to fetch.
-     */
-    where: DocumentWhereUniqueInput
-  }
-
-  /**
-   * Document findUniqueOrThrow
-   */
-  export type DocumentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Document
-     */
-    select?: DocumentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Document
-     */
-    omit?: DocumentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DocumentInclude<ExtArgs> | null
-    /**
-     * Filter, which Document to fetch.
-     */
-    where: DocumentWhereUniqueInput
-  }
-
-  /**
-   * Document findFirst
-   */
-  export type DocumentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Document
-     */
-    select?: DocumentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Document
-     */
-    omit?: DocumentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DocumentInclude<ExtArgs> | null
-    /**
-     * Filter, which Document to fetch.
-     */
-    where?: DocumentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Documents to fetch.
-     */
-    orderBy?: DocumentOrderByWithRelationInput | DocumentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Documents.
-     */
-    cursor?: DocumentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Documents from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Documents.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Documents.
-     */
-    distinct?: DocumentScalarFieldEnum | DocumentScalarFieldEnum[]
-  }
-
-  /**
-   * Document findFirstOrThrow
-   */
-  export type DocumentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Document
-     */
-    select?: DocumentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Document
-     */
-    omit?: DocumentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DocumentInclude<ExtArgs> | null
-    /**
-     * Filter, which Document to fetch.
-     */
-    where?: DocumentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Documents to fetch.
-     */
-    orderBy?: DocumentOrderByWithRelationInput | DocumentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Documents.
-     */
-    cursor?: DocumentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Documents from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Documents.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Documents.
-     */
-    distinct?: DocumentScalarFieldEnum | DocumentScalarFieldEnum[]
-  }
-
-  /**
-   * Document findMany
-   */
-  export type DocumentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Document
-     */
-    select?: DocumentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Document
-     */
-    omit?: DocumentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DocumentInclude<ExtArgs> | null
-    /**
-     * Filter, which Documents to fetch.
-     */
-    where?: DocumentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Documents to fetch.
-     */
-    orderBy?: DocumentOrderByWithRelationInput | DocumentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Documents.
-     */
-    cursor?: DocumentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Documents from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Documents.
-     */
-    skip?: number
-    distinct?: DocumentScalarFieldEnum | DocumentScalarFieldEnum[]
-  }
-
-  /**
-   * Document create
-   */
-  export type DocumentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Document
-     */
-    select?: DocumentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Document
-     */
-    omit?: DocumentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DocumentInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Document.
-     */
-    data: XOR<DocumentCreateInput, DocumentUncheckedCreateInput>
-  }
-
-  /**
-   * Document createMany
-   */
-  export type DocumentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Documents.
-     */
-    data: DocumentCreateManyInput | DocumentCreateManyInput[]
+    data: FileCreateManyInput | FileCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Document createManyAndReturn
+   * File update
    */
-  export type DocumentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Document
+     * Select specific fields to fetch from the File
      */
-    select?: DocumentSelectCreateManyAndReturn<ExtArgs> | null
+    select?: FileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Document
+     * Omit specific fields from the File
      */
-    omit?: DocumentOmit<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
     /**
-     * The data used to create many Documents.
+     * The data needed to update a File.
      */
-    data: DocumentCreateManyInput | DocumentCreateManyInput[]
-    skipDuplicates?: boolean
+    data: XOR<FileUpdateInput, FileUncheckedUpdateInput>
     /**
-     * Choose, which related nodes to fetch as well
+     * Choose, which File to update.
      */
-    include?: DocumentIncludeCreateManyAndReturn<ExtArgs> | null
+    where: FileWhereUniqueInput
   }
 
   /**
-   * Document update
+   * File updateMany
    */
-  export type DocumentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Document
+     * The data used to update Files.
      */
-    select?: DocumentSelect<ExtArgs> | null
+    data: XOR<FileUpdateManyMutationInput, FileUncheckedUpdateManyInput>
     /**
-     * Omit specific fields from the Document
+     * Filter which Files to update
      */
-    omit?: DocumentOmit<ExtArgs> | null
+    where?: FileWhereInput
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DocumentInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Document.
-     */
-    data: XOR<DocumentUpdateInput, DocumentUncheckedUpdateInput>
-    /**
-     * Choose, which Document to update.
-     */
-    where: DocumentWhereUniqueInput
-  }
-
-  /**
-   * Document updateMany
-   */
-  export type DocumentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Documents.
-     */
-    data: XOR<DocumentUpdateManyMutationInput, DocumentUncheckedUpdateManyInput>
-    /**
-     * Filter which Documents to update
-     */
-    where?: DocumentWhereInput
-    /**
-     * Limit how many Documents to update.
+     * Limit how many Files to update.
      */
     limit?: number
   }
 
   /**
-   * Document updateManyAndReturn
+   * File updateManyAndReturn
    */
-  export type DocumentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Document
+     * Select specific fields to fetch from the File
      */
-    select?: DocumentSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: FileSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Document
+     * Omit specific fields from the File
      */
-    omit?: DocumentOmit<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
     /**
-     * The data used to update Documents.
+     * The data used to update Files.
      */
-    data: XOR<DocumentUpdateManyMutationInput, DocumentUncheckedUpdateManyInput>
+    data: XOR<FileUpdateManyMutationInput, FileUncheckedUpdateManyInput>
     /**
-     * Filter which Documents to update
+     * Filter which Files to update
      */
-    where?: DocumentWhereInput
+    where?: FileWhereInput
     /**
-     * Limit how many Documents to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DocumentIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Document upsert
-   */
-  export type DocumentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Document
-     */
-    select?: DocumentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Document
-     */
-    omit?: DocumentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DocumentInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Document to update in case it exists.
-     */
-    where: DocumentWhereUniqueInput
-    /**
-     * In case the Document found by the `where` argument doesn't exist, create a new Document with this data.
-     */
-    create: XOR<DocumentCreateInput, DocumentUncheckedCreateInput>
-    /**
-     * In case the Document was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<DocumentUpdateInput, DocumentUncheckedUpdateInput>
-  }
-
-  /**
-   * Document delete
-   */
-  export type DocumentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Document
-     */
-    select?: DocumentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Document
-     */
-    omit?: DocumentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DocumentInclude<ExtArgs> | null
-    /**
-     * Filter which Document to delete.
-     */
-    where: DocumentWhereUniqueInput
-  }
-
-  /**
-   * Document deleteMany
-   */
-  export type DocumentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Documents to delete
-     */
-    where?: DocumentWhereInput
-    /**
-     * Limit how many Documents to delete.
+     * Limit how many Files to update.
      */
     limit?: number
   }
 
   /**
-   * Document.analyses
+   * File upsert
    */
-  export type Document$analysesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Analysis
+     * Select specific fields to fetch from the File
      */
-    select?: AnalysisSelect<ExtArgs> | null
+    select?: FileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Analysis
+     * Omit specific fields from the File
      */
-    omit?: AnalysisOmit<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The filter to search for the File to update in case it exists.
      */
-    include?: AnalysisInclude<ExtArgs> | null
-    where?: AnalysisWhereInput
-    orderBy?: AnalysisOrderByWithRelationInput | AnalysisOrderByWithRelationInput[]
-    cursor?: AnalysisWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AnalysisScalarFieldEnum | AnalysisScalarFieldEnum[]
+    where: FileWhereUniqueInput
+    /**
+     * In case the File found by the `where` argument doesn't exist, create a new File with this data.
+     */
+    create: XOR<FileCreateInput, FileUncheckedCreateInput>
+    /**
+     * In case the File was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FileUpdateInput, FileUncheckedUpdateInput>
   }
 
   /**
-   * Document without action
+   * File delete
    */
-  export type DocumentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Document
+     * Select specific fields to fetch from the File
      */
-    select?: DocumentSelect<ExtArgs> | null
+    select?: FileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Document
+     * Omit specific fields from the File
      */
-    omit?: DocumentOmit<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter which File to delete.
      */
-    include?: DocumentInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Analysis
-   */
-
-  export type AggregateAnalysis = {
-    _count: AnalysisCountAggregateOutputType | null
-    _avg: AnalysisAvgAggregateOutputType | null
-    _sum: AnalysisSumAggregateOutputType | null
-    _min: AnalysisMinAggregateOutputType | null
-    _max: AnalysisMaxAggregateOutputType | null
-  }
-
-  export type AnalysisAvgAggregateOutputType = {
-    confidence: number | null
-  }
-
-  export type AnalysisSumAggregateOutputType = {
-    confidence: number | null
-  }
-
-  export type AnalysisMinAggregateOutputType = {
-    id: string | null
-    documentId: string | null
-    confidence: number | null
-    createdAt: Date | null
-  }
-
-  export type AnalysisMaxAggregateOutputType = {
-    id: string | null
-    documentId: string | null
-    confidence: number | null
-    createdAt: Date | null
-  }
-
-  export type AnalysisCountAggregateOutputType = {
-    id: number
-    documentId: number
-    rawJson: number
-    summary: number
-    confidence: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type AnalysisAvgAggregateInputType = {
-    confidence?: true
-  }
-
-  export type AnalysisSumAggregateInputType = {
-    confidence?: true
-  }
-
-  export type AnalysisMinAggregateInputType = {
-    id?: true
-    documentId?: true
-    confidence?: true
-    createdAt?: true
-  }
-
-  export type AnalysisMaxAggregateInputType = {
-    id?: true
-    documentId?: true
-    confidence?: true
-    createdAt?: true
-  }
-
-  export type AnalysisCountAggregateInputType = {
-    id?: true
-    documentId?: true
-    rawJson?: true
-    summary?: true
-    confidence?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type AnalysisAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Analysis to aggregate.
-     */
-    where?: AnalysisWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Analyses to fetch.
-     */
-    orderBy?: AnalysisOrderByWithRelationInput | AnalysisOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: AnalysisWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Analyses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Analyses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Analyses
-    **/
-    _count?: true | AnalysisCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: AnalysisAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: AnalysisSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: AnalysisMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: AnalysisMaxAggregateInputType
-  }
-
-  export type GetAnalysisAggregateType<T extends AnalysisAggregateArgs> = {
-        [P in keyof T & keyof AggregateAnalysis]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateAnalysis[P]>
-      : GetScalarType<T[P], AggregateAnalysis[P]>
-  }
-
-
-
-
-  export type AnalysisGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AnalysisWhereInput
-    orderBy?: AnalysisOrderByWithAggregationInput | AnalysisOrderByWithAggregationInput[]
-    by: AnalysisScalarFieldEnum[] | AnalysisScalarFieldEnum
-    having?: AnalysisScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: AnalysisCountAggregateInputType | true
-    _avg?: AnalysisAvgAggregateInputType
-    _sum?: AnalysisSumAggregateInputType
-    _min?: AnalysisMinAggregateInputType
-    _max?: AnalysisMaxAggregateInputType
-  }
-
-  export type AnalysisGroupByOutputType = {
-    id: string
-    documentId: string
-    rawJson: JsonValue
-    summary: JsonValue
-    confidence: number
-    createdAt: Date
-    _count: AnalysisCountAggregateOutputType | null
-    _avg: AnalysisAvgAggregateOutputType | null
-    _sum: AnalysisSumAggregateOutputType | null
-    _min: AnalysisMinAggregateOutputType | null
-    _max: AnalysisMaxAggregateOutputType | null
-  }
-
-  type GetAnalysisGroupByPayload<T extends AnalysisGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<AnalysisGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof AnalysisGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AnalysisGroupByOutputType[P]>
-            : GetScalarType<T[P], AnalysisGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type AnalysisSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    documentId?: boolean
-    rawJson?: boolean
-    summary?: boolean
-    confidence?: boolean
-    createdAt?: boolean
-    document?: boolean | DocumentDefaultArgs<ExtArgs>
-    missingItems?: boolean | Analysis$missingItemsArgs<ExtArgs>
-    risks?: boolean | Analysis$risksArgs<ExtArgs>
-    completeness?: boolean | Analysis$completenessArgs<ExtArgs>
-    graphMetrics?: boolean | Analysis$graphMetricsArgs<ExtArgs>
-    _count?: boolean | AnalysisCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["analysis"]>
-
-  export type AnalysisSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    documentId?: boolean
-    rawJson?: boolean
-    summary?: boolean
-    confidence?: boolean
-    createdAt?: boolean
-    document?: boolean | DocumentDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["analysis"]>
-
-  export type AnalysisSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    documentId?: boolean
-    rawJson?: boolean
-    summary?: boolean
-    confidence?: boolean
-    createdAt?: boolean
-    document?: boolean | DocumentDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["analysis"]>
-
-  export type AnalysisSelectScalar = {
-    id?: boolean
-    documentId?: boolean
-    rawJson?: boolean
-    summary?: boolean
-    confidence?: boolean
-    createdAt?: boolean
-  }
-
-  export type AnalysisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "documentId" | "rawJson" | "summary" | "confidence" | "createdAt", ExtArgs["result"]["analysis"]>
-  export type AnalysisInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    document?: boolean | DocumentDefaultArgs<ExtArgs>
-    missingItems?: boolean | Analysis$missingItemsArgs<ExtArgs>
-    risks?: boolean | Analysis$risksArgs<ExtArgs>
-    completeness?: boolean | Analysis$completenessArgs<ExtArgs>
-    graphMetrics?: boolean | Analysis$graphMetricsArgs<ExtArgs>
-    _count?: boolean | AnalysisCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type AnalysisIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    document?: boolean | DocumentDefaultArgs<ExtArgs>
-  }
-  export type AnalysisIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    document?: boolean | DocumentDefaultArgs<ExtArgs>
-  }
-
-  export type $AnalysisPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Analysis"
-    objects: {
-      document: Prisma.$DocumentPayload<ExtArgs>
-      missingItems: Prisma.$MissingItemPayload<ExtArgs>[]
-      risks: Prisma.$RiskPayload<ExtArgs>[]
-      completeness: Prisma.$CompletenessPayload<ExtArgs> | null
-      graphMetrics: Prisma.$GraphMetricPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      documentId: string
-      rawJson: Prisma.JsonValue
-      summary: Prisma.JsonValue
-      confidence: number
-      createdAt: Date
-    }, ExtArgs["result"]["analysis"]>
-    composites: {}
-  }
-
-  type AnalysisGetPayload<S extends boolean | null | undefined | AnalysisDefaultArgs> = $Result.GetResult<Prisma.$AnalysisPayload, S>
-
-  type AnalysisCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AnalysisFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AnalysisCountAggregateInputType | true
-    }
-
-  export interface AnalysisDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Analysis'], meta: { name: 'Analysis' } }
-    /**
-     * Find zero or one Analysis that matches the filter.
-     * @param {AnalysisFindUniqueArgs} args - Arguments to find a Analysis
-     * @example
-     * // Get one Analysis
-     * const analysis = await prisma.analysis.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends AnalysisFindUniqueArgs>(args: SelectSubset<T, AnalysisFindUniqueArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Analysis that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {AnalysisFindUniqueOrThrowArgs} args - Arguments to find a Analysis
-     * @example
-     * // Get one Analysis
-     * const analysis = await prisma.analysis.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends AnalysisFindUniqueOrThrowArgs>(args: SelectSubset<T, AnalysisFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Analysis that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AnalysisFindFirstArgs} args - Arguments to find a Analysis
-     * @example
-     * // Get one Analysis
-     * const analysis = await prisma.analysis.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends AnalysisFindFirstArgs>(args?: SelectSubset<T, AnalysisFindFirstArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Analysis that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AnalysisFindFirstOrThrowArgs} args - Arguments to find a Analysis
-     * @example
-     * // Get one Analysis
-     * const analysis = await prisma.analysis.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends AnalysisFindFirstOrThrowArgs>(args?: SelectSubset<T, AnalysisFindFirstOrThrowArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Analyses that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AnalysisFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Analyses
-     * const analyses = await prisma.analysis.findMany()
-     * 
-     * // Get first 10 Analyses
-     * const analyses = await prisma.analysis.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const analysisWithIdOnly = await prisma.analysis.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends AnalysisFindManyArgs>(args?: SelectSubset<T, AnalysisFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Analysis.
-     * @param {AnalysisCreateArgs} args - Arguments to create a Analysis.
-     * @example
-     * // Create one Analysis
-     * const Analysis = await prisma.analysis.create({
-     *   data: {
-     *     // ... data to create a Analysis
-     *   }
-     * })
-     * 
-     */
-    create<T extends AnalysisCreateArgs>(args: SelectSubset<T, AnalysisCreateArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Analyses.
-     * @param {AnalysisCreateManyArgs} args - Arguments to create many Analyses.
-     * @example
-     * // Create many Analyses
-     * const analysis = await prisma.analysis.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends AnalysisCreateManyArgs>(args?: SelectSubset<T, AnalysisCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Analyses and returns the data saved in the database.
-     * @param {AnalysisCreateManyAndReturnArgs} args - Arguments to create many Analyses.
-     * @example
-     * // Create many Analyses
-     * const analysis = await prisma.analysis.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Analyses and only return the `id`
-     * const analysisWithIdOnly = await prisma.analysis.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends AnalysisCreateManyAndReturnArgs>(args?: SelectSubset<T, AnalysisCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Analysis.
-     * @param {AnalysisDeleteArgs} args - Arguments to delete one Analysis.
-     * @example
-     * // Delete one Analysis
-     * const Analysis = await prisma.analysis.delete({
-     *   where: {
-     *     // ... filter to delete one Analysis
-     *   }
-     * })
-     * 
-     */
-    delete<T extends AnalysisDeleteArgs>(args: SelectSubset<T, AnalysisDeleteArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Analysis.
-     * @param {AnalysisUpdateArgs} args - Arguments to update one Analysis.
-     * @example
-     * // Update one Analysis
-     * const analysis = await prisma.analysis.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends AnalysisUpdateArgs>(args: SelectSubset<T, AnalysisUpdateArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Analyses.
-     * @param {AnalysisDeleteManyArgs} args - Arguments to filter Analyses to delete.
-     * @example
-     * // Delete a few Analyses
-     * const { count } = await prisma.analysis.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends AnalysisDeleteManyArgs>(args?: SelectSubset<T, AnalysisDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Analyses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AnalysisUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Analyses
-     * const analysis = await prisma.analysis.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends AnalysisUpdateManyArgs>(args: SelectSubset<T, AnalysisUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Analyses and returns the data updated in the database.
-     * @param {AnalysisUpdateManyAndReturnArgs} args - Arguments to update many Analyses.
-     * @example
-     * // Update many Analyses
-     * const analysis = await prisma.analysis.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Analyses and only return the `id`
-     * const analysisWithIdOnly = await prisma.analysis.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends AnalysisUpdateManyAndReturnArgs>(args: SelectSubset<T, AnalysisUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Analysis.
-     * @param {AnalysisUpsertArgs} args - Arguments to update or create a Analysis.
-     * @example
-     * // Update or create a Analysis
-     * const analysis = await prisma.analysis.upsert({
-     *   create: {
-     *     // ... data to create a Analysis
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Analysis we want to update
-     *   }
-     * })
-     */
-    upsert<T extends AnalysisUpsertArgs>(args: SelectSubset<T, AnalysisUpsertArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Analyses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AnalysisCountArgs} args - Arguments to filter Analyses to count.
-     * @example
-     * // Count the number of Analyses
-     * const count = await prisma.analysis.count({
-     *   where: {
-     *     // ... the filter for the Analyses we want to count
-     *   }
-     * })
-    **/
-    count<T extends AnalysisCountArgs>(
-      args?: Subset<T, AnalysisCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], AnalysisCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Analysis.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AnalysisAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends AnalysisAggregateArgs>(args: Subset<T, AnalysisAggregateArgs>): Prisma.PrismaPromise<GetAnalysisAggregateType<T>>
-
-    /**
-     * Group by Analysis.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AnalysisGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends AnalysisGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AnalysisGroupByArgs['orderBy'] }
-        : { orderBy?: AnalysisGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, AnalysisGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAnalysisGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Analysis model
-   */
-  readonly fields: AnalysisFieldRefs;
+    where: FileWhereUniqueInput
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Analysis.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
+   * File deleteMany
    */
-  export interface Prisma__AnalysisClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    document<T extends DocumentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DocumentDefaultArgs<ExtArgs>>): Prisma__DocumentClient<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    missingItems<T extends Analysis$missingItemsArgs<ExtArgs> = {}>(args?: Subset<T, Analysis$missingItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    risks<T extends Analysis$risksArgs<ExtArgs> = {}>(args?: Subset<T, Analysis$risksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    completeness<T extends Analysis$completenessArgs<ExtArgs> = {}>(args?: Subset<T, Analysis$completenessArgs<ExtArgs>>): Prisma__CompletenessClient<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    graphMetrics<T extends Analysis$graphMetricsArgs<ExtArgs> = {}>(args?: Subset<T, Analysis$graphMetricsArgs<ExtArgs>>): Prisma__GraphMetricClient<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  export type FileDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
+     * Filter which Files to delete
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    where?: FileWhereInput
     /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Analysis model
-   */
-  interface AnalysisFieldRefs {
-    readonly id: FieldRef<"Analysis", 'String'>
-    readonly documentId: FieldRef<"Analysis", 'String'>
-    readonly rawJson: FieldRef<"Analysis", 'Json'>
-    readonly summary: FieldRef<"Analysis", 'Json'>
-    readonly confidence: FieldRef<"Analysis", 'Float'>
-    readonly createdAt: FieldRef<"Analysis", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Analysis findUnique
-   */
-  export type AnalysisFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Analysis
-     */
-    select?: AnalysisSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Analysis
-     */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisInclude<ExtArgs> | null
-    /**
-     * Filter, which Analysis to fetch.
-     */
-    where: AnalysisWhereUniqueInput
-  }
-
-  /**
-   * Analysis findUniqueOrThrow
-   */
-  export type AnalysisFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Analysis
-     */
-    select?: AnalysisSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Analysis
-     */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisInclude<ExtArgs> | null
-    /**
-     * Filter, which Analysis to fetch.
-     */
-    where: AnalysisWhereUniqueInput
-  }
-
-  /**
-   * Analysis findFirst
-   */
-  export type AnalysisFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Analysis
-     */
-    select?: AnalysisSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Analysis
-     */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisInclude<ExtArgs> | null
-    /**
-     * Filter, which Analysis to fetch.
-     */
-    where?: AnalysisWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Analyses to fetch.
-     */
-    orderBy?: AnalysisOrderByWithRelationInput | AnalysisOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Analyses.
-     */
-    cursor?: AnalysisWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Analyses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Analyses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Analyses.
-     */
-    distinct?: AnalysisScalarFieldEnum | AnalysisScalarFieldEnum[]
-  }
-
-  /**
-   * Analysis findFirstOrThrow
-   */
-  export type AnalysisFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Analysis
-     */
-    select?: AnalysisSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Analysis
-     */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisInclude<ExtArgs> | null
-    /**
-     * Filter, which Analysis to fetch.
-     */
-    where?: AnalysisWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Analyses to fetch.
-     */
-    orderBy?: AnalysisOrderByWithRelationInput | AnalysisOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Analyses.
-     */
-    cursor?: AnalysisWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Analyses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Analyses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Analyses.
-     */
-    distinct?: AnalysisScalarFieldEnum | AnalysisScalarFieldEnum[]
-  }
-
-  /**
-   * Analysis findMany
-   */
-  export type AnalysisFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Analysis
-     */
-    select?: AnalysisSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Analysis
-     */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisInclude<ExtArgs> | null
-    /**
-     * Filter, which Analyses to fetch.
-     */
-    where?: AnalysisWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Analyses to fetch.
-     */
-    orderBy?: AnalysisOrderByWithRelationInput | AnalysisOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Analyses.
-     */
-    cursor?: AnalysisWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Analyses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Analyses.
-     */
-    skip?: number
-    distinct?: AnalysisScalarFieldEnum | AnalysisScalarFieldEnum[]
-  }
-
-  /**
-   * Analysis create
-   */
-  export type AnalysisCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Analysis
-     */
-    select?: AnalysisSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Analysis
-     */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Analysis.
-     */
-    data: XOR<AnalysisCreateInput, AnalysisUncheckedCreateInput>
-  }
-
-  /**
-   * Analysis createMany
-   */
-  export type AnalysisCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Analyses.
-     */
-    data: AnalysisCreateManyInput | AnalysisCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Analysis createManyAndReturn
-   */
-  export type AnalysisCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Analysis
-     */
-    select?: AnalysisSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Analysis
-     */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * The data used to create many Analyses.
-     */
-    data: AnalysisCreateManyInput | AnalysisCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Analysis update
-   */
-  export type AnalysisUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Analysis
-     */
-    select?: AnalysisSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Analysis
-     */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Analysis.
-     */
-    data: XOR<AnalysisUpdateInput, AnalysisUncheckedUpdateInput>
-    /**
-     * Choose, which Analysis to update.
-     */
-    where: AnalysisWhereUniqueInput
-  }
-
-  /**
-   * Analysis updateMany
-   */
-  export type AnalysisUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Analyses.
-     */
-    data: XOR<AnalysisUpdateManyMutationInput, AnalysisUncheckedUpdateManyInput>
-    /**
-     * Filter which Analyses to update
-     */
-    where?: AnalysisWhereInput
-    /**
-     * Limit how many Analyses to update.
+     * Limit how many Files to delete.
      */
     limit?: number
   }
 
   /**
-   * Analysis updateManyAndReturn
+   * File without action
    */
-  export type AnalysisUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Analysis
+     * Select specific fields to fetch from the File
      */
-    select?: AnalysisSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: FileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Analysis
+     * Omit specific fields from the File
      */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * The data used to update Analyses.
-     */
-    data: XOR<AnalysisUpdateManyMutationInput, AnalysisUncheckedUpdateManyInput>
-    /**
-     * Filter which Analyses to update
-     */
-    where?: AnalysisWhereInput
-    /**
-     * Limit how many Analyses to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Analysis upsert
-   */
-  export type AnalysisUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Analysis
-     */
-    select?: AnalysisSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Analysis
-     */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Analysis to update in case it exists.
-     */
-    where: AnalysisWhereUniqueInput
-    /**
-     * In case the Analysis found by the `where` argument doesn't exist, create a new Analysis with this data.
-     */
-    create: XOR<AnalysisCreateInput, AnalysisUncheckedCreateInput>
-    /**
-     * In case the Analysis was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<AnalysisUpdateInput, AnalysisUncheckedUpdateInput>
-  }
-
-  /**
-   * Analysis delete
-   */
-  export type AnalysisDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Analysis
-     */
-    select?: AnalysisSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Analysis
-     */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisInclude<ExtArgs> | null
-    /**
-     * Filter which Analysis to delete.
-     */
-    where: AnalysisWhereUniqueInput
-  }
-
-  /**
-   * Analysis deleteMany
-   */
-  export type AnalysisDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Analyses to delete
-     */
-    where?: AnalysisWhereInput
-    /**
-     * Limit how many Analyses to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Analysis.missingItems
-   */
-  export type Analysis$missingItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemInclude<ExtArgs> | null
-    where?: MissingItemWhereInput
-    orderBy?: MissingItemOrderByWithRelationInput | MissingItemOrderByWithRelationInput[]
-    cursor?: MissingItemWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MissingItemScalarFieldEnum | MissingItemScalarFieldEnum[]
-  }
-
-  /**
-   * Analysis.risks
-   */
-  export type Analysis$risksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskInclude<ExtArgs> | null
-    where?: RiskWhereInput
-    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
-    cursor?: RiskWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: RiskScalarFieldEnum | RiskScalarFieldEnum[]
-  }
-
-  /**
-   * Analysis.completeness
-   */
-  export type Analysis$completenessArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessInclude<ExtArgs> | null
-    where?: CompletenessWhereInput
-  }
-
-  /**
-   * Analysis.graphMetrics
-   */
-  export type Analysis$graphMetricsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricInclude<ExtArgs> | null
-    where?: GraphMetricWhereInput
-  }
-
-  /**
-   * Analysis without action
-   */
-  export type AnalysisDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Analysis
-     */
-    select?: AnalysisSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Analysis
-     */
-    omit?: AnalysisOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalysisInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model MissingItem
-   */
-
-  export type AggregateMissingItem = {
-    _count: MissingItemCountAggregateOutputType | null
-    _avg: MissingItemAvgAggregateOutputType | null
-    _sum: MissingItemSumAggregateOutputType | null
-    _min: MissingItemMinAggregateOutputType | null
-    _max: MissingItemMaxAggregateOutputType | null
-  }
-
-  export type MissingItemAvgAggregateOutputType = {
-    page: number | null
-  }
-
-  export type MissingItemSumAggregateOutputType = {
-    page: number | null
-  }
-
-  export type MissingItemMinAggregateOutputType = {
-    id: string | null
-    analysisId: string | null
-    category: string | null
-    title: string | null
-    description: string | null
-    severity: string | null
-    page: number | null
-  }
-
-  export type MissingItemMaxAggregateOutputType = {
-    id: string | null
-    analysisId: string | null
-    category: string | null
-    title: string | null
-    description: string | null
-    severity: string | null
-    page: number | null
-  }
-
-  export type MissingItemCountAggregateOutputType = {
-    id: number
-    analysisId: number
-    category: number
-    title: number
-    description: number
-    severity: number
-    page: number
-    _all: number
-  }
-
-
-  export type MissingItemAvgAggregateInputType = {
-    page?: true
-  }
-
-  export type MissingItemSumAggregateInputType = {
-    page?: true
-  }
-
-  export type MissingItemMinAggregateInputType = {
-    id?: true
-    analysisId?: true
-    category?: true
-    title?: true
-    description?: true
-    severity?: true
-    page?: true
-  }
-
-  export type MissingItemMaxAggregateInputType = {
-    id?: true
-    analysisId?: true
-    category?: true
-    title?: true
-    description?: true
-    severity?: true
-    page?: true
-  }
-
-  export type MissingItemCountAggregateInputType = {
-    id?: true
-    analysisId?: true
-    category?: true
-    title?: true
-    description?: true
-    severity?: true
-    page?: true
-    _all?: true
-  }
-
-  export type MissingItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MissingItem to aggregate.
-     */
-    where?: MissingItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MissingItems to fetch.
-     */
-    orderBy?: MissingItemOrderByWithRelationInput | MissingItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: MissingItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MissingItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MissingItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned MissingItems
-    **/
-    _count?: true | MissingItemCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: MissingItemAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: MissingItemSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: MissingItemMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: MissingItemMaxAggregateInputType
-  }
-
-  export type GetMissingItemAggregateType<T extends MissingItemAggregateArgs> = {
-        [P in keyof T & keyof AggregateMissingItem]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateMissingItem[P]>
-      : GetScalarType<T[P], AggregateMissingItem[P]>
-  }
-
-
-
-
-  export type MissingItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MissingItemWhereInput
-    orderBy?: MissingItemOrderByWithAggregationInput | MissingItemOrderByWithAggregationInput[]
-    by: MissingItemScalarFieldEnum[] | MissingItemScalarFieldEnum
-    having?: MissingItemScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: MissingItemCountAggregateInputType | true
-    _avg?: MissingItemAvgAggregateInputType
-    _sum?: MissingItemSumAggregateInputType
-    _min?: MissingItemMinAggregateInputType
-    _max?: MissingItemMaxAggregateInputType
-  }
-
-  export type MissingItemGroupByOutputType = {
-    id: string
-    analysisId: string
-    category: string
-    title: string
-    description: string
-    severity: string
-    page: number | null
-    _count: MissingItemCountAggregateOutputType | null
-    _avg: MissingItemAvgAggregateOutputType | null
-    _sum: MissingItemSumAggregateOutputType | null
-    _min: MissingItemMinAggregateOutputType | null
-    _max: MissingItemMaxAggregateOutputType | null
-  }
-
-  type GetMissingItemGroupByPayload<T extends MissingItemGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<MissingItemGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof MissingItemGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], MissingItemGroupByOutputType[P]>
-            : GetScalarType<T[P], MissingItemGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type MissingItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    category?: boolean
-    title?: boolean
-    description?: boolean
-    severity?: boolean
-    page?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["missingItem"]>
-
-  export type MissingItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    category?: boolean
-    title?: boolean
-    description?: boolean
-    severity?: boolean
-    page?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["missingItem"]>
-
-  export type MissingItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    category?: boolean
-    title?: boolean
-    description?: boolean
-    severity?: boolean
-    page?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["missingItem"]>
-
-  export type MissingItemSelectScalar = {
-    id?: boolean
-    analysisId?: boolean
-    category?: boolean
-    title?: boolean
-    description?: boolean
-    severity?: boolean
-    page?: boolean
-  }
-
-  export type MissingItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "analysisId" | "category" | "title" | "description" | "severity" | "page", ExtArgs["result"]["missingItem"]>
-  export type MissingItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-  export type MissingItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-  export type MissingItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-
-  export type $MissingItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "MissingItem"
-    objects: {
-      analysis: Prisma.$AnalysisPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      analysisId: string
-      category: string
-      title: string
-      description: string
-      severity: string
-      page: number | null
-    }, ExtArgs["result"]["missingItem"]>
-    composites: {}
-  }
-
-  type MissingItemGetPayload<S extends boolean | null | undefined | MissingItemDefaultArgs> = $Result.GetResult<Prisma.$MissingItemPayload, S>
-
-  type MissingItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<MissingItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: MissingItemCountAggregateInputType | true
-    }
-
-  export interface MissingItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MissingItem'], meta: { name: 'MissingItem' } }
-    /**
-     * Find zero or one MissingItem that matches the filter.
-     * @param {MissingItemFindUniqueArgs} args - Arguments to find a MissingItem
-     * @example
-     * // Get one MissingItem
-     * const missingItem = await prisma.missingItem.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends MissingItemFindUniqueArgs>(args: SelectSubset<T, MissingItemFindUniqueArgs<ExtArgs>>): Prisma__MissingItemClient<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one MissingItem that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {MissingItemFindUniqueOrThrowArgs} args - Arguments to find a MissingItem
-     * @example
-     * // Get one MissingItem
-     * const missingItem = await prisma.missingItem.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends MissingItemFindUniqueOrThrowArgs>(args: SelectSubset<T, MissingItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MissingItemClient<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first MissingItem that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MissingItemFindFirstArgs} args - Arguments to find a MissingItem
-     * @example
-     * // Get one MissingItem
-     * const missingItem = await prisma.missingItem.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends MissingItemFindFirstArgs>(args?: SelectSubset<T, MissingItemFindFirstArgs<ExtArgs>>): Prisma__MissingItemClient<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first MissingItem that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MissingItemFindFirstOrThrowArgs} args - Arguments to find a MissingItem
-     * @example
-     * // Get one MissingItem
-     * const missingItem = await prisma.missingItem.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends MissingItemFindFirstOrThrowArgs>(args?: SelectSubset<T, MissingItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__MissingItemClient<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more MissingItems that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MissingItemFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all MissingItems
-     * const missingItems = await prisma.missingItem.findMany()
-     * 
-     * // Get first 10 MissingItems
-     * const missingItems = await prisma.missingItem.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const missingItemWithIdOnly = await prisma.missingItem.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends MissingItemFindManyArgs>(args?: SelectSubset<T, MissingItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a MissingItem.
-     * @param {MissingItemCreateArgs} args - Arguments to create a MissingItem.
-     * @example
-     * // Create one MissingItem
-     * const MissingItem = await prisma.missingItem.create({
-     *   data: {
-     *     // ... data to create a MissingItem
-     *   }
-     * })
-     * 
-     */
-    create<T extends MissingItemCreateArgs>(args: SelectSubset<T, MissingItemCreateArgs<ExtArgs>>): Prisma__MissingItemClient<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many MissingItems.
-     * @param {MissingItemCreateManyArgs} args - Arguments to create many MissingItems.
-     * @example
-     * // Create many MissingItems
-     * const missingItem = await prisma.missingItem.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends MissingItemCreateManyArgs>(args?: SelectSubset<T, MissingItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many MissingItems and returns the data saved in the database.
-     * @param {MissingItemCreateManyAndReturnArgs} args - Arguments to create many MissingItems.
-     * @example
-     * // Create many MissingItems
-     * const missingItem = await prisma.missingItem.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many MissingItems and only return the `id`
-     * const missingItemWithIdOnly = await prisma.missingItem.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends MissingItemCreateManyAndReturnArgs>(args?: SelectSubset<T, MissingItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a MissingItem.
-     * @param {MissingItemDeleteArgs} args - Arguments to delete one MissingItem.
-     * @example
-     * // Delete one MissingItem
-     * const MissingItem = await prisma.missingItem.delete({
-     *   where: {
-     *     // ... filter to delete one MissingItem
-     *   }
-     * })
-     * 
-     */
-    delete<T extends MissingItemDeleteArgs>(args: SelectSubset<T, MissingItemDeleteArgs<ExtArgs>>): Prisma__MissingItemClient<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one MissingItem.
-     * @param {MissingItemUpdateArgs} args - Arguments to update one MissingItem.
-     * @example
-     * // Update one MissingItem
-     * const missingItem = await prisma.missingItem.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends MissingItemUpdateArgs>(args: SelectSubset<T, MissingItemUpdateArgs<ExtArgs>>): Prisma__MissingItemClient<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more MissingItems.
-     * @param {MissingItemDeleteManyArgs} args - Arguments to filter MissingItems to delete.
-     * @example
-     * // Delete a few MissingItems
-     * const { count } = await prisma.missingItem.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends MissingItemDeleteManyArgs>(args?: SelectSubset<T, MissingItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MissingItems.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MissingItemUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many MissingItems
-     * const missingItem = await prisma.missingItem.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends MissingItemUpdateManyArgs>(args: SelectSubset<T, MissingItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MissingItems and returns the data updated in the database.
-     * @param {MissingItemUpdateManyAndReturnArgs} args - Arguments to update many MissingItems.
-     * @example
-     * // Update many MissingItems
-     * const missingItem = await prisma.missingItem.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more MissingItems and only return the `id`
-     * const missingItemWithIdOnly = await prisma.missingItem.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends MissingItemUpdateManyAndReturnArgs>(args: SelectSubset<T, MissingItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one MissingItem.
-     * @param {MissingItemUpsertArgs} args - Arguments to update or create a MissingItem.
-     * @example
-     * // Update or create a MissingItem
-     * const missingItem = await prisma.missingItem.upsert({
-     *   create: {
-     *     // ... data to create a MissingItem
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the MissingItem we want to update
-     *   }
-     * })
-     */
-    upsert<T extends MissingItemUpsertArgs>(args: SelectSubset<T, MissingItemUpsertArgs<ExtArgs>>): Prisma__MissingItemClient<$Result.GetResult<Prisma.$MissingItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of MissingItems.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MissingItemCountArgs} args - Arguments to filter MissingItems to count.
-     * @example
-     * // Count the number of MissingItems
-     * const count = await prisma.missingItem.count({
-     *   where: {
-     *     // ... the filter for the MissingItems we want to count
-     *   }
-     * })
-    **/
-    count<T extends MissingItemCountArgs>(
-      args?: Subset<T, MissingItemCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], MissingItemCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a MissingItem.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MissingItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends MissingItemAggregateArgs>(args: Subset<T, MissingItemAggregateArgs>): Prisma.PrismaPromise<GetMissingItemAggregateType<T>>
-
-    /**
-     * Group by MissingItem.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MissingItemGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends MissingItemGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MissingItemGroupByArgs['orderBy'] }
-        : { orderBy?: MissingItemGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, MissingItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMissingItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the MissingItem model
-   */
-  readonly fields: MissingItemFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for MissingItem.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__MissingItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    analysis<T extends AnalysisDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AnalysisDefaultArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the MissingItem model
-   */
-  interface MissingItemFieldRefs {
-    readonly id: FieldRef<"MissingItem", 'String'>
-    readonly analysisId: FieldRef<"MissingItem", 'String'>
-    readonly category: FieldRef<"MissingItem", 'String'>
-    readonly title: FieldRef<"MissingItem", 'String'>
-    readonly description: FieldRef<"MissingItem", 'String'>
-    readonly severity: FieldRef<"MissingItem", 'String'>
-    readonly page: FieldRef<"MissingItem", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * MissingItem findUnique
-   */
-  export type MissingItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemInclude<ExtArgs> | null
-    /**
-     * Filter, which MissingItem to fetch.
-     */
-    where: MissingItemWhereUniqueInput
-  }
-
-  /**
-   * MissingItem findUniqueOrThrow
-   */
-  export type MissingItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemInclude<ExtArgs> | null
-    /**
-     * Filter, which MissingItem to fetch.
-     */
-    where: MissingItemWhereUniqueInput
-  }
-
-  /**
-   * MissingItem findFirst
-   */
-  export type MissingItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemInclude<ExtArgs> | null
-    /**
-     * Filter, which MissingItem to fetch.
-     */
-    where?: MissingItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MissingItems to fetch.
-     */
-    orderBy?: MissingItemOrderByWithRelationInput | MissingItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MissingItems.
-     */
-    cursor?: MissingItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MissingItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MissingItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MissingItems.
-     */
-    distinct?: MissingItemScalarFieldEnum | MissingItemScalarFieldEnum[]
-  }
-
-  /**
-   * MissingItem findFirstOrThrow
-   */
-  export type MissingItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemInclude<ExtArgs> | null
-    /**
-     * Filter, which MissingItem to fetch.
-     */
-    where?: MissingItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MissingItems to fetch.
-     */
-    orderBy?: MissingItemOrderByWithRelationInput | MissingItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MissingItems.
-     */
-    cursor?: MissingItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MissingItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MissingItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MissingItems.
-     */
-    distinct?: MissingItemScalarFieldEnum | MissingItemScalarFieldEnum[]
-  }
-
-  /**
-   * MissingItem findMany
-   */
-  export type MissingItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemInclude<ExtArgs> | null
-    /**
-     * Filter, which MissingItems to fetch.
-     */
-    where?: MissingItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MissingItems to fetch.
-     */
-    orderBy?: MissingItemOrderByWithRelationInput | MissingItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing MissingItems.
-     */
-    cursor?: MissingItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MissingItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MissingItems.
-     */
-    skip?: number
-    distinct?: MissingItemScalarFieldEnum | MissingItemScalarFieldEnum[]
-  }
-
-  /**
-   * MissingItem create
-   */
-  export type MissingItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemInclude<ExtArgs> | null
-    /**
-     * The data needed to create a MissingItem.
-     */
-    data: XOR<MissingItemCreateInput, MissingItemUncheckedCreateInput>
-  }
-
-  /**
-   * MissingItem createMany
-   */
-  export type MissingItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many MissingItems.
-     */
-    data: MissingItemCreateManyInput | MissingItemCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * MissingItem createManyAndReturn
-   */
-  export type MissingItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * The data used to create many MissingItems.
-     */
-    data: MissingItemCreateManyInput | MissingItemCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MissingItem update
-   */
-  export type MissingItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemInclude<ExtArgs> | null
-    /**
-     * The data needed to update a MissingItem.
-     */
-    data: XOR<MissingItemUpdateInput, MissingItemUncheckedUpdateInput>
-    /**
-     * Choose, which MissingItem to update.
-     */
-    where: MissingItemWhereUniqueInput
-  }
-
-  /**
-   * MissingItem updateMany
-   */
-  export type MissingItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update MissingItems.
-     */
-    data: XOR<MissingItemUpdateManyMutationInput, MissingItemUncheckedUpdateManyInput>
-    /**
-     * Filter which MissingItems to update
-     */
-    where?: MissingItemWhereInput
-    /**
-     * Limit how many MissingItems to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * MissingItem updateManyAndReturn
-   */
-  export type MissingItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * The data used to update MissingItems.
-     */
-    data: XOR<MissingItemUpdateManyMutationInput, MissingItemUncheckedUpdateManyInput>
-    /**
-     * Filter which MissingItems to update
-     */
-    where?: MissingItemWhereInput
-    /**
-     * Limit how many MissingItems to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MissingItem upsert
-   */
-  export type MissingItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemInclude<ExtArgs> | null
-    /**
-     * The filter to search for the MissingItem to update in case it exists.
-     */
-    where: MissingItemWhereUniqueInput
-    /**
-     * In case the MissingItem found by the `where` argument doesn't exist, create a new MissingItem with this data.
-     */
-    create: XOR<MissingItemCreateInput, MissingItemUncheckedCreateInput>
-    /**
-     * In case the MissingItem was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<MissingItemUpdateInput, MissingItemUncheckedUpdateInput>
-  }
-
-  /**
-   * MissingItem delete
-   */
-  export type MissingItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemInclude<ExtArgs> | null
-    /**
-     * Filter which MissingItem to delete.
-     */
-    where: MissingItemWhereUniqueInput
-  }
-
-  /**
-   * MissingItem deleteMany
-   */
-  export type MissingItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MissingItems to delete
-     */
-    where?: MissingItemWhereInput
-    /**
-     * Limit how many MissingItems to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * MissingItem without action
-   */
-  export type MissingItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MissingItem
-     */
-    select?: MissingItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MissingItem
-     */
-    omit?: MissingItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MissingItemInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Risk
-   */
-
-  export type AggregateRisk = {
-    _count: RiskCountAggregateOutputType | null
-    _min: RiskMinAggregateOutputType | null
-    _max: RiskMaxAggregateOutputType | null
-  }
-
-  export type RiskMinAggregateOutputType = {
-    id: string | null
-    analysisId: string | null
-    category: string | null
-    title: string | null
-    description: string | null
-    impact: string | null
-    severity: string | null
-  }
-
-  export type RiskMaxAggregateOutputType = {
-    id: string | null
-    analysisId: string | null
-    category: string | null
-    title: string | null
-    description: string | null
-    impact: string | null
-    severity: string | null
-  }
-
-  export type RiskCountAggregateOutputType = {
-    id: number
-    analysisId: number
-    category: number
-    title: number
-    description: number
-    impact: number
-    severity: number
-    _all: number
-  }
-
-
-  export type RiskMinAggregateInputType = {
-    id?: true
-    analysisId?: true
-    category?: true
-    title?: true
-    description?: true
-    impact?: true
-    severity?: true
-  }
-
-  export type RiskMaxAggregateInputType = {
-    id?: true
-    analysisId?: true
-    category?: true
-    title?: true
-    description?: true
-    impact?: true
-    severity?: true
-  }
-
-  export type RiskCountAggregateInputType = {
-    id?: true
-    analysisId?: true
-    category?: true
-    title?: true
-    description?: true
-    impact?: true
-    severity?: true
-    _all?: true
-  }
-
-  export type RiskAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Risk to aggregate.
-     */
-    where?: RiskWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Risks to fetch.
-     */
-    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: RiskWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Risks from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Risks.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Risks
-    **/
-    _count?: true | RiskCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: RiskMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: RiskMaxAggregateInputType
-  }
-
-  export type GetRiskAggregateType<T extends RiskAggregateArgs> = {
-        [P in keyof T & keyof AggregateRisk]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateRisk[P]>
-      : GetScalarType<T[P], AggregateRisk[P]>
-  }
-
-
-
-
-  export type RiskGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RiskWhereInput
-    orderBy?: RiskOrderByWithAggregationInput | RiskOrderByWithAggregationInput[]
-    by: RiskScalarFieldEnum[] | RiskScalarFieldEnum
-    having?: RiskScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: RiskCountAggregateInputType | true
-    _min?: RiskMinAggregateInputType
-    _max?: RiskMaxAggregateInputType
-  }
-
-  export type RiskGroupByOutputType = {
-    id: string
-    analysisId: string
-    category: string
-    title: string
-    description: string
-    impact: string
-    severity: string
-    _count: RiskCountAggregateOutputType | null
-    _min: RiskMinAggregateOutputType | null
-    _max: RiskMaxAggregateOutputType | null
-  }
-
-  type GetRiskGroupByPayload<T extends RiskGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<RiskGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof RiskGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], RiskGroupByOutputType[P]>
-            : GetScalarType<T[P], RiskGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type RiskSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    category?: boolean
-    title?: boolean
-    description?: boolean
-    impact?: boolean
-    severity?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["risk"]>
-
-  export type RiskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    category?: boolean
-    title?: boolean
-    description?: boolean
-    impact?: boolean
-    severity?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["risk"]>
-
-  export type RiskSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    category?: boolean
-    title?: boolean
-    description?: boolean
-    impact?: boolean
-    severity?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["risk"]>
-
-  export type RiskSelectScalar = {
-    id?: boolean
-    analysisId?: boolean
-    category?: boolean
-    title?: boolean
-    description?: boolean
-    impact?: boolean
-    severity?: boolean
-  }
-
-  export type RiskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "analysisId" | "category" | "title" | "description" | "impact" | "severity", ExtArgs["result"]["risk"]>
-  export type RiskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-  export type RiskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-  export type RiskIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-
-  export type $RiskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Risk"
-    objects: {
-      analysis: Prisma.$AnalysisPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      analysisId: string
-      category: string
-      title: string
-      description: string
-      impact: string
-      severity: string
-    }, ExtArgs["result"]["risk"]>
-    composites: {}
-  }
-
-  type RiskGetPayload<S extends boolean | null | undefined | RiskDefaultArgs> = $Result.GetResult<Prisma.$RiskPayload, S>
-
-  type RiskCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<RiskFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: RiskCountAggregateInputType | true
-    }
-
-  export interface RiskDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Risk'], meta: { name: 'Risk' } }
-    /**
-     * Find zero or one Risk that matches the filter.
-     * @param {RiskFindUniqueArgs} args - Arguments to find a Risk
-     * @example
-     * // Get one Risk
-     * const risk = await prisma.risk.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends RiskFindUniqueArgs>(args: SelectSubset<T, RiskFindUniqueArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Risk that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {RiskFindUniqueOrThrowArgs} args - Arguments to find a Risk
-     * @example
-     * // Get one Risk
-     * const risk = await prisma.risk.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends RiskFindUniqueOrThrowArgs>(args: SelectSubset<T, RiskFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Risk that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RiskFindFirstArgs} args - Arguments to find a Risk
-     * @example
-     * // Get one Risk
-     * const risk = await prisma.risk.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends RiskFindFirstArgs>(args?: SelectSubset<T, RiskFindFirstArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Risk that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RiskFindFirstOrThrowArgs} args - Arguments to find a Risk
-     * @example
-     * // Get one Risk
-     * const risk = await prisma.risk.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends RiskFindFirstOrThrowArgs>(args?: SelectSubset<T, RiskFindFirstOrThrowArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Risks that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RiskFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Risks
-     * const risks = await prisma.risk.findMany()
-     * 
-     * // Get first 10 Risks
-     * const risks = await prisma.risk.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const riskWithIdOnly = await prisma.risk.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends RiskFindManyArgs>(args?: SelectSubset<T, RiskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Risk.
-     * @param {RiskCreateArgs} args - Arguments to create a Risk.
-     * @example
-     * // Create one Risk
-     * const Risk = await prisma.risk.create({
-     *   data: {
-     *     // ... data to create a Risk
-     *   }
-     * })
-     * 
-     */
-    create<T extends RiskCreateArgs>(args: SelectSubset<T, RiskCreateArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Risks.
-     * @param {RiskCreateManyArgs} args - Arguments to create many Risks.
-     * @example
-     * // Create many Risks
-     * const risk = await prisma.risk.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends RiskCreateManyArgs>(args?: SelectSubset<T, RiskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Risks and returns the data saved in the database.
-     * @param {RiskCreateManyAndReturnArgs} args - Arguments to create many Risks.
-     * @example
-     * // Create many Risks
-     * const risk = await prisma.risk.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Risks and only return the `id`
-     * const riskWithIdOnly = await prisma.risk.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends RiskCreateManyAndReturnArgs>(args?: SelectSubset<T, RiskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Risk.
-     * @param {RiskDeleteArgs} args - Arguments to delete one Risk.
-     * @example
-     * // Delete one Risk
-     * const Risk = await prisma.risk.delete({
-     *   where: {
-     *     // ... filter to delete one Risk
-     *   }
-     * })
-     * 
-     */
-    delete<T extends RiskDeleteArgs>(args: SelectSubset<T, RiskDeleteArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Risk.
-     * @param {RiskUpdateArgs} args - Arguments to update one Risk.
-     * @example
-     * // Update one Risk
-     * const risk = await prisma.risk.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends RiskUpdateArgs>(args: SelectSubset<T, RiskUpdateArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Risks.
-     * @param {RiskDeleteManyArgs} args - Arguments to filter Risks to delete.
-     * @example
-     * // Delete a few Risks
-     * const { count } = await prisma.risk.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends RiskDeleteManyArgs>(args?: SelectSubset<T, RiskDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Risks.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RiskUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Risks
-     * const risk = await prisma.risk.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends RiskUpdateManyArgs>(args: SelectSubset<T, RiskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Risks and returns the data updated in the database.
-     * @param {RiskUpdateManyAndReturnArgs} args - Arguments to update many Risks.
-     * @example
-     * // Update many Risks
-     * const risk = await prisma.risk.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Risks and only return the `id`
-     * const riskWithIdOnly = await prisma.risk.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends RiskUpdateManyAndReturnArgs>(args: SelectSubset<T, RiskUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Risk.
-     * @param {RiskUpsertArgs} args - Arguments to update or create a Risk.
-     * @example
-     * // Update or create a Risk
-     * const risk = await prisma.risk.upsert({
-     *   create: {
-     *     // ... data to create a Risk
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Risk we want to update
-     *   }
-     * })
-     */
-    upsert<T extends RiskUpsertArgs>(args: SelectSubset<T, RiskUpsertArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Risks.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RiskCountArgs} args - Arguments to filter Risks to count.
-     * @example
-     * // Count the number of Risks
-     * const count = await prisma.risk.count({
-     *   where: {
-     *     // ... the filter for the Risks we want to count
-     *   }
-     * })
-    **/
-    count<T extends RiskCountArgs>(
-      args?: Subset<T, RiskCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], RiskCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Risk.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RiskAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends RiskAggregateArgs>(args: Subset<T, RiskAggregateArgs>): Prisma.PrismaPromise<GetRiskAggregateType<T>>
-
-    /**
-     * Group by Risk.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {RiskGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends RiskGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: RiskGroupByArgs['orderBy'] }
-        : { orderBy?: RiskGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, RiskGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRiskGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Risk model
-   */
-  readonly fields: RiskFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Risk.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__RiskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    analysis<T extends AnalysisDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AnalysisDefaultArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Risk model
-   */
-  interface RiskFieldRefs {
-    readonly id: FieldRef<"Risk", 'String'>
-    readonly analysisId: FieldRef<"Risk", 'String'>
-    readonly category: FieldRef<"Risk", 'String'>
-    readonly title: FieldRef<"Risk", 'String'>
-    readonly description: FieldRef<"Risk", 'String'>
-    readonly impact: FieldRef<"Risk", 'String'>
-    readonly severity: FieldRef<"Risk", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Risk findUnique
-   */
-  export type RiskFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskInclude<ExtArgs> | null
-    /**
-     * Filter, which Risk to fetch.
-     */
-    where: RiskWhereUniqueInput
-  }
-
-  /**
-   * Risk findUniqueOrThrow
-   */
-  export type RiskFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskInclude<ExtArgs> | null
-    /**
-     * Filter, which Risk to fetch.
-     */
-    where: RiskWhereUniqueInput
-  }
-
-  /**
-   * Risk findFirst
-   */
-  export type RiskFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskInclude<ExtArgs> | null
-    /**
-     * Filter, which Risk to fetch.
-     */
-    where?: RiskWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Risks to fetch.
-     */
-    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Risks.
-     */
-    cursor?: RiskWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Risks from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Risks.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Risks.
-     */
-    distinct?: RiskScalarFieldEnum | RiskScalarFieldEnum[]
-  }
-
-  /**
-   * Risk findFirstOrThrow
-   */
-  export type RiskFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskInclude<ExtArgs> | null
-    /**
-     * Filter, which Risk to fetch.
-     */
-    where?: RiskWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Risks to fetch.
-     */
-    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Risks.
-     */
-    cursor?: RiskWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Risks from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Risks.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Risks.
-     */
-    distinct?: RiskScalarFieldEnum | RiskScalarFieldEnum[]
-  }
-
-  /**
-   * Risk findMany
-   */
-  export type RiskFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskInclude<ExtArgs> | null
-    /**
-     * Filter, which Risks to fetch.
-     */
-    where?: RiskWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Risks to fetch.
-     */
-    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Risks.
-     */
-    cursor?: RiskWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Risks from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Risks.
-     */
-    skip?: number
-    distinct?: RiskScalarFieldEnum | RiskScalarFieldEnum[]
-  }
-
-  /**
-   * Risk create
-   */
-  export type RiskCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Risk.
-     */
-    data: XOR<RiskCreateInput, RiskUncheckedCreateInput>
-  }
-
-  /**
-   * Risk createMany
-   */
-  export type RiskCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Risks.
-     */
-    data: RiskCreateManyInput | RiskCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Risk createManyAndReturn
-   */
-  export type RiskCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * The data used to create many Risks.
-     */
-    data: RiskCreateManyInput | RiskCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Risk update
-   */
-  export type RiskUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Risk.
-     */
-    data: XOR<RiskUpdateInput, RiskUncheckedUpdateInput>
-    /**
-     * Choose, which Risk to update.
-     */
-    where: RiskWhereUniqueInput
-  }
-
-  /**
-   * Risk updateMany
-   */
-  export type RiskUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Risks.
-     */
-    data: XOR<RiskUpdateManyMutationInput, RiskUncheckedUpdateManyInput>
-    /**
-     * Filter which Risks to update
-     */
-    where?: RiskWhereInput
-    /**
-     * Limit how many Risks to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Risk updateManyAndReturn
-   */
-  export type RiskUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * The data used to update Risks.
-     */
-    data: XOR<RiskUpdateManyMutationInput, RiskUncheckedUpdateManyInput>
-    /**
-     * Filter which Risks to update
-     */
-    where?: RiskWhereInput
-    /**
-     * Limit how many Risks to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Risk upsert
-   */
-  export type RiskUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Risk to update in case it exists.
-     */
-    where: RiskWhereUniqueInput
-    /**
-     * In case the Risk found by the `where` argument doesn't exist, create a new Risk with this data.
-     */
-    create: XOR<RiskCreateInput, RiskUncheckedCreateInput>
-    /**
-     * In case the Risk was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<RiskUpdateInput, RiskUncheckedUpdateInput>
-  }
-
-  /**
-   * Risk delete
-   */
-  export type RiskDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskInclude<ExtArgs> | null
-    /**
-     * Filter which Risk to delete.
-     */
-    where: RiskWhereUniqueInput
-  }
-
-  /**
-   * Risk deleteMany
-   */
-  export type RiskDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Risks to delete
-     */
-    where?: RiskWhereInput
-    /**
-     * Limit how many Risks to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Risk without action
-   */
-  export type RiskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Risk
-     */
-    select?: RiskSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Risk
-     */
-    omit?: RiskOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RiskInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Completeness
-   */
-
-  export type AggregateCompleteness = {
-    _count: CompletenessCountAggregateOutputType | null
-    _avg: CompletenessAvgAggregateOutputType | null
-    _sum: CompletenessSumAggregateOutputType | null
-    _min: CompletenessMinAggregateOutputType | null
-    _max: CompletenessMaxAggregateOutputType | null
-  }
-
-  export type CompletenessAvgAggregateOutputType = {
-    electrical: number | null
-    plumbing: number | null
-    hvac: number | null
-    structural: number | null
-    safety: number | null
-    documentation: number | null
-  }
-
-  export type CompletenessSumAggregateOutputType = {
-    electrical: number | null
-    plumbing: number | null
-    hvac: number | null
-    structural: number | null
-    safety: number | null
-    documentation: number | null
-  }
-
-  export type CompletenessMinAggregateOutputType = {
-    id: string | null
-    analysisId: string | null
-    electrical: number | null
-    plumbing: number | null
-    hvac: number | null
-    structural: number | null
-    safety: number | null
-    documentation: number | null
-  }
-
-  export type CompletenessMaxAggregateOutputType = {
-    id: string | null
-    analysisId: string | null
-    electrical: number | null
-    plumbing: number | null
-    hvac: number | null
-    structural: number | null
-    safety: number | null
-    documentation: number | null
-  }
-
-  export type CompletenessCountAggregateOutputType = {
-    id: number
-    analysisId: number
-    electrical: number
-    plumbing: number
-    hvac: number
-    structural: number
-    safety: number
-    documentation: number
-    _all: number
-  }
-
-
-  export type CompletenessAvgAggregateInputType = {
-    electrical?: true
-    plumbing?: true
-    hvac?: true
-    structural?: true
-    safety?: true
-    documentation?: true
-  }
-
-  export type CompletenessSumAggregateInputType = {
-    electrical?: true
-    plumbing?: true
-    hvac?: true
-    structural?: true
-    safety?: true
-    documentation?: true
-  }
-
-  export type CompletenessMinAggregateInputType = {
-    id?: true
-    analysisId?: true
-    electrical?: true
-    plumbing?: true
-    hvac?: true
-    structural?: true
-    safety?: true
-    documentation?: true
-  }
-
-  export type CompletenessMaxAggregateInputType = {
-    id?: true
-    analysisId?: true
-    electrical?: true
-    plumbing?: true
-    hvac?: true
-    structural?: true
-    safety?: true
-    documentation?: true
-  }
-
-  export type CompletenessCountAggregateInputType = {
-    id?: true
-    analysisId?: true
-    electrical?: true
-    plumbing?: true
-    hvac?: true
-    structural?: true
-    safety?: true
-    documentation?: true
-    _all?: true
-  }
-
-  export type CompletenessAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Completeness to aggregate.
-     */
-    where?: CompletenessWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Completenesses to fetch.
-     */
-    orderBy?: CompletenessOrderByWithRelationInput | CompletenessOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: CompletenessWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Completenesses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Completenesses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Completenesses
-    **/
-    _count?: true | CompletenessCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: CompletenessAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: CompletenessSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: CompletenessMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: CompletenessMaxAggregateInputType
-  }
-
-  export type GetCompletenessAggregateType<T extends CompletenessAggregateArgs> = {
-        [P in keyof T & keyof AggregateCompleteness]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateCompleteness[P]>
-      : GetScalarType<T[P], AggregateCompleteness[P]>
-  }
-
-
-
-
-  export type CompletenessGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CompletenessWhereInput
-    orderBy?: CompletenessOrderByWithAggregationInput | CompletenessOrderByWithAggregationInput[]
-    by: CompletenessScalarFieldEnum[] | CompletenessScalarFieldEnum
-    having?: CompletenessScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: CompletenessCountAggregateInputType | true
-    _avg?: CompletenessAvgAggregateInputType
-    _sum?: CompletenessSumAggregateInputType
-    _min?: CompletenessMinAggregateInputType
-    _max?: CompletenessMaxAggregateInputType
-  }
-
-  export type CompletenessGroupByOutputType = {
-    id: string
-    analysisId: string
-    electrical: number
-    plumbing: number
-    hvac: number
-    structural: number
-    safety: number
-    documentation: number
-    _count: CompletenessCountAggregateOutputType | null
-    _avg: CompletenessAvgAggregateOutputType | null
-    _sum: CompletenessSumAggregateOutputType | null
-    _min: CompletenessMinAggregateOutputType | null
-    _max: CompletenessMaxAggregateOutputType | null
-  }
-
-  type GetCompletenessGroupByPayload<T extends CompletenessGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<CompletenessGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof CompletenessGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], CompletenessGroupByOutputType[P]>
-            : GetScalarType<T[P], CompletenessGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type CompletenessSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    electrical?: boolean
-    plumbing?: boolean
-    hvac?: boolean
-    structural?: boolean
-    safety?: boolean
-    documentation?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["completeness"]>
-
-  export type CompletenessSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    electrical?: boolean
-    plumbing?: boolean
-    hvac?: boolean
-    structural?: boolean
-    safety?: boolean
-    documentation?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["completeness"]>
-
-  export type CompletenessSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    electrical?: boolean
-    plumbing?: boolean
-    hvac?: boolean
-    structural?: boolean
-    safety?: boolean
-    documentation?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["completeness"]>
-
-  export type CompletenessSelectScalar = {
-    id?: boolean
-    analysisId?: boolean
-    electrical?: boolean
-    plumbing?: boolean
-    hvac?: boolean
-    structural?: boolean
-    safety?: boolean
-    documentation?: boolean
-  }
-
-  export type CompletenessOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "analysisId" | "electrical" | "plumbing" | "hvac" | "structural" | "safety" | "documentation", ExtArgs["result"]["completeness"]>
-  export type CompletenessInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-  export type CompletenessIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-  export type CompletenessIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-
-  export type $CompletenessPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Completeness"
-    objects: {
-      analysis: Prisma.$AnalysisPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      analysisId: string
-      electrical: number
-      plumbing: number
-      hvac: number
-      structural: number
-      safety: number
-      documentation: number
-    }, ExtArgs["result"]["completeness"]>
-    composites: {}
-  }
-
-  type CompletenessGetPayload<S extends boolean | null | undefined | CompletenessDefaultArgs> = $Result.GetResult<Prisma.$CompletenessPayload, S>
-
-  type CompletenessCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<CompletenessFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: CompletenessCountAggregateInputType | true
-    }
-
-  export interface CompletenessDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Completeness'], meta: { name: 'Completeness' } }
-    /**
-     * Find zero or one Completeness that matches the filter.
-     * @param {CompletenessFindUniqueArgs} args - Arguments to find a Completeness
-     * @example
-     * // Get one Completeness
-     * const completeness = await prisma.completeness.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends CompletenessFindUniqueArgs>(args: SelectSubset<T, CompletenessFindUniqueArgs<ExtArgs>>): Prisma__CompletenessClient<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Completeness that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {CompletenessFindUniqueOrThrowArgs} args - Arguments to find a Completeness
-     * @example
-     * // Get one Completeness
-     * const completeness = await prisma.completeness.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends CompletenessFindUniqueOrThrowArgs>(args: SelectSubset<T, CompletenessFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CompletenessClient<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Completeness that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CompletenessFindFirstArgs} args - Arguments to find a Completeness
-     * @example
-     * // Get one Completeness
-     * const completeness = await prisma.completeness.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends CompletenessFindFirstArgs>(args?: SelectSubset<T, CompletenessFindFirstArgs<ExtArgs>>): Prisma__CompletenessClient<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Completeness that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CompletenessFindFirstOrThrowArgs} args - Arguments to find a Completeness
-     * @example
-     * // Get one Completeness
-     * const completeness = await prisma.completeness.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends CompletenessFindFirstOrThrowArgs>(args?: SelectSubset<T, CompletenessFindFirstOrThrowArgs<ExtArgs>>): Prisma__CompletenessClient<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Completenesses that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CompletenessFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Completenesses
-     * const completenesses = await prisma.completeness.findMany()
-     * 
-     * // Get first 10 Completenesses
-     * const completenesses = await prisma.completeness.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const completenessWithIdOnly = await prisma.completeness.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends CompletenessFindManyArgs>(args?: SelectSubset<T, CompletenessFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Completeness.
-     * @param {CompletenessCreateArgs} args - Arguments to create a Completeness.
-     * @example
-     * // Create one Completeness
-     * const Completeness = await prisma.completeness.create({
-     *   data: {
-     *     // ... data to create a Completeness
-     *   }
-     * })
-     * 
-     */
-    create<T extends CompletenessCreateArgs>(args: SelectSubset<T, CompletenessCreateArgs<ExtArgs>>): Prisma__CompletenessClient<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Completenesses.
-     * @param {CompletenessCreateManyArgs} args - Arguments to create many Completenesses.
-     * @example
-     * // Create many Completenesses
-     * const completeness = await prisma.completeness.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends CompletenessCreateManyArgs>(args?: SelectSubset<T, CompletenessCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Completenesses and returns the data saved in the database.
-     * @param {CompletenessCreateManyAndReturnArgs} args - Arguments to create many Completenesses.
-     * @example
-     * // Create many Completenesses
-     * const completeness = await prisma.completeness.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Completenesses and only return the `id`
-     * const completenessWithIdOnly = await prisma.completeness.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends CompletenessCreateManyAndReturnArgs>(args?: SelectSubset<T, CompletenessCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Completeness.
-     * @param {CompletenessDeleteArgs} args - Arguments to delete one Completeness.
-     * @example
-     * // Delete one Completeness
-     * const Completeness = await prisma.completeness.delete({
-     *   where: {
-     *     // ... filter to delete one Completeness
-     *   }
-     * })
-     * 
-     */
-    delete<T extends CompletenessDeleteArgs>(args: SelectSubset<T, CompletenessDeleteArgs<ExtArgs>>): Prisma__CompletenessClient<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Completeness.
-     * @param {CompletenessUpdateArgs} args - Arguments to update one Completeness.
-     * @example
-     * // Update one Completeness
-     * const completeness = await prisma.completeness.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends CompletenessUpdateArgs>(args: SelectSubset<T, CompletenessUpdateArgs<ExtArgs>>): Prisma__CompletenessClient<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Completenesses.
-     * @param {CompletenessDeleteManyArgs} args - Arguments to filter Completenesses to delete.
-     * @example
-     * // Delete a few Completenesses
-     * const { count } = await prisma.completeness.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends CompletenessDeleteManyArgs>(args?: SelectSubset<T, CompletenessDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Completenesses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CompletenessUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Completenesses
-     * const completeness = await prisma.completeness.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends CompletenessUpdateManyArgs>(args: SelectSubset<T, CompletenessUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Completenesses and returns the data updated in the database.
-     * @param {CompletenessUpdateManyAndReturnArgs} args - Arguments to update many Completenesses.
-     * @example
-     * // Update many Completenesses
-     * const completeness = await prisma.completeness.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Completenesses and only return the `id`
-     * const completenessWithIdOnly = await prisma.completeness.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends CompletenessUpdateManyAndReturnArgs>(args: SelectSubset<T, CompletenessUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Completeness.
-     * @param {CompletenessUpsertArgs} args - Arguments to update or create a Completeness.
-     * @example
-     * // Update or create a Completeness
-     * const completeness = await prisma.completeness.upsert({
-     *   create: {
-     *     // ... data to create a Completeness
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Completeness we want to update
-     *   }
-     * })
-     */
-    upsert<T extends CompletenessUpsertArgs>(args: SelectSubset<T, CompletenessUpsertArgs<ExtArgs>>): Prisma__CompletenessClient<$Result.GetResult<Prisma.$CompletenessPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Completenesses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CompletenessCountArgs} args - Arguments to filter Completenesses to count.
-     * @example
-     * // Count the number of Completenesses
-     * const count = await prisma.completeness.count({
-     *   where: {
-     *     // ... the filter for the Completenesses we want to count
-     *   }
-     * })
-    **/
-    count<T extends CompletenessCountArgs>(
-      args?: Subset<T, CompletenessCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], CompletenessCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Completeness.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CompletenessAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends CompletenessAggregateArgs>(args: Subset<T, CompletenessAggregateArgs>): Prisma.PrismaPromise<GetCompletenessAggregateType<T>>
-
-    /**
-     * Group by Completeness.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CompletenessGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends CompletenessGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: CompletenessGroupByArgs['orderBy'] }
-        : { orderBy?: CompletenessGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, CompletenessGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCompletenessGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Completeness model
-   */
-  readonly fields: CompletenessFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Completeness.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__CompletenessClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    analysis<T extends AnalysisDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AnalysisDefaultArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Completeness model
-   */
-  interface CompletenessFieldRefs {
-    readonly id: FieldRef<"Completeness", 'String'>
-    readonly analysisId: FieldRef<"Completeness", 'String'>
-    readonly electrical: FieldRef<"Completeness", 'Int'>
-    readonly plumbing: FieldRef<"Completeness", 'Int'>
-    readonly hvac: FieldRef<"Completeness", 'Int'>
-    readonly structural: FieldRef<"Completeness", 'Int'>
-    readonly safety: FieldRef<"Completeness", 'Int'>
-    readonly documentation: FieldRef<"Completeness", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Completeness findUnique
-   */
-  export type CompletenessFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessInclude<ExtArgs> | null
-    /**
-     * Filter, which Completeness to fetch.
-     */
-    where: CompletenessWhereUniqueInput
-  }
-
-  /**
-   * Completeness findUniqueOrThrow
-   */
-  export type CompletenessFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessInclude<ExtArgs> | null
-    /**
-     * Filter, which Completeness to fetch.
-     */
-    where: CompletenessWhereUniqueInput
-  }
-
-  /**
-   * Completeness findFirst
-   */
-  export type CompletenessFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessInclude<ExtArgs> | null
-    /**
-     * Filter, which Completeness to fetch.
-     */
-    where?: CompletenessWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Completenesses to fetch.
-     */
-    orderBy?: CompletenessOrderByWithRelationInput | CompletenessOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Completenesses.
-     */
-    cursor?: CompletenessWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Completenesses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Completenesses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Completenesses.
-     */
-    distinct?: CompletenessScalarFieldEnum | CompletenessScalarFieldEnum[]
-  }
-
-  /**
-   * Completeness findFirstOrThrow
-   */
-  export type CompletenessFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessInclude<ExtArgs> | null
-    /**
-     * Filter, which Completeness to fetch.
-     */
-    where?: CompletenessWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Completenesses to fetch.
-     */
-    orderBy?: CompletenessOrderByWithRelationInput | CompletenessOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Completenesses.
-     */
-    cursor?: CompletenessWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Completenesses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Completenesses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Completenesses.
-     */
-    distinct?: CompletenessScalarFieldEnum | CompletenessScalarFieldEnum[]
-  }
-
-  /**
-   * Completeness findMany
-   */
-  export type CompletenessFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessInclude<ExtArgs> | null
-    /**
-     * Filter, which Completenesses to fetch.
-     */
-    where?: CompletenessWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Completenesses to fetch.
-     */
-    orderBy?: CompletenessOrderByWithRelationInput | CompletenessOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Completenesses.
-     */
-    cursor?: CompletenessWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Completenesses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Completenesses.
-     */
-    skip?: number
-    distinct?: CompletenessScalarFieldEnum | CompletenessScalarFieldEnum[]
-  }
-
-  /**
-   * Completeness create
-   */
-  export type CompletenessCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Completeness.
-     */
-    data: XOR<CompletenessCreateInput, CompletenessUncheckedCreateInput>
-  }
-
-  /**
-   * Completeness createMany
-   */
-  export type CompletenessCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Completenesses.
-     */
-    data: CompletenessCreateManyInput | CompletenessCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Completeness createManyAndReturn
-   */
-  export type CompletenessCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * The data used to create many Completenesses.
-     */
-    data: CompletenessCreateManyInput | CompletenessCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Completeness update
-   */
-  export type CompletenessUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Completeness.
-     */
-    data: XOR<CompletenessUpdateInput, CompletenessUncheckedUpdateInput>
-    /**
-     * Choose, which Completeness to update.
-     */
-    where: CompletenessWhereUniqueInput
-  }
-
-  /**
-   * Completeness updateMany
-   */
-  export type CompletenessUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Completenesses.
-     */
-    data: XOR<CompletenessUpdateManyMutationInput, CompletenessUncheckedUpdateManyInput>
-    /**
-     * Filter which Completenesses to update
-     */
-    where?: CompletenessWhereInput
-    /**
-     * Limit how many Completenesses to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Completeness updateManyAndReturn
-   */
-  export type CompletenessUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * The data used to update Completenesses.
-     */
-    data: XOR<CompletenessUpdateManyMutationInput, CompletenessUncheckedUpdateManyInput>
-    /**
-     * Filter which Completenesses to update
-     */
-    where?: CompletenessWhereInput
-    /**
-     * Limit how many Completenesses to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Completeness upsert
-   */
-  export type CompletenessUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Completeness to update in case it exists.
-     */
-    where: CompletenessWhereUniqueInput
-    /**
-     * In case the Completeness found by the `where` argument doesn't exist, create a new Completeness with this data.
-     */
-    create: XOR<CompletenessCreateInput, CompletenessUncheckedCreateInput>
-    /**
-     * In case the Completeness was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<CompletenessUpdateInput, CompletenessUncheckedUpdateInput>
-  }
-
-  /**
-   * Completeness delete
-   */
-  export type CompletenessDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessInclude<ExtArgs> | null
-    /**
-     * Filter which Completeness to delete.
-     */
-    where: CompletenessWhereUniqueInput
-  }
-
-  /**
-   * Completeness deleteMany
-   */
-  export type CompletenessDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Completenesses to delete
-     */
-    where?: CompletenessWhereInput
-    /**
-     * Limit how many Completenesses to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Completeness without action
-   */
-  export type CompletenessDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Completeness
-     */
-    select?: CompletenessSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Completeness
-     */
-    omit?: CompletenessOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompletenessInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model GraphMetric
-   */
-
-  export type AggregateGraphMetric = {
-    _count: GraphMetricCountAggregateOutputType | null
-    _avg: GraphMetricAvgAggregateOutputType | null
-    _sum: GraphMetricSumAggregateOutputType | null
-    _min: GraphMetricMinAggregateOutputType | null
-    _max: GraphMetricMaxAggregateOutputType | null
-  }
-
-  export type GraphMetricAvgAggregateOutputType = {
-    riskLow: number | null
-    riskMedium: number | null
-    riskHigh: number | null
-    missingElectrical: number | null
-    missingPlumbing: number | null
-    missingHVAC: number | null
-    missingStructural: number | null
-    missingSafety: number | null
-    missingDocs: number | null
-  }
-
-  export type GraphMetricSumAggregateOutputType = {
-    riskLow: number | null
-    riskMedium: number | null
-    riskHigh: number | null
-    missingElectrical: number | null
-    missingPlumbing: number | null
-    missingHVAC: number | null
-    missingStructural: number | null
-    missingSafety: number | null
-    missingDocs: number | null
-  }
-
-  export type GraphMetricMinAggregateOutputType = {
-    id: string | null
-    analysisId: string | null
-    riskLow: number | null
-    riskMedium: number | null
-    riskHigh: number | null
-    missingElectrical: number | null
-    missingPlumbing: number | null
-    missingHVAC: number | null
-    missingStructural: number | null
-    missingSafety: number | null
-    missingDocs: number | null
-  }
-
-  export type GraphMetricMaxAggregateOutputType = {
-    id: string | null
-    analysisId: string | null
-    riskLow: number | null
-    riskMedium: number | null
-    riskHigh: number | null
-    missingElectrical: number | null
-    missingPlumbing: number | null
-    missingHVAC: number | null
-    missingStructural: number | null
-    missingSafety: number | null
-    missingDocs: number | null
-  }
-
-  export type GraphMetricCountAggregateOutputType = {
-    id: number
-    analysisId: number
-    riskLow: number
-    riskMedium: number
-    riskHigh: number
-    missingElectrical: number
-    missingPlumbing: number
-    missingHVAC: number
-    missingStructural: number
-    missingSafety: number
-    missingDocs: number
-    _all: number
-  }
-
-
-  export type GraphMetricAvgAggregateInputType = {
-    riskLow?: true
-    riskMedium?: true
-    riskHigh?: true
-    missingElectrical?: true
-    missingPlumbing?: true
-    missingHVAC?: true
-    missingStructural?: true
-    missingSafety?: true
-    missingDocs?: true
-  }
-
-  export type GraphMetricSumAggregateInputType = {
-    riskLow?: true
-    riskMedium?: true
-    riskHigh?: true
-    missingElectrical?: true
-    missingPlumbing?: true
-    missingHVAC?: true
-    missingStructural?: true
-    missingSafety?: true
-    missingDocs?: true
-  }
-
-  export type GraphMetricMinAggregateInputType = {
-    id?: true
-    analysisId?: true
-    riskLow?: true
-    riskMedium?: true
-    riskHigh?: true
-    missingElectrical?: true
-    missingPlumbing?: true
-    missingHVAC?: true
-    missingStructural?: true
-    missingSafety?: true
-    missingDocs?: true
-  }
-
-  export type GraphMetricMaxAggregateInputType = {
-    id?: true
-    analysisId?: true
-    riskLow?: true
-    riskMedium?: true
-    riskHigh?: true
-    missingElectrical?: true
-    missingPlumbing?: true
-    missingHVAC?: true
-    missingStructural?: true
-    missingSafety?: true
-    missingDocs?: true
-  }
-
-  export type GraphMetricCountAggregateInputType = {
-    id?: true
-    analysisId?: true
-    riskLow?: true
-    riskMedium?: true
-    riskHigh?: true
-    missingElectrical?: true
-    missingPlumbing?: true
-    missingHVAC?: true
-    missingStructural?: true
-    missingSafety?: true
-    missingDocs?: true
-    _all?: true
-  }
-
-  export type GraphMetricAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which GraphMetric to aggregate.
-     */
-    where?: GraphMetricWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GraphMetrics to fetch.
-     */
-    orderBy?: GraphMetricOrderByWithRelationInput | GraphMetricOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: GraphMetricWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GraphMetrics from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GraphMetrics.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned GraphMetrics
-    **/
-    _count?: true | GraphMetricCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: GraphMetricAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: GraphMetricSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: GraphMetricMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: GraphMetricMaxAggregateInputType
-  }
-
-  export type GetGraphMetricAggregateType<T extends GraphMetricAggregateArgs> = {
-        [P in keyof T & keyof AggregateGraphMetric]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateGraphMetric[P]>
-      : GetScalarType<T[P], AggregateGraphMetric[P]>
-  }
-
-
-
-
-  export type GraphMetricGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: GraphMetricWhereInput
-    orderBy?: GraphMetricOrderByWithAggregationInput | GraphMetricOrderByWithAggregationInput[]
-    by: GraphMetricScalarFieldEnum[] | GraphMetricScalarFieldEnum
-    having?: GraphMetricScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: GraphMetricCountAggregateInputType | true
-    _avg?: GraphMetricAvgAggregateInputType
-    _sum?: GraphMetricSumAggregateInputType
-    _min?: GraphMetricMinAggregateInputType
-    _max?: GraphMetricMaxAggregateInputType
-  }
-
-  export type GraphMetricGroupByOutputType = {
-    id: string
-    analysisId: string
-    riskLow: number
-    riskMedium: number
-    riskHigh: number
-    missingElectrical: number
-    missingPlumbing: number
-    missingHVAC: number
-    missingStructural: number
-    missingSafety: number
-    missingDocs: number
-    _count: GraphMetricCountAggregateOutputType | null
-    _avg: GraphMetricAvgAggregateOutputType | null
-    _sum: GraphMetricSumAggregateOutputType | null
-    _min: GraphMetricMinAggregateOutputType | null
-    _max: GraphMetricMaxAggregateOutputType | null
-  }
-
-  type GetGraphMetricGroupByPayload<T extends GraphMetricGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<GraphMetricGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof GraphMetricGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], GraphMetricGroupByOutputType[P]>
-            : GetScalarType<T[P], GraphMetricGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type GraphMetricSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    riskLow?: boolean
-    riskMedium?: boolean
-    riskHigh?: boolean
-    missingElectrical?: boolean
-    missingPlumbing?: boolean
-    missingHVAC?: boolean
-    missingStructural?: boolean
-    missingSafety?: boolean
-    missingDocs?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["graphMetric"]>
-
-  export type GraphMetricSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    riskLow?: boolean
-    riskMedium?: boolean
-    riskHigh?: boolean
-    missingElectrical?: boolean
-    missingPlumbing?: boolean
-    missingHVAC?: boolean
-    missingStructural?: boolean
-    missingSafety?: boolean
-    missingDocs?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["graphMetric"]>
-
-  export type GraphMetricSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    analysisId?: boolean
-    riskLow?: boolean
-    riskMedium?: boolean
-    riskHigh?: boolean
-    missingElectrical?: boolean
-    missingPlumbing?: boolean
-    missingHVAC?: boolean
-    missingStructural?: boolean
-    missingSafety?: boolean
-    missingDocs?: boolean
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["graphMetric"]>
-
-  export type GraphMetricSelectScalar = {
-    id?: boolean
-    analysisId?: boolean
-    riskLow?: boolean
-    riskMedium?: boolean
-    riskHigh?: boolean
-    missingElectrical?: boolean
-    missingPlumbing?: boolean
-    missingHVAC?: boolean
-    missingStructural?: boolean
-    missingSafety?: boolean
-    missingDocs?: boolean
-  }
-
-  export type GraphMetricOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "analysisId" | "riskLow" | "riskMedium" | "riskHigh" | "missingElectrical" | "missingPlumbing" | "missingHVAC" | "missingStructural" | "missingSafety" | "missingDocs", ExtArgs["result"]["graphMetric"]>
-  export type GraphMetricInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-  export type GraphMetricIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-  export type GraphMetricIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analysis?: boolean | AnalysisDefaultArgs<ExtArgs>
-  }
-
-  export type $GraphMetricPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "GraphMetric"
-    objects: {
-      analysis: Prisma.$AnalysisPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      analysisId: string
-      riskLow: number
-      riskMedium: number
-      riskHigh: number
-      missingElectrical: number
-      missingPlumbing: number
-      missingHVAC: number
-      missingStructural: number
-      missingSafety: number
-      missingDocs: number
-    }, ExtArgs["result"]["graphMetric"]>
-    composites: {}
-  }
-
-  type GraphMetricGetPayload<S extends boolean | null | undefined | GraphMetricDefaultArgs> = $Result.GetResult<Prisma.$GraphMetricPayload, S>
-
-  type GraphMetricCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<GraphMetricFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: GraphMetricCountAggregateInputType | true
-    }
-
-  export interface GraphMetricDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GraphMetric'], meta: { name: 'GraphMetric' } }
-    /**
-     * Find zero or one GraphMetric that matches the filter.
-     * @param {GraphMetricFindUniqueArgs} args - Arguments to find a GraphMetric
-     * @example
-     * // Get one GraphMetric
-     * const graphMetric = await prisma.graphMetric.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends GraphMetricFindUniqueArgs>(args: SelectSubset<T, GraphMetricFindUniqueArgs<ExtArgs>>): Prisma__GraphMetricClient<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one GraphMetric that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {GraphMetricFindUniqueOrThrowArgs} args - Arguments to find a GraphMetric
-     * @example
-     * // Get one GraphMetric
-     * const graphMetric = await prisma.graphMetric.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends GraphMetricFindUniqueOrThrowArgs>(args: SelectSubset<T, GraphMetricFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GraphMetricClient<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first GraphMetric that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GraphMetricFindFirstArgs} args - Arguments to find a GraphMetric
-     * @example
-     * // Get one GraphMetric
-     * const graphMetric = await prisma.graphMetric.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends GraphMetricFindFirstArgs>(args?: SelectSubset<T, GraphMetricFindFirstArgs<ExtArgs>>): Prisma__GraphMetricClient<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first GraphMetric that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GraphMetricFindFirstOrThrowArgs} args - Arguments to find a GraphMetric
-     * @example
-     * // Get one GraphMetric
-     * const graphMetric = await prisma.graphMetric.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends GraphMetricFindFirstOrThrowArgs>(args?: SelectSubset<T, GraphMetricFindFirstOrThrowArgs<ExtArgs>>): Prisma__GraphMetricClient<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more GraphMetrics that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GraphMetricFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all GraphMetrics
-     * const graphMetrics = await prisma.graphMetric.findMany()
-     * 
-     * // Get first 10 GraphMetrics
-     * const graphMetrics = await prisma.graphMetric.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const graphMetricWithIdOnly = await prisma.graphMetric.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends GraphMetricFindManyArgs>(args?: SelectSubset<T, GraphMetricFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a GraphMetric.
-     * @param {GraphMetricCreateArgs} args - Arguments to create a GraphMetric.
-     * @example
-     * // Create one GraphMetric
-     * const GraphMetric = await prisma.graphMetric.create({
-     *   data: {
-     *     // ... data to create a GraphMetric
-     *   }
-     * })
-     * 
-     */
-    create<T extends GraphMetricCreateArgs>(args: SelectSubset<T, GraphMetricCreateArgs<ExtArgs>>): Prisma__GraphMetricClient<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many GraphMetrics.
-     * @param {GraphMetricCreateManyArgs} args - Arguments to create many GraphMetrics.
-     * @example
-     * // Create many GraphMetrics
-     * const graphMetric = await prisma.graphMetric.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends GraphMetricCreateManyArgs>(args?: SelectSubset<T, GraphMetricCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many GraphMetrics and returns the data saved in the database.
-     * @param {GraphMetricCreateManyAndReturnArgs} args - Arguments to create many GraphMetrics.
-     * @example
-     * // Create many GraphMetrics
-     * const graphMetric = await prisma.graphMetric.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many GraphMetrics and only return the `id`
-     * const graphMetricWithIdOnly = await prisma.graphMetric.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends GraphMetricCreateManyAndReturnArgs>(args?: SelectSubset<T, GraphMetricCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a GraphMetric.
-     * @param {GraphMetricDeleteArgs} args - Arguments to delete one GraphMetric.
-     * @example
-     * // Delete one GraphMetric
-     * const GraphMetric = await prisma.graphMetric.delete({
-     *   where: {
-     *     // ... filter to delete one GraphMetric
-     *   }
-     * })
-     * 
-     */
-    delete<T extends GraphMetricDeleteArgs>(args: SelectSubset<T, GraphMetricDeleteArgs<ExtArgs>>): Prisma__GraphMetricClient<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one GraphMetric.
-     * @param {GraphMetricUpdateArgs} args - Arguments to update one GraphMetric.
-     * @example
-     * // Update one GraphMetric
-     * const graphMetric = await prisma.graphMetric.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends GraphMetricUpdateArgs>(args: SelectSubset<T, GraphMetricUpdateArgs<ExtArgs>>): Prisma__GraphMetricClient<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more GraphMetrics.
-     * @param {GraphMetricDeleteManyArgs} args - Arguments to filter GraphMetrics to delete.
-     * @example
-     * // Delete a few GraphMetrics
-     * const { count } = await prisma.graphMetric.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends GraphMetricDeleteManyArgs>(args?: SelectSubset<T, GraphMetricDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more GraphMetrics.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GraphMetricUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many GraphMetrics
-     * const graphMetric = await prisma.graphMetric.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends GraphMetricUpdateManyArgs>(args: SelectSubset<T, GraphMetricUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more GraphMetrics and returns the data updated in the database.
-     * @param {GraphMetricUpdateManyAndReturnArgs} args - Arguments to update many GraphMetrics.
-     * @example
-     * // Update many GraphMetrics
-     * const graphMetric = await prisma.graphMetric.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more GraphMetrics and only return the `id`
-     * const graphMetricWithIdOnly = await prisma.graphMetric.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends GraphMetricUpdateManyAndReturnArgs>(args: SelectSubset<T, GraphMetricUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one GraphMetric.
-     * @param {GraphMetricUpsertArgs} args - Arguments to update or create a GraphMetric.
-     * @example
-     * // Update or create a GraphMetric
-     * const graphMetric = await prisma.graphMetric.upsert({
-     *   create: {
-     *     // ... data to create a GraphMetric
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the GraphMetric we want to update
-     *   }
-     * })
-     */
-    upsert<T extends GraphMetricUpsertArgs>(args: SelectSubset<T, GraphMetricUpsertArgs<ExtArgs>>): Prisma__GraphMetricClient<$Result.GetResult<Prisma.$GraphMetricPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of GraphMetrics.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GraphMetricCountArgs} args - Arguments to filter GraphMetrics to count.
-     * @example
-     * // Count the number of GraphMetrics
-     * const count = await prisma.graphMetric.count({
-     *   where: {
-     *     // ... the filter for the GraphMetrics we want to count
-     *   }
-     * })
-    **/
-    count<T extends GraphMetricCountArgs>(
-      args?: Subset<T, GraphMetricCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], GraphMetricCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a GraphMetric.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GraphMetricAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends GraphMetricAggregateArgs>(args: Subset<T, GraphMetricAggregateArgs>): Prisma.PrismaPromise<GetGraphMetricAggregateType<T>>
-
-    /**
-     * Group by GraphMetric.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GraphMetricGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends GraphMetricGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: GraphMetricGroupByArgs['orderBy'] }
-        : { orderBy?: GraphMetricGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, GraphMetricGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGraphMetricGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the GraphMetric model
-   */
-  readonly fields: GraphMetricFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for GraphMetric.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__GraphMetricClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    analysis<T extends AnalysisDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AnalysisDefaultArgs<ExtArgs>>): Prisma__AnalysisClient<$Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the GraphMetric model
-   */
-  interface GraphMetricFieldRefs {
-    readonly id: FieldRef<"GraphMetric", 'String'>
-    readonly analysisId: FieldRef<"GraphMetric", 'String'>
-    readonly riskLow: FieldRef<"GraphMetric", 'Int'>
-    readonly riskMedium: FieldRef<"GraphMetric", 'Int'>
-    readonly riskHigh: FieldRef<"GraphMetric", 'Int'>
-    readonly missingElectrical: FieldRef<"GraphMetric", 'Int'>
-    readonly missingPlumbing: FieldRef<"GraphMetric", 'Int'>
-    readonly missingHVAC: FieldRef<"GraphMetric", 'Int'>
-    readonly missingStructural: FieldRef<"GraphMetric", 'Int'>
-    readonly missingSafety: FieldRef<"GraphMetric", 'Int'>
-    readonly missingDocs: FieldRef<"GraphMetric", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * GraphMetric findUnique
-   */
-  export type GraphMetricFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricInclude<ExtArgs> | null
-    /**
-     * Filter, which GraphMetric to fetch.
-     */
-    where: GraphMetricWhereUniqueInput
-  }
-
-  /**
-   * GraphMetric findUniqueOrThrow
-   */
-  export type GraphMetricFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricInclude<ExtArgs> | null
-    /**
-     * Filter, which GraphMetric to fetch.
-     */
-    where: GraphMetricWhereUniqueInput
-  }
-
-  /**
-   * GraphMetric findFirst
-   */
-  export type GraphMetricFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricInclude<ExtArgs> | null
-    /**
-     * Filter, which GraphMetric to fetch.
-     */
-    where?: GraphMetricWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GraphMetrics to fetch.
-     */
-    orderBy?: GraphMetricOrderByWithRelationInput | GraphMetricOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for GraphMetrics.
-     */
-    cursor?: GraphMetricWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GraphMetrics from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GraphMetrics.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of GraphMetrics.
-     */
-    distinct?: GraphMetricScalarFieldEnum | GraphMetricScalarFieldEnum[]
-  }
-
-  /**
-   * GraphMetric findFirstOrThrow
-   */
-  export type GraphMetricFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricInclude<ExtArgs> | null
-    /**
-     * Filter, which GraphMetric to fetch.
-     */
-    where?: GraphMetricWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GraphMetrics to fetch.
-     */
-    orderBy?: GraphMetricOrderByWithRelationInput | GraphMetricOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for GraphMetrics.
-     */
-    cursor?: GraphMetricWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GraphMetrics from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GraphMetrics.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of GraphMetrics.
-     */
-    distinct?: GraphMetricScalarFieldEnum | GraphMetricScalarFieldEnum[]
-  }
-
-  /**
-   * GraphMetric findMany
-   */
-  export type GraphMetricFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricInclude<ExtArgs> | null
-    /**
-     * Filter, which GraphMetrics to fetch.
-     */
-    where?: GraphMetricWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GraphMetrics to fetch.
-     */
-    orderBy?: GraphMetricOrderByWithRelationInput | GraphMetricOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing GraphMetrics.
-     */
-    cursor?: GraphMetricWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GraphMetrics from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GraphMetrics.
-     */
-    skip?: number
-    distinct?: GraphMetricScalarFieldEnum | GraphMetricScalarFieldEnum[]
-  }
-
-  /**
-   * GraphMetric create
-   */
-  export type GraphMetricCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricInclude<ExtArgs> | null
-    /**
-     * The data needed to create a GraphMetric.
-     */
-    data: XOR<GraphMetricCreateInput, GraphMetricUncheckedCreateInput>
-  }
-
-  /**
-   * GraphMetric createMany
-   */
-  export type GraphMetricCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many GraphMetrics.
-     */
-    data: GraphMetricCreateManyInput | GraphMetricCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * GraphMetric createManyAndReturn
-   */
-  export type GraphMetricCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * The data used to create many GraphMetrics.
-     */
-    data: GraphMetricCreateManyInput | GraphMetricCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * GraphMetric update
-   */
-  export type GraphMetricUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricInclude<ExtArgs> | null
-    /**
-     * The data needed to update a GraphMetric.
-     */
-    data: XOR<GraphMetricUpdateInput, GraphMetricUncheckedUpdateInput>
-    /**
-     * Choose, which GraphMetric to update.
-     */
-    where: GraphMetricWhereUniqueInput
-  }
-
-  /**
-   * GraphMetric updateMany
-   */
-  export type GraphMetricUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update GraphMetrics.
-     */
-    data: XOR<GraphMetricUpdateManyMutationInput, GraphMetricUncheckedUpdateManyInput>
-    /**
-     * Filter which GraphMetrics to update
-     */
-    where?: GraphMetricWhereInput
-    /**
-     * Limit how many GraphMetrics to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * GraphMetric updateManyAndReturn
-   */
-  export type GraphMetricUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * The data used to update GraphMetrics.
-     */
-    data: XOR<GraphMetricUpdateManyMutationInput, GraphMetricUncheckedUpdateManyInput>
-    /**
-     * Filter which GraphMetrics to update
-     */
-    where?: GraphMetricWhereInput
-    /**
-     * Limit how many GraphMetrics to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * GraphMetric upsert
-   */
-  export type GraphMetricUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricInclude<ExtArgs> | null
-    /**
-     * The filter to search for the GraphMetric to update in case it exists.
-     */
-    where: GraphMetricWhereUniqueInput
-    /**
-     * In case the GraphMetric found by the `where` argument doesn't exist, create a new GraphMetric with this data.
-     */
-    create: XOR<GraphMetricCreateInput, GraphMetricUncheckedCreateInput>
-    /**
-     * In case the GraphMetric was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<GraphMetricUpdateInput, GraphMetricUncheckedUpdateInput>
-  }
-
-  /**
-   * GraphMetric delete
-   */
-  export type GraphMetricDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricInclude<ExtArgs> | null
-    /**
-     * Filter which GraphMetric to delete.
-     */
-    where: GraphMetricWhereUniqueInput
-  }
-
-  /**
-   * GraphMetric deleteMany
-   */
-  export type GraphMetricDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which GraphMetrics to delete
-     */
-    where?: GraphMetricWhereInput
-    /**
-     * Limit how many GraphMetrics to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * GraphMetric without action
-   */
-  export type GraphMetricDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GraphMetric
-     */
-    select?: GraphMetricSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GraphMetric
-     */
-    omit?: GraphMetricOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GraphMetricInclude<ExtArgs> | null
+    omit?: FileOmit<ExtArgs> | null
   }
 
 
@@ -15487,95 +7988,21 @@ export namespace Prisma {
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
 
 
-  export const ProjectScalarFieldEnum: {
+  export const FileScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    userId: 'userId',
-    createdAt: 'createdAt'
-  };
-
-  export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
-
-
-  export const DocumentScalarFieldEnum: {
-    id: 'id',
-    projectId: 'projectId',
-    fileUrl: 'fileUrl',
-    fileName: 'fileName',
-    status: 'status',
-    createdAt: 'createdAt'
-  };
-
-  export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
-
-
-  export const AnalysisScalarFieldEnum: {
-    id: 'id',
-    documentId: 'documentId',
-    rawJson: 'rawJson',
-    summary: 'summary',
+    supabasePath: 'supabasePath',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     confidence: 'confidence',
-    createdAt: 'createdAt'
+    durationMinutes: 'durationMinutes',
+    missingItems: 'missingItems',
+    risks: 'risks',
+    summary: 'summary',
+    status: 'status'
   };
 
-  export type AnalysisScalarFieldEnum = (typeof AnalysisScalarFieldEnum)[keyof typeof AnalysisScalarFieldEnum]
-
-
-  export const MissingItemScalarFieldEnum: {
-    id: 'id',
-    analysisId: 'analysisId',
-    category: 'category',
-    title: 'title',
-    description: 'description',
-    severity: 'severity',
-    page: 'page'
-  };
-
-  export type MissingItemScalarFieldEnum = (typeof MissingItemScalarFieldEnum)[keyof typeof MissingItemScalarFieldEnum]
-
-
-  export const RiskScalarFieldEnum: {
-    id: 'id',
-    analysisId: 'analysisId',
-    category: 'category',
-    title: 'title',
-    description: 'description',
-    impact: 'impact',
-    severity: 'severity'
-  };
-
-  export type RiskScalarFieldEnum = (typeof RiskScalarFieldEnum)[keyof typeof RiskScalarFieldEnum]
-
-
-  export const CompletenessScalarFieldEnum: {
-    id: 'id',
-    analysisId: 'analysisId',
-    electrical: 'electrical',
-    plumbing: 'plumbing',
-    hvac: 'hvac',
-    structural: 'structural',
-    safety: 'safety',
-    documentation: 'documentation'
-  };
-
-  export type CompletenessScalarFieldEnum = (typeof CompletenessScalarFieldEnum)[keyof typeof CompletenessScalarFieldEnum]
-
-
-  export const GraphMetricScalarFieldEnum: {
-    id: 'id',
-    analysisId: 'analysisId',
-    riskLow: 'riskLow',
-    riskMedium: 'riskMedium',
-    riskHigh: 'riskHigh',
-    missingElectrical: 'missingElectrical',
-    missingPlumbing: 'missingPlumbing',
-    missingHVAC: 'missingHVAC',
-    missingStructural: 'missingStructural',
-    missingSafety: 'missingSafety',
-    missingDocs: 'missingDocs'
-  };
-
-  export type GraphMetricScalarFieldEnum = (typeof GraphMetricScalarFieldEnum)[keyof typeof GraphMetricScalarFieldEnum]
+  export type FileScalarFieldEnum = (typeof FileScalarFieldEnum)[keyof typeof FileScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -15584,13 +8011,6 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
-
-
-  export const JsonNullValueInput: {
-    JsonNull: typeof JsonNull
-  };
-
-  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -15607,15 +8027,6 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-  export const JsonNullValueFilter: {
-    DbNull: typeof DbNull,
-    JsonNull: typeof JsonNull,
-    AnyNull: typeof AnyNull
-  };
-
-  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -15666,20 +8077,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Json'
-   */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-  /**
-   * Reference to a field of type 'QueryMode'
-   */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -15690,6 +8087,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProcessingStatus'
+   */
+  export type EnumProcessingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProcessingStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProcessingStatus[]'
+   */
+  export type ListEnumProcessingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProcessingStatus[]'>
     
   /**
    * Deep Input Types
@@ -15706,9 +8117,8 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
-    sessions?: SessionListRelationFilter
     posts?: PostListRelationFilter
-    projects?: ProjectListRelationFilter
+    sessions?: SessionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -15718,9 +8128,8 @@ export namespace Prisma {
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     accounts?: AccountOrderByRelationAggregateInput
-    sessions?: SessionOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
-    projects?: ProjectOrderByRelationAggregateInput
+    sessions?: SessionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -15733,9 +8142,8 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
-    sessions?: SessionListRelationFilter
     posts?: PostListRelationFilter
-    projects?: ProjectListRelationFilter
+    sessions?: SessionListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -16008,485 +8416,88 @@ export namespace Prisma {
     createdById?: StringWithAggregatesFilter<"Post"> | string
   }
 
-  export type ProjectWhereInput = {
-    AND?: ProjectWhereInput | ProjectWhereInput[]
-    OR?: ProjectWhereInput[]
-    NOT?: ProjectWhereInput | ProjectWhereInput[]
-    id?: StringFilter<"Project"> | string
-    name?: StringFilter<"Project"> | string
-    userId?: StringFilter<"Project"> | string
-    createdAt?: DateTimeFilter<"Project"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    documents?: DocumentListRelationFilter
+  export type FileWhereInput = {
+    AND?: FileWhereInput | FileWhereInput[]
+    OR?: FileWhereInput[]
+    NOT?: FileWhereInput | FileWhereInput[]
+    id?: StringFilter<"File"> | string
+    name?: StringFilter<"File"> | string
+    supabasePath?: StringFilter<"File"> | string
+    createdAt?: DateTimeFilter<"File"> | Date | string
+    updatedAt?: DateTimeFilter<"File"> | Date | string
+    confidence?: StringNullableFilter<"File"> | string | null
+    durationMinutes?: FloatNullableFilter<"File"> | number | null
+    missingItems?: StringNullableListFilter<"File">
+    risks?: StringNullableListFilter<"File">
+    summary?: StringNullableFilter<"File"> | string | null
+    status?: EnumProcessingStatusFilter<"File"> | $Enums.ProcessingStatus
   }
 
-  export type ProjectOrderByWithRelationInput = {
+  export type FileOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    userId?: SortOrder
+    supabasePath?: SortOrder
     createdAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    documents?: DocumentOrderByRelationAggregateInput
+    updatedAt?: SortOrder
+    confidence?: SortOrderInput | SortOrder
+    durationMinutes?: SortOrderInput | SortOrder
+    missingItems?: SortOrder
+    risks?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    status?: SortOrder
   }
 
-  export type ProjectWhereUniqueInput = Prisma.AtLeast<{
+  export type FileWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: ProjectWhereInput | ProjectWhereInput[]
-    OR?: ProjectWhereInput[]
-    NOT?: ProjectWhereInput | ProjectWhereInput[]
-    name?: StringFilter<"Project"> | string
-    userId?: StringFilter<"Project"> | string
-    createdAt?: DateTimeFilter<"Project"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    documents?: DocumentListRelationFilter
-  }, "id">
+    supabasePath?: string
+    AND?: FileWhereInput | FileWhereInput[]
+    OR?: FileWhereInput[]
+    NOT?: FileWhereInput | FileWhereInput[]
+    name?: StringFilter<"File"> | string
+    createdAt?: DateTimeFilter<"File"> | Date | string
+    updatedAt?: DateTimeFilter<"File"> | Date | string
+    confidence?: StringNullableFilter<"File"> | string | null
+    durationMinutes?: FloatNullableFilter<"File"> | number | null
+    missingItems?: StringNullableListFilter<"File">
+    risks?: StringNullableListFilter<"File">
+    summary?: StringNullableFilter<"File"> | string | null
+    status?: EnumProcessingStatusFilter<"File"> | $Enums.ProcessingStatus
+  }, "id" | "supabasePath">
 
-  export type ProjectOrderByWithAggregationInput = {
+  export type FileOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    userId?: SortOrder
+    supabasePath?: SortOrder
     createdAt?: SortOrder
-    _count?: ProjectCountOrderByAggregateInput
-    _max?: ProjectMaxOrderByAggregateInput
-    _min?: ProjectMinOrderByAggregateInput
-  }
-
-  export type ProjectScalarWhereWithAggregatesInput = {
-    AND?: ProjectScalarWhereWithAggregatesInput | ProjectScalarWhereWithAggregatesInput[]
-    OR?: ProjectScalarWhereWithAggregatesInput[]
-    NOT?: ProjectScalarWhereWithAggregatesInput | ProjectScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Project"> | string
-    name?: StringWithAggregatesFilter<"Project"> | string
-    userId?: StringWithAggregatesFilter<"Project"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
-  }
-
-  export type DocumentWhereInput = {
-    AND?: DocumentWhereInput | DocumentWhereInput[]
-    OR?: DocumentWhereInput[]
-    NOT?: DocumentWhereInput | DocumentWhereInput[]
-    id?: StringFilter<"Document"> | string
-    projectId?: StringFilter<"Document"> | string
-    fileUrl?: StringFilter<"Document"> | string
-    fileName?: StringFilter<"Document"> | string
-    status?: StringFilter<"Document"> | string
-    createdAt?: DateTimeFilter<"Document"> | Date | string
-    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
-    analyses?: AnalysisListRelationFilter
-  }
-
-  export type DocumentOrderByWithRelationInput = {
-    id?: SortOrder
-    projectId?: SortOrder
-    fileUrl?: SortOrder
-    fileName?: SortOrder
+    updatedAt?: SortOrder
+    confidence?: SortOrderInput | SortOrder
+    durationMinutes?: SortOrderInput | SortOrder
+    missingItems?: SortOrder
+    risks?: SortOrder
+    summary?: SortOrderInput | SortOrder
     status?: SortOrder
-    createdAt?: SortOrder
-    project?: ProjectOrderByWithRelationInput
-    analyses?: AnalysisOrderByRelationAggregateInput
+    _count?: FileCountOrderByAggregateInput
+    _avg?: FileAvgOrderByAggregateInput
+    _max?: FileMaxOrderByAggregateInput
+    _min?: FileMinOrderByAggregateInput
+    _sum?: FileSumOrderByAggregateInput
   }
 
-  export type DocumentWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: DocumentWhereInput | DocumentWhereInput[]
-    OR?: DocumentWhereInput[]
-    NOT?: DocumentWhereInput | DocumentWhereInput[]
-    projectId?: StringFilter<"Document"> | string
-    fileUrl?: StringFilter<"Document"> | string
-    fileName?: StringFilter<"Document"> | string
-    status?: StringFilter<"Document"> | string
-    createdAt?: DateTimeFilter<"Document"> | Date | string
-    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
-    analyses?: AnalysisListRelationFilter
-  }, "id">
-
-  export type DocumentOrderByWithAggregationInput = {
-    id?: SortOrder
-    projectId?: SortOrder
-    fileUrl?: SortOrder
-    fileName?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    _count?: DocumentCountOrderByAggregateInput
-    _max?: DocumentMaxOrderByAggregateInput
-    _min?: DocumentMinOrderByAggregateInput
-  }
-
-  export type DocumentScalarWhereWithAggregatesInput = {
-    AND?: DocumentScalarWhereWithAggregatesInput | DocumentScalarWhereWithAggregatesInput[]
-    OR?: DocumentScalarWhereWithAggregatesInput[]
-    NOT?: DocumentScalarWhereWithAggregatesInput | DocumentScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Document"> | string
-    projectId?: StringWithAggregatesFilter<"Document"> | string
-    fileUrl?: StringWithAggregatesFilter<"Document"> | string
-    fileName?: StringWithAggregatesFilter<"Document"> | string
-    status?: StringWithAggregatesFilter<"Document"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Document"> | Date | string
-  }
-
-  export type AnalysisWhereInput = {
-    AND?: AnalysisWhereInput | AnalysisWhereInput[]
-    OR?: AnalysisWhereInput[]
-    NOT?: AnalysisWhereInput | AnalysisWhereInput[]
-    id?: StringFilter<"Analysis"> | string
-    documentId?: StringFilter<"Analysis"> | string
-    rawJson?: JsonFilter<"Analysis">
-    summary?: JsonFilter<"Analysis">
-    confidence?: FloatFilter<"Analysis"> | number
-    createdAt?: DateTimeFilter<"Analysis"> | Date | string
-    document?: XOR<DocumentScalarRelationFilter, DocumentWhereInput>
-    missingItems?: MissingItemListRelationFilter
-    risks?: RiskListRelationFilter
-    completeness?: XOR<CompletenessNullableScalarRelationFilter, CompletenessWhereInput> | null
-    graphMetrics?: XOR<GraphMetricNullableScalarRelationFilter, GraphMetricWhereInput> | null
-  }
-
-  export type AnalysisOrderByWithRelationInput = {
-    id?: SortOrder
-    documentId?: SortOrder
-    rawJson?: SortOrder
-    summary?: SortOrder
-    confidence?: SortOrder
-    createdAt?: SortOrder
-    document?: DocumentOrderByWithRelationInput
-    missingItems?: MissingItemOrderByRelationAggregateInput
-    risks?: RiskOrderByRelationAggregateInput
-    completeness?: CompletenessOrderByWithRelationInput
-    graphMetrics?: GraphMetricOrderByWithRelationInput
-  }
-
-  export type AnalysisWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: AnalysisWhereInput | AnalysisWhereInput[]
-    OR?: AnalysisWhereInput[]
-    NOT?: AnalysisWhereInput | AnalysisWhereInput[]
-    documentId?: StringFilter<"Analysis"> | string
-    rawJson?: JsonFilter<"Analysis">
-    summary?: JsonFilter<"Analysis">
-    confidence?: FloatFilter<"Analysis"> | number
-    createdAt?: DateTimeFilter<"Analysis"> | Date | string
-    document?: XOR<DocumentScalarRelationFilter, DocumentWhereInput>
-    missingItems?: MissingItemListRelationFilter
-    risks?: RiskListRelationFilter
-    completeness?: XOR<CompletenessNullableScalarRelationFilter, CompletenessWhereInput> | null
-    graphMetrics?: XOR<GraphMetricNullableScalarRelationFilter, GraphMetricWhereInput> | null
-  }, "id">
-
-  export type AnalysisOrderByWithAggregationInput = {
-    id?: SortOrder
-    documentId?: SortOrder
-    rawJson?: SortOrder
-    summary?: SortOrder
-    confidence?: SortOrder
-    createdAt?: SortOrder
-    _count?: AnalysisCountOrderByAggregateInput
-    _avg?: AnalysisAvgOrderByAggregateInput
-    _max?: AnalysisMaxOrderByAggregateInput
-    _min?: AnalysisMinOrderByAggregateInput
-    _sum?: AnalysisSumOrderByAggregateInput
-  }
-
-  export type AnalysisScalarWhereWithAggregatesInput = {
-    AND?: AnalysisScalarWhereWithAggregatesInput | AnalysisScalarWhereWithAggregatesInput[]
-    OR?: AnalysisScalarWhereWithAggregatesInput[]
-    NOT?: AnalysisScalarWhereWithAggregatesInput | AnalysisScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Analysis"> | string
-    documentId?: StringWithAggregatesFilter<"Analysis"> | string
-    rawJson?: JsonWithAggregatesFilter<"Analysis">
-    summary?: JsonWithAggregatesFilter<"Analysis">
-    confidence?: FloatWithAggregatesFilter<"Analysis"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"Analysis"> | Date | string
-  }
-
-  export type MissingItemWhereInput = {
-    AND?: MissingItemWhereInput | MissingItemWhereInput[]
-    OR?: MissingItemWhereInput[]
-    NOT?: MissingItemWhereInput | MissingItemWhereInput[]
-    id?: StringFilter<"MissingItem"> | string
-    analysisId?: StringFilter<"MissingItem"> | string
-    category?: StringFilter<"MissingItem"> | string
-    title?: StringFilter<"MissingItem"> | string
-    description?: StringFilter<"MissingItem"> | string
-    severity?: StringFilter<"MissingItem"> | string
-    page?: IntNullableFilter<"MissingItem"> | number | null
-    analysis?: XOR<AnalysisScalarRelationFilter, AnalysisWhereInput>
-  }
-
-  export type MissingItemOrderByWithRelationInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    category?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    severity?: SortOrder
-    page?: SortOrderInput | SortOrder
-    analysis?: AnalysisOrderByWithRelationInput
-  }
-
-  export type MissingItemWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: MissingItemWhereInput | MissingItemWhereInput[]
-    OR?: MissingItemWhereInput[]
-    NOT?: MissingItemWhereInput | MissingItemWhereInput[]
-    analysisId?: StringFilter<"MissingItem"> | string
-    category?: StringFilter<"MissingItem"> | string
-    title?: StringFilter<"MissingItem"> | string
-    description?: StringFilter<"MissingItem"> | string
-    severity?: StringFilter<"MissingItem"> | string
-    page?: IntNullableFilter<"MissingItem"> | number | null
-    analysis?: XOR<AnalysisScalarRelationFilter, AnalysisWhereInput>
-  }, "id">
-
-  export type MissingItemOrderByWithAggregationInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    category?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    severity?: SortOrder
-    page?: SortOrderInput | SortOrder
-    _count?: MissingItemCountOrderByAggregateInput
-    _avg?: MissingItemAvgOrderByAggregateInput
-    _max?: MissingItemMaxOrderByAggregateInput
-    _min?: MissingItemMinOrderByAggregateInput
-    _sum?: MissingItemSumOrderByAggregateInput
-  }
-
-  export type MissingItemScalarWhereWithAggregatesInput = {
-    AND?: MissingItemScalarWhereWithAggregatesInput | MissingItemScalarWhereWithAggregatesInput[]
-    OR?: MissingItemScalarWhereWithAggregatesInput[]
-    NOT?: MissingItemScalarWhereWithAggregatesInput | MissingItemScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"MissingItem"> | string
-    analysisId?: StringWithAggregatesFilter<"MissingItem"> | string
-    category?: StringWithAggregatesFilter<"MissingItem"> | string
-    title?: StringWithAggregatesFilter<"MissingItem"> | string
-    description?: StringWithAggregatesFilter<"MissingItem"> | string
-    severity?: StringWithAggregatesFilter<"MissingItem"> | string
-    page?: IntNullableWithAggregatesFilter<"MissingItem"> | number | null
-  }
-
-  export type RiskWhereInput = {
-    AND?: RiskWhereInput | RiskWhereInput[]
-    OR?: RiskWhereInput[]
-    NOT?: RiskWhereInput | RiskWhereInput[]
-    id?: StringFilter<"Risk"> | string
-    analysisId?: StringFilter<"Risk"> | string
-    category?: StringFilter<"Risk"> | string
-    title?: StringFilter<"Risk"> | string
-    description?: StringFilter<"Risk"> | string
-    impact?: StringFilter<"Risk"> | string
-    severity?: StringFilter<"Risk"> | string
-    analysis?: XOR<AnalysisScalarRelationFilter, AnalysisWhereInput>
-  }
-
-  export type RiskOrderByWithRelationInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    category?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    impact?: SortOrder
-    severity?: SortOrder
-    analysis?: AnalysisOrderByWithRelationInput
-  }
-
-  export type RiskWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: RiskWhereInput | RiskWhereInput[]
-    OR?: RiskWhereInput[]
-    NOT?: RiskWhereInput | RiskWhereInput[]
-    analysisId?: StringFilter<"Risk"> | string
-    category?: StringFilter<"Risk"> | string
-    title?: StringFilter<"Risk"> | string
-    description?: StringFilter<"Risk"> | string
-    impact?: StringFilter<"Risk"> | string
-    severity?: StringFilter<"Risk"> | string
-    analysis?: XOR<AnalysisScalarRelationFilter, AnalysisWhereInput>
-  }, "id">
-
-  export type RiskOrderByWithAggregationInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    category?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    impact?: SortOrder
-    severity?: SortOrder
-    _count?: RiskCountOrderByAggregateInput
-    _max?: RiskMaxOrderByAggregateInput
-    _min?: RiskMinOrderByAggregateInput
-  }
-
-  export type RiskScalarWhereWithAggregatesInput = {
-    AND?: RiskScalarWhereWithAggregatesInput | RiskScalarWhereWithAggregatesInput[]
-    OR?: RiskScalarWhereWithAggregatesInput[]
-    NOT?: RiskScalarWhereWithAggregatesInput | RiskScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Risk"> | string
-    analysisId?: StringWithAggregatesFilter<"Risk"> | string
-    category?: StringWithAggregatesFilter<"Risk"> | string
-    title?: StringWithAggregatesFilter<"Risk"> | string
-    description?: StringWithAggregatesFilter<"Risk"> | string
-    impact?: StringWithAggregatesFilter<"Risk"> | string
-    severity?: StringWithAggregatesFilter<"Risk"> | string
-  }
-
-  export type CompletenessWhereInput = {
-    AND?: CompletenessWhereInput | CompletenessWhereInput[]
-    OR?: CompletenessWhereInput[]
-    NOT?: CompletenessWhereInput | CompletenessWhereInput[]
-    id?: StringFilter<"Completeness"> | string
-    analysisId?: StringFilter<"Completeness"> | string
-    electrical?: IntFilter<"Completeness"> | number
-    plumbing?: IntFilter<"Completeness"> | number
-    hvac?: IntFilter<"Completeness"> | number
-    structural?: IntFilter<"Completeness"> | number
-    safety?: IntFilter<"Completeness"> | number
-    documentation?: IntFilter<"Completeness"> | number
-    analysis?: XOR<AnalysisScalarRelationFilter, AnalysisWhereInput>
-  }
-
-  export type CompletenessOrderByWithRelationInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    electrical?: SortOrder
-    plumbing?: SortOrder
-    hvac?: SortOrder
-    structural?: SortOrder
-    safety?: SortOrder
-    documentation?: SortOrder
-    analysis?: AnalysisOrderByWithRelationInput
-  }
-
-  export type CompletenessWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    analysisId?: string
-    AND?: CompletenessWhereInput | CompletenessWhereInput[]
-    OR?: CompletenessWhereInput[]
-    NOT?: CompletenessWhereInput | CompletenessWhereInput[]
-    electrical?: IntFilter<"Completeness"> | number
-    plumbing?: IntFilter<"Completeness"> | number
-    hvac?: IntFilter<"Completeness"> | number
-    structural?: IntFilter<"Completeness"> | number
-    safety?: IntFilter<"Completeness"> | number
-    documentation?: IntFilter<"Completeness"> | number
-    analysis?: XOR<AnalysisScalarRelationFilter, AnalysisWhereInput>
-  }, "id" | "analysisId">
-
-  export type CompletenessOrderByWithAggregationInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    electrical?: SortOrder
-    plumbing?: SortOrder
-    hvac?: SortOrder
-    structural?: SortOrder
-    safety?: SortOrder
-    documentation?: SortOrder
-    _count?: CompletenessCountOrderByAggregateInput
-    _avg?: CompletenessAvgOrderByAggregateInput
-    _max?: CompletenessMaxOrderByAggregateInput
-    _min?: CompletenessMinOrderByAggregateInput
-    _sum?: CompletenessSumOrderByAggregateInput
-  }
-
-  export type CompletenessScalarWhereWithAggregatesInput = {
-    AND?: CompletenessScalarWhereWithAggregatesInput | CompletenessScalarWhereWithAggregatesInput[]
-    OR?: CompletenessScalarWhereWithAggregatesInput[]
-    NOT?: CompletenessScalarWhereWithAggregatesInput | CompletenessScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Completeness"> | string
-    analysisId?: StringWithAggregatesFilter<"Completeness"> | string
-    electrical?: IntWithAggregatesFilter<"Completeness"> | number
-    plumbing?: IntWithAggregatesFilter<"Completeness"> | number
-    hvac?: IntWithAggregatesFilter<"Completeness"> | number
-    structural?: IntWithAggregatesFilter<"Completeness"> | number
-    safety?: IntWithAggregatesFilter<"Completeness"> | number
-    documentation?: IntWithAggregatesFilter<"Completeness"> | number
-  }
-
-  export type GraphMetricWhereInput = {
-    AND?: GraphMetricWhereInput | GraphMetricWhereInput[]
-    OR?: GraphMetricWhereInput[]
-    NOT?: GraphMetricWhereInput | GraphMetricWhereInput[]
-    id?: StringFilter<"GraphMetric"> | string
-    analysisId?: StringFilter<"GraphMetric"> | string
-    riskLow?: IntFilter<"GraphMetric"> | number
-    riskMedium?: IntFilter<"GraphMetric"> | number
-    riskHigh?: IntFilter<"GraphMetric"> | number
-    missingElectrical?: IntFilter<"GraphMetric"> | number
-    missingPlumbing?: IntFilter<"GraphMetric"> | number
-    missingHVAC?: IntFilter<"GraphMetric"> | number
-    missingStructural?: IntFilter<"GraphMetric"> | number
-    missingSafety?: IntFilter<"GraphMetric"> | number
-    missingDocs?: IntFilter<"GraphMetric"> | number
-    analysis?: XOR<AnalysisScalarRelationFilter, AnalysisWhereInput>
-  }
-
-  export type GraphMetricOrderByWithRelationInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    riskLow?: SortOrder
-    riskMedium?: SortOrder
-    riskHigh?: SortOrder
-    missingElectrical?: SortOrder
-    missingPlumbing?: SortOrder
-    missingHVAC?: SortOrder
-    missingStructural?: SortOrder
-    missingSafety?: SortOrder
-    missingDocs?: SortOrder
-    analysis?: AnalysisOrderByWithRelationInput
-  }
-
-  export type GraphMetricWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    analysisId?: string
-    AND?: GraphMetricWhereInput | GraphMetricWhereInput[]
-    OR?: GraphMetricWhereInput[]
-    NOT?: GraphMetricWhereInput | GraphMetricWhereInput[]
-    riskLow?: IntFilter<"GraphMetric"> | number
-    riskMedium?: IntFilter<"GraphMetric"> | number
-    riskHigh?: IntFilter<"GraphMetric"> | number
-    missingElectrical?: IntFilter<"GraphMetric"> | number
-    missingPlumbing?: IntFilter<"GraphMetric"> | number
-    missingHVAC?: IntFilter<"GraphMetric"> | number
-    missingStructural?: IntFilter<"GraphMetric"> | number
-    missingSafety?: IntFilter<"GraphMetric"> | number
-    missingDocs?: IntFilter<"GraphMetric"> | number
-    analysis?: XOR<AnalysisScalarRelationFilter, AnalysisWhereInput>
-  }, "id" | "analysisId">
-
-  export type GraphMetricOrderByWithAggregationInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    riskLow?: SortOrder
-    riskMedium?: SortOrder
-    riskHigh?: SortOrder
-    missingElectrical?: SortOrder
-    missingPlumbing?: SortOrder
-    missingHVAC?: SortOrder
-    missingStructural?: SortOrder
-    missingSafety?: SortOrder
-    missingDocs?: SortOrder
-    _count?: GraphMetricCountOrderByAggregateInput
-    _avg?: GraphMetricAvgOrderByAggregateInput
-    _max?: GraphMetricMaxOrderByAggregateInput
-    _min?: GraphMetricMinOrderByAggregateInput
-    _sum?: GraphMetricSumOrderByAggregateInput
-  }
-
-  export type GraphMetricScalarWhereWithAggregatesInput = {
-    AND?: GraphMetricScalarWhereWithAggregatesInput | GraphMetricScalarWhereWithAggregatesInput[]
-    OR?: GraphMetricScalarWhereWithAggregatesInput[]
-    NOT?: GraphMetricScalarWhereWithAggregatesInput | GraphMetricScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"GraphMetric"> | string
-    analysisId?: StringWithAggregatesFilter<"GraphMetric"> | string
-    riskLow?: IntWithAggregatesFilter<"GraphMetric"> | number
-    riskMedium?: IntWithAggregatesFilter<"GraphMetric"> | number
-    riskHigh?: IntWithAggregatesFilter<"GraphMetric"> | number
-    missingElectrical?: IntWithAggregatesFilter<"GraphMetric"> | number
-    missingPlumbing?: IntWithAggregatesFilter<"GraphMetric"> | number
-    missingHVAC?: IntWithAggregatesFilter<"GraphMetric"> | number
-    missingStructural?: IntWithAggregatesFilter<"GraphMetric"> | number
-    missingSafety?: IntWithAggregatesFilter<"GraphMetric"> | number
-    missingDocs?: IntWithAggregatesFilter<"GraphMetric"> | number
+  export type FileScalarWhereWithAggregatesInput = {
+    AND?: FileScalarWhereWithAggregatesInput | FileScalarWhereWithAggregatesInput[]
+    OR?: FileScalarWhereWithAggregatesInput[]
+    NOT?: FileScalarWhereWithAggregatesInput | FileScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"File"> | string
+    name?: StringWithAggregatesFilter<"File"> | string
+    supabasePath?: StringWithAggregatesFilter<"File"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"File"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"File"> | Date | string
+    confidence?: StringNullableWithAggregatesFilter<"File"> | string | null
+    durationMinutes?: FloatNullableWithAggregatesFilter<"File"> | number | null
+    missingItems?: StringNullableListFilter<"File">
+    risks?: StringNullableListFilter<"File">
+    summary?: StringNullableWithAggregatesFilter<"File"> | string | null
+    status?: EnumProcessingStatusWithAggregatesFilter<"File"> | $Enums.ProcessingStatus
   }
 
   export type UserCreateInput = {
@@ -16496,9 +8507,8 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
-    projects?: ProjectCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -16508,9 +8518,8 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
-    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -16520,9 +8529,8 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
-    projects?: ProjectUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -16532,9 +8540,8 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
-    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -16814,511 +8821,102 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
   }
 
-  export type ProjectCreateInput = {
-    id?: string
+  export type FileCreateInput = {
+    id: string
     name: string
+    supabasePath: string
     createdAt?: Date | string
-    user: UserCreateNestedOneWithoutProjectsInput
-    documents?: DocumentCreateNestedManyWithoutProjectInput
+    updatedAt: Date | string
+    confidence?: string | null
+    durationMinutes?: number | null
+    missingItems?: FileCreatemissingItemsInput | string[]
+    risks?: FileCreaterisksInput | string[]
+    summary?: string | null
+    status?: $Enums.ProcessingStatus
   }
 
-  export type ProjectUncheckedCreateInput = {
-    id?: string
+  export type FileUncheckedCreateInput = {
+    id: string
     name: string
-    userId: string
+    supabasePath: string
     createdAt?: Date | string
-    documents?: DocumentUncheckedCreateNestedManyWithoutProjectInput
+    updatedAt: Date | string
+    confidence?: string | null
+    durationMinutes?: number | null
+    missingItems?: FileCreatemissingItemsInput | string[]
+    risks?: FileCreaterisksInput | string[]
+    summary?: string | null
+    status?: $Enums.ProcessingStatus
   }
 
-  export type ProjectUpdateInput = {
+  export type FileUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    supabasePath?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutProjectsNestedInput
-    documents?: DocumentUpdateManyWithoutProjectNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    confidence?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableFloatFieldUpdateOperationsInput | number | null
+    missingItems?: FileUpdatemissingItemsInput | string[]
+    risks?: FileUpdaterisksInput | string[]
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProcessingStatusFieldUpdateOperationsInput | $Enums.ProcessingStatus
   }
 
-  export type ProjectUncheckedUpdateInput = {
+  export type FileUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    supabasePath?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    documents?: DocumentUncheckedUpdateManyWithoutProjectNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    confidence?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableFloatFieldUpdateOperationsInput | number | null
+    missingItems?: FileUpdatemissingItemsInput | string[]
+    risks?: FileUpdaterisksInput | string[]
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProcessingStatusFieldUpdateOperationsInput | $Enums.ProcessingStatus
   }
 
-  export type ProjectCreateManyInput = {
-    id?: string
+  export type FileCreateManyInput = {
+    id: string
     name: string
-    userId: string
+    supabasePath: string
     createdAt?: Date | string
+    updatedAt: Date | string
+    confidence?: string | null
+    durationMinutes?: number | null
+    missingItems?: FileCreatemissingItemsInput | string[]
+    risks?: FileCreaterisksInput | string[]
+    summary?: string | null
+    status?: $Enums.ProcessingStatus
   }
 
-  export type ProjectUpdateManyMutationInput = {
+  export type FileUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    supabasePath?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    confidence?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableFloatFieldUpdateOperationsInput | number | null
+    missingItems?: FileUpdatemissingItemsInput | string[]
+    risks?: FileUpdaterisksInput | string[]
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProcessingStatusFieldUpdateOperationsInput | $Enums.ProcessingStatus
   }
 
-  export type ProjectUncheckedUpdateManyInput = {
+  export type FileUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    supabasePath?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DocumentCreateInput = {
-    id?: string
-    fileUrl: string
-    fileName: string
-    status: string
-    createdAt?: Date | string
-    project: ProjectCreateNestedOneWithoutDocumentsInput
-    analyses?: AnalysisCreateNestedManyWithoutDocumentInput
-  }
-
-  export type DocumentUncheckedCreateInput = {
-    id?: string
-    projectId: string
-    fileUrl: string
-    fileName: string
-    status: string
-    createdAt?: Date | string
-    analyses?: AnalysisUncheckedCreateNestedManyWithoutDocumentInput
-  }
-
-  export type DocumentUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
-    fileName?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneRequiredWithoutDocumentsNestedInput
-    analyses?: AnalysisUpdateManyWithoutDocumentNestedInput
-  }
-
-  export type DocumentUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
-    fileName?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    analyses?: AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
-  }
-
-  export type DocumentCreateManyInput = {
-    id?: string
-    projectId: string
-    fileUrl: string
-    fileName: string
-    status: string
-    createdAt?: Date | string
-  }
-
-  export type DocumentUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
-    fileName?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DocumentUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
-    fileName?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AnalysisCreateInput = {
-    id?: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    document: DocumentCreateNestedOneWithoutAnalysesInput
-    missingItems?: MissingItemCreateNestedManyWithoutAnalysisInput
-    risks?: RiskCreateNestedManyWithoutAnalysisInput
-    completeness?: CompletenessCreateNestedOneWithoutAnalysisInput
-    graphMetrics?: GraphMetricCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisUncheckedCreateInput = {
-    id?: string
-    documentId: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    missingItems?: MissingItemUncheckedCreateNestedManyWithoutAnalysisInput
-    risks?: RiskUncheckedCreateNestedManyWithoutAnalysisInput
-    completeness?: CompletenessUncheckedCreateNestedOneWithoutAnalysisInput
-    graphMetrics?: GraphMetricUncheckedCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    document?: DocumentUpdateOneRequiredWithoutAnalysesNestedInput
-    missingItems?: MissingItemUpdateManyWithoutAnalysisNestedInput
-    risks?: RiskUpdateManyWithoutAnalysisNestedInput
-    completeness?: CompletenessUpdateOneWithoutAnalysisNestedInput
-    graphMetrics?: GraphMetricUpdateOneWithoutAnalysisNestedInput
-  }
-
-  export type AnalysisUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documentId?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    missingItems?: MissingItemUncheckedUpdateManyWithoutAnalysisNestedInput
-    risks?: RiskUncheckedUpdateManyWithoutAnalysisNestedInput
-    completeness?: CompletenessUncheckedUpdateOneWithoutAnalysisNestedInput
-    graphMetrics?: GraphMetricUncheckedUpdateOneWithoutAnalysisNestedInput
-  }
-
-  export type AnalysisCreateManyInput = {
-    id?: string
-    documentId: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-  }
-
-  export type AnalysisUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AnalysisUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documentId?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MissingItemCreateInput = {
-    id?: string
-    category: string
-    title: string
-    description: string
-    severity: string
-    page?: number | null
-    analysis: AnalysisCreateNestedOneWithoutMissingItemsInput
-  }
-
-  export type MissingItemUncheckedCreateInput = {
-    id?: string
-    analysisId: string
-    category: string
-    title: string
-    description: string
-    severity: string
-    page?: number | null
-  }
-
-  export type MissingItemUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-    page?: NullableIntFieldUpdateOperationsInput | number | null
-    analysis?: AnalysisUpdateOneRequiredWithoutMissingItemsNestedInput
-  }
-
-  export type MissingItemUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    analysisId?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-    page?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type MissingItemCreateManyInput = {
-    id?: string
-    analysisId: string
-    category: string
-    title: string
-    description: string
-    severity: string
-    page?: number | null
-  }
-
-  export type MissingItemUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-    page?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type MissingItemUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    analysisId?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-    page?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type RiskCreateInput = {
-    id?: string
-    category: string
-    title: string
-    description: string
-    impact: string
-    severity: string
-    analysis: AnalysisCreateNestedOneWithoutRisksInput
-  }
-
-  export type RiskUncheckedCreateInput = {
-    id?: string
-    analysisId: string
-    category: string
-    title: string
-    description: string
-    impact: string
-    severity: string
-  }
-
-  export type RiskUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    impact?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-    analysis?: AnalysisUpdateOneRequiredWithoutRisksNestedInput
-  }
-
-  export type RiskUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    analysisId?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    impact?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type RiskCreateManyInput = {
-    id?: string
-    analysisId: string
-    category: string
-    title: string
-    description: string
-    impact: string
-    severity: string
-  }
-
-  export type RiskUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    impact?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type RiskUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    analysisId?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    impact?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type CompletenessCreateInput = {
-    id?: string
-    electrical: number
-    plumbing: number
-    hvac: number
-    structural: number
-    safety: number
-    documentation: number
-    analysis: AnalysisCreateNestedOneWithoutCompletenessInput
-  }
-
-  export type CompletenessUncheckedCreateInput = {
-    id?: string
-    analysisId: string
-    electrical: number
-    plumbing: number
-    hvac: number
-    structural: number
-    safety: number
-    documentation: number
-  }
-
-  export type CompletenessUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    electrical?: IntFieldUpdateOperationsInput | number
-    plumbing?: IntFieldUpdateOperationsInput | number
-    hvac?: IntFieldUpdateOperationsInput | number
-    structural?: IntFieldUpdateOperationsInput | number
-    safety?: IntFieldUpdateOperationsInput | number
-    documentation?: IntFieldUpdateOperationsInput | number
-    analysis?: AnalysisUpdateOneRequiredWithoutCompletenessNestedInput
-  }
-
-  export type CompletenessUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    analysisId?: StringFieldUpdateOperationsInput | string
-    electrical?: IntFieldUpdateOperationsInput | number
-    plumbing?: IntFieldUpdateOperationsInput | number
-    hvac?: IntFieldUpdateOperationsInput | number
-    structural?: IntFieldUpdateOperationsInput | number
-    safety?: IntFieldUpdateOperationsInput | number
-    documentation?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type CompletenessCreateManyInput = {
-    id?: string
-    analysisId: string
-    electrical: number
-    plumbing: number
-    hvac: number
-    structural: number
-    safety: number
-    documentation: number
-  }
-
-  export type CompletenessUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    electrical?: IntFieldUpdateOperationsInput | number
-    plumbing?: IntFieldUpdateOperationsInput | number
-    hvac?: IntFieldUpdateOperationsInput | number
-    structural?: IntFieldUpdateOperationsInput | number
-    safety?: IntFieldUpdateOperationsInput | number
-    documentation?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type CompletenessUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    analysisId?: StringFieldUpdateOperationsInput | string
-    electrical?: IntFieldUpdateOperationsInput | number
-    plumbing?: IntFieldUpdateOperationsInput | number
-    hvac?: IntFieldUpdateOperationsInput | number
-    structural?: IntFieldUpdateOperationsInput | number
-    safety?: IntFieldUpdateOperationsInput | number
-    documentation?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type GraphMetricCreateInput = {
-    id?: string
-    riskLow: number
-    riskMedium: number
-    riskHigh: number
-    missingElectrical: number
-    missingPlumbing: number
-    missingHVAC: number
-    missingStructural: number
-    missingSafety: number
-    missingDocs: number
-    analysis: AnalysisCreateNestedOneWithoutGraphMetricsInput
-  }
-
-  export type GraphMetricUncheckedCreateInput = {
-    id?: string
-    analysisId: string
-    riskLow: number
-    riskMedium: number
-    riskHigh: number
-    missingElectrical: number
-    missingPlumbing: number
-    missingHVAC: number
-    missingStructural: number
-    missingSafety: number
-    missingDocs: number
-  }
-
-  export type GraphMetricUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    riskLow?: IntFieldUpdateOperationsInput | number
-    riskMedium?: IntFieldUpdateOperationsInput | number
-    riskHigh?: IntFieldUpdateOperationsInput | number
-    missingElectrical?: IntFieldUpdateOperationsInput | number
-    missingPlumbing?: IntFieldUpdateOperationsInput | number
-    missingHVAC?: IntFieldUpdateOperationsInput | number
-    missingStructural?: IntFieldUpdateOperationsInput | number
-    missingSafety?: IntFieldUpdateOperationsInput | number
-    missingDocs?: IntFieldUpdateOperationsInput | number
-    analysis?: AnalysisUpdateOneRequiredWithoutGraphMetricsNestedInput
-  }
-
-  export type GraphMetricUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    analysisId?: StringFieldUpdateOperationsInput | string
-    riskLow?: IntFieldUpdateOperationsInput | number
-    riskMedium?: IntFieldUpdateOperationsInput | number
-    riskHigh?: IntFieldUpdateOperationsInput | number
-    missingElectrical?: IntFieldUpdateOperationsInput | number
-    missingPlumbing?: IntFieldUpdateOperationsInput | number
-    missingHVAC?: IntFieldUpdateOperationsInput | number
-    missingStructural?: IntFieldUpdateOperationsInput | number
-    missingSafety?: IntFieldUpdateOperationsInput | number
-    missingDocs?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type GraphMetricCreateManyInput = {
-    id?: string
-    analysisId: string
-    riskLow: number
-    riskMedium: number
-    riskHigh: number
-    missingElectrical: number
-    missingPlumbing: number
-    missingHVAC: number
-    missingStructural: number
-    missingSafety: number
-    missingDocs: number
-  }
-
-  export type GraphMetricUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    riskLow?: IntFieldUpdateOperationsInput | number
-    riskMedium?: IntFieldUpdateOperationsInput | number
-    riskHigh?: IntFieldUpdateOperationsInput | number
-    missingElectrical?: IntFieldUpdateOperationsInput | number
-    missingPlumbing?: IntFieldUpdateOperationsInput | number
-    missingHVAC?: IntFieldUpdateOperationsInput | number
-    missingStructural?: IntFieldUpdateOperationsInput | number
-    missingSafety?: IntFieldUpdateOperationsInput | number
-    missingDocs?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type GraphMetricUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    analysisId?: StringFieldUpdateOperationsInput | string
-    riskLow?: IntFieldUpdateOperationsInput | number
-    riskMedium?: IntFieldUpdateOperationsInput | number
-    riskHigh?: IntFieldUpdateOperationsInput | number
-    missingElectrical?: IntFieldUpdateOperationsInput | number
-    missingPlumbing?: IntFieldUpdateOperationsInput | number
-    missingHVAC?: IntFieldUpdateOperationsInput | number
-    missingStructural?: IntFieldUpdateOperationsInput | number
-    missingSafety?: IntFieldUpdateOperationsInput | number
-    missingDocs?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    confidence?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableFloatFieldUpdateOperationsInput | number | null
+    missingItems?: FileUpdatemissingItemsInput | string[]
+    risks?: FileUpdaterisksInput | string[]
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProcessingStatusFieldUpdateOperationsInput | $Enums.ProcessingStatus
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -17368,22 +8966,16 @@ export namespace Prisma {
     none?: AccountWhereInput
   }
 
-  export type SessionListRelationFilter = {
-    every?: SessionWhereInput
-    some?: SessionWhereInput
-    none?: SessionWhereInput
-  }
-
   export type PostListRelationFilter = {
     every?: PostWhereInput
     some?: PostWhereInput
     none?: PostWhereInput
   }
 
-  export type ProjectListRelationFilter = {
-    every?: ProjectWhereInput
-    some?: ProjectWhereInput
-    none?: ProjectWhereInput
+  export type SessionListRelationFilter = {
+    every?: SessionWhereInput
+    some?: SessionWhereInput
+    none?: SessionWhereInput
   }
 
   export type SortOrderInput = {
@@ -17395,15 +8987,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type SessionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type PostOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type ProjectOrderByRelationAggregateInput = {
+  export type SessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17704,409 +9292,102 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type DocumentListRelationFilter = {
-    every?: DocumentWhereInput
-    some?: DocumentWhereInput
-    none?: DocumentWhereInput
-  }
-
-  export type DocumentOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ProjectCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type ProjectMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type ProjectMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type ProjectScalarRelationFilter = {
-    is?: ProjectWhereInput
-    isNot?: ProjectWhereInput
-  }
-
-  export type AnalysisListRelationFilter = {
-    every?: AnalysisWhereInput
-    some?: AnalysisWhereInput
-    none?: AnalysisWhereInput
-  }
-
-  export type AnalysisOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type DocumentCountOrderByAggregateInput = {
-    id?: SortOrder
-    projectId?: SortOrder
-    fileUrl?: SortOrder
-    fileName?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type DocumentMaxOrderByAggregateInput = {
-    id?: SortOrder
-    projectId?: SortOrder
-    fileUrl?: SortOrder
-    fileName?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type DocumentMinOrderByAggregateInput = {
-    id?: SortOrder
-    projectId?: SortOrder
-    fileUrl?: SortOrder
-    fileName?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-  }
-  export type JsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type DocumentScalarRelationFilter = {
-    is?: DocumentWhereInput
-    isNot?: DocumentWhereInput
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
   }
 
-  export type MissingItemListRelationFilter = {
-    every?: MissingItemWhereInput
-    some?: MissingItemWhereInput
-    none?: MissingItemWhereInput
+  export type EnumProcessingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProcessingStatus | EnumProcessingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProcessingStatus[] | ListEnumProcessingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProcessingStatus[] | ListEnumProcessingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProcessingStatusFilter<$PrismaModel> | $Enums.ProcessingStatus
   }
 
-  export type RiskListRelationFilter = {
-    every?: RiskWhereInput
-    some?: RiskWhereInput
-    none?: RiskWhereInput
-  }
-
-  export type CompletenessNullableScalarRelationFilter = {
-    is?: CompletenessWhereInput | null
-    isNot?: CompletenessWhereInput | null
-  }
-
-  export type GraphMetricNullableScalarRelationFilter = {
-    is?: GraphMetricWhereInput | null
-    isNot?: GraphMetricWhereInput | null
-  }
-
-  export type MissingItemOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type RiskOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type AnalysisCountOrderByAggregateInput = {
+  export type FileCountOrderByAggregateInput = {
     id?: SortOrder
-    documentId?: SortOrder
-    rawJson?: SortOrder
+    name?: SortOrder
+    supabasePath?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    confidence?: SortOrder
+    durationMinutes?: SortOrder
+    missingItems?: SortOrder
+    risks?: SortOrder
     summary?: SortOrder
-    confidence?: SortOrder
-    createdAt?: SortOrder
+    status?: SortOrder
   }
 
-  export type AnalysisAvgOrderByAggregateInput = {
-    confidence?: SortOrder
+  export type FileAvgOrderByAggregateInput = {
+    durationMinutes?: SortOrder
   }
 
-  export type AnalysisMaxOrderByAggregateInput = {
+  export type FileMaxOrderByAggregateInput = {
     id?: SortOrder
-    documentId?: SortOrder
-    confidence?: SortOrder
+    name?: SortOrder
+    supabasePath?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
+    confidence?: SortOrder
+    durationMinutes?: SortOrder
+    summary?: SortOrder
+    status?: SortOrder
   }
 
-  export type AnalysisMinOrderByAggregateInput = {
+  export type FileMinOrderByAggregateInput = {
     id?: SortOrder
-    documentId?: SortOrder
-    confidence?: SortOrder
+    name?: SortOrder
+    supabasePath?: SortOrder
     createdAt?: SortOrder
-  }
-
-  export type AnalysisSumOrderByAggregateInput = {
+    updatedAt?: SortOrder
     confidence?: SortOrder
-  }
-  export type JsonWithAggregatesFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedJsonFilter<$PrismaModel>
-    _max?: NestedJsonFilter<$PrismaModel>
+    durationMinutes?: SortOrder
+    summary?: SortOrder
+    status?: SortOrder
   }
 
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type FileSumOrderByAggregateInput = {
+    durationMinutes?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type EnumProcessingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProcessingStatus | EnumProcessingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProcessingStatus[] | ListEnumProcessingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProcessingStatus[] | ListEnumProcessingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProcessingStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProcessingStatus
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type AnalysisScalarRelationFilter = {
-    is?: AnalysisWhereInput
-    isNot?: AnalysisWhereInput
-  }
-
-  export type MissingItemCountOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    category?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    severity?: SortOrder
-    page?: SortOrder
-  }
-
-  export type MissingItemAvgOrderByAggregateInput = {
-    page?: SortOrder
-  }
-
-  export type MissingItemMaxOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    category?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    severity?: SortOrder
-    page?: SortOrder
-  }
-
-  export type MissingItemMinOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    category?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    severity?: SortOrder
-    page?: SortOrder
-  }
-
-  export type MissingItemSumOrderByAggregateInput = {
-    page?: SortOrder
-  }
-
-  export type RiskCountOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    category?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    impact?: SortOrder
-    severity?: SortOrder
-  }
-
-  export type RiskMaxOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    category?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    impact?: SortOrder
-    severity?: SortOrder
-  }
-
-  export type RiskMinOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    category?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    impact?: SortOrder
-    severity?: SortOrder
-  }
-
-  export type CompletenessCountOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    electrical?: SortOrder
-    plumbing?: SortOrder
-    hvac?: SortOrder
-    structural?: SortOrder
-    safety?: SortOrder
-    documentation?: SortOrder
-  }
-
-  export type CompletenessAvgOrderByAggregateInput = {
-    electrical?: SortOrder
-    plumbing?: SortOrder
-    hvac?: SortOrder
-    structural?: SortOrder
-    safety?: SortOrder
-    documentation?: SortOrder
-  }
-
-  export type CompletenessMaxOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    electrical?: SortOrder
-    plumbing?: SortOrder
-    hvac?: SortOrder
-    structural?: SortOrder
-    safety?: SortOrder
-    documentation?: SortOrder
-  }
-
-  export type CompletenessMinOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    electrical?: SortOrder
-    plumbing?: SortOrder
-    hvac?: SortOrder
-    structural?: SortOrder
-    safety?: SortOrder
-    documentation?: SortOrder
-  }
-
-  export type CompletenessSumOrderByAggregateInput = {
-    electrical?: SortOrder
-    plumbing?: SortOrder
-    hvac?: SortOrder
-    structural?: SortOrder
-    safety?: SortOrder
-    documentation?: SortOrder
-  }
-
-  export type GraphMetricCountOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    riskLow?: SortOrder
-    riskMedium?: SortOrder
-    riskHigh?: SortOrder
-    missingElectrical?: SortOrder
-    missingPlumbing?: SortOrder
-    missingHVAC?: SortOrder
-    missingStructural?: SortOrder
-    missingSafety?: SortOrder
-    missingDocs?: SortOrder
-  }
-
-  export type GraphMetricAvgOrderByAggregateInput = {
-    riskLow?: SortOrder
-    riskMedium?: SortOrder
-    riskHigh?: SortOrder
-    missingElectrical?: SortOrder
-    missingPlumbing?: SortOrder
-    missingHVAC?: SortOrder
-    missingStructural?: SortOrder
-    missingSafety?: SortOrder
-    missingDocs?: SortOrder
-  }
-
-  export type GraphMetricMaxOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    riskLow?: SortOrder
-    riskMedium?: SortOrder
-    riskHigh?: SortOrder
-    missingElectrical?: SortOrder
-    missingPlumbing?: SortOrder
-    missingHVAC?: SortOrder
-    missingStructural?: SortOrder
-    missingSafety?: SortOrder
-    missingDocs?: SortOrder
-  }
-
-  export type GraphMetricMinOrderByAggregateInput = {
-    id?: SortOrder
-    analysisId?: SortOrder
-    riskLow?: SortOrder
-    riskMedium?: SortOrder
-    riskHigh?: SortOrder
-    missingElectrical?: SortOrder
-    missingPlumbing?: SortOrder
-    missingHVAC?: SortOrder
-    missingStructural?: SortOrder
-    missingSafety?: SortOrder
-    missingDocs?: SortOrder
-  }
-
-  export type GraphMetricSumOrderByAggregateInput = {
-    riskLow?: SortOrder
-    riskMedium?: SortOrder
-    riskHigh?: SortOrder
-    missingElectrical?: SortOrder
-    missingPlumbing?: SortOrder
-    missingHVAC?: SortOrder
-    missingStructural?: SortOrder
-    missingSafety?: SortOrder
-    missingDocs?: SortOrder
+    _min?: NestedEnumProcessingStatusFilter<$PrismaModel>
+    _max?: NestedEnumProcessingStatusFilter<$PrismaModel>
   }
 
   export type AccountCreateNestedManyWithoutUserInput = {
@@ -18116,13 +9397,6 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
-  export type SessionCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
   export type PostCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<PostCreateWithoutCreatedByInput, PostUncheckedCreateWithoutCreatedByInput> | PostCreateWithoutCreatedByInput[] | PostUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: PostCreateOrConnectWithoutCreatedByInput | PostCreateOrConnectWithoutCreatedByInput[]
@@ -18130,11 +9404,11 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
-  export type ProjectCreateNestedManyWithoutUserInput = {
-    create?: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput> | ProjectCreateWithoutUserInput[] | ProjectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutUserInput | ProjectCreateOrConnectWithoutUserInput[]
-    createMany?: ProjectCreateManyUserInputEnvelope
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+  export type SessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
@@ -18144,13 +9418,6 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
-  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
   export type PostUncheckedCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<PostCreateWithoutCreatedByInput, PostUncheckedCreateWithoutCreatedByInput> | PostCreateWithoutCreatedByInput[] | PostUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: PostCreateOrConnectWithoutCreatedByInput | PostCreateOrConnectWithoutCreatedByInput[]
@@ -18158,11 +9425,11 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
-  export type ProjectUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput> | ProjectCreateWithoutUserInput[] | ProjectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutUserInput | ProjectCreateOrConnectWithoutUserInput[]
-    createMany?: ProjectCreateManyUserInputEnvelope
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -18191,20 +9458,6 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
-  export type SessionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
   export type PostUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<PostCreateWithoutCreatedByInput, PostUncheckedCreateWithoutCreatedByInput> | PostCreateWithoutCreatedByInput[] | PostUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: PostCreateOrConnectWithoutCreatedByInput | PostCreateOrConnectWithoutCreatedByInput[]
@@ -18219,18 +9472,18 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
-  export type ProjectUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput> | ProjectCreateWithoutUserInput[] | ProjectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutUserInput | ProjectCreateOrConnectWithoutUserInput[]
-    upsert?: ProjectUpsertWithWhereUniqueWithoutUserInput | ProjectUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ProjectCreateManyUserInputEnvelope
-    set?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    disconnect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    delete?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    update?: ProjectUpdateWithWhereUniqueWithoutUserInput | ProjectUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ProjectUpdateManyWithWhereWithoutUserInput | ProjectUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
+  export type SessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
@@ -18247,20 +9500,6 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
-  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
   export type PostUncheckedUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<PostCreateWithoutCreatedByInput, PostUncheckedCreateWithoutCreatedByInput> | PostCreateWithoutCreatedByInput[] | PostUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: PostCreateOrConnectWithoutCreatedByInput | PostCreateOrConnectWithoutCreatedByInput[]
@@ -18275,18 +9514,18 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
-  export type ProjectUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput> | ProjectCreateWithoutUserInput[] | ProjectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutUserInput | ProjectCreateOrConnectWithoutUserInput[]
-    upsert?: ProjectUpsertWithWhereUniqueWithoutUserInput | ProjectUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ProjectCreateManyUserInputEnvelope
-    set?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    disconnect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    delete?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    update?: ProjectUpdateWithWhereUniqueWithoutUserInput | ProjectUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ProjectUpdateManyWithWhereWithoutUserInput | ProjectUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
+  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -18351,342 +9590,34 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type UserCreateNestedOneWithoutProjectsInput = {
-    create?: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutProjectsInput
-    connect?: UserWhereUniqueInput
+  export type FileCreatemissingItemsInput = {
+    set: string[]
   }
 
-  export type DocumentCreateNestedManyWithoutProjectInput = {
-    create?: XOR<DocumentCreateWithoutProjectInput, DocumentUncheckedCreateWithoutProjectInput> | DocumentCreateWithoutProjectInput[] | DocumentUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: DocumentCreateOrConnectWithoutProjectInput | DocumentCreateOrConnectWithoutProjectInput[]
-    createMany?: DocumentCreateManyProjectInputEnvelope
-    connect?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
+  export type FileCreaterisksInput = {
+    set: string[]
   }
 
-  export type DocumentUncheckedCreateNestedManyWithoutProjectInput = {
-    create?: XOR<DocumentCreateWithoutProjectInput, DocumentUncheckedCreateWithoutProjectInput> | DocumentCreateWithoutProjectInput[] | DocumentUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: DocumentCreateOrConnectWithoutProjectInput | DocumentCreateOrConnectWithoutProjectInput[]
-    createMany?: DocumentCreateManyProjectInputEnvelope
-    connect?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
-  }
-
-  export type UserUpdateOneRequiredWithoutProjectsNestedInput = {
-    create?: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutProjectsInput
-    upsert?: UserUpsertWithoutProjectsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProjectsInput, UserUpdateWithoutProjectsInput>, UserUncheckedUpdateWithoutProjectsInput>
-  }
-
-  export type DocumentUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<DocumentCreateWithoutProjectInput, DocumentUncheckedCreateWithoutProjectInput> | DocumentCreateWithoutProjectInput[] | DocumentUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: DocumentCreateOrConnectWithoutProjectInput | DocumentCreateOrConnectWithoutProjectInput[]
-    upsert?: DocumentUpsertWithWhereUniqueWithoutProjectInput | DocumentUpsertWithWhereUniqueWithoutProjectInput[]
-    createMany?: DocumentCreateManyProjectInputEnvelope
-    set?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
-    disconnect?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
-    delete?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
-    connect?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
-    update?: DocumentUpdateWithWhereUniqueWithoutProjectInput | DocumentUpdateWithWhereUniqueWithoutProjectInput[]
-    updateMany?: DocumentUpdateManyWithWhereWithoutProjectInput | DocumentUpdateManyWithWhereWithoutProjectInput[]
-    deleteMany?: DocumentScalarWhereInput | DocumentScalarWhereInput[]
-  }
-
-  export type DocumentUncheckedUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<DocumentCreateWithoutProjectInput, DocumentUncheckedCreateWithoutProjectInput> | DocumentCreateWithoutProjectInput[] | DocumentUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: DocumentCreateOrConnectWithoutProjectInput | DocumentCreateOrConnectWithoutProjectInput[]
-    upsert?: DocumentUpsertWithWhereUniqueWithoutProjectInput | DocumentUpsertWithWhereUniqueWithoutProjectInput[]
-    createMany?: DocumentCreateManyProjectInputEnvelope
-    set?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
-    disconnect?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
-    delete?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
-    connect?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
-    update?: DocumentUpdateWithWhereUniqueWithoutProjectInput | DocumentUpdateWithWhereUniqueWithoutProjectInput[]
-    updateMany?: DocumentUpdateManyWithWhereWithoutProjectInput | DocumentUpdateManyWithWhereWithoutProjectInput[]
-    deleteMany?: DocumentScalarWhereInput | DocumentScalarWhereInput[]
-  }
-
-  export type ProjectCreateNestedOneWithoutDocumentsInput = {
-    create?: XOR<ProjectCreateWithoutDocumentsInput, ProjectUncheckedCreateWithoutDocumentsInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutDocumentsInput
-    connect?: ProjectWhereUniqueInput
-  }
-
-  export type AnalysisCreateNestedManyWithoutDocumentInput = {
-    create?: XOR<AnalysisCreateWithoutDocumentInput, AnalysisUncheckedCreateWithoutDocumentInput> | AnalysisCreateWithoutDocumentInput[] | AnalysisUncheckedCreateWithoutDocumentInput[]
-    connectOrCreate?: AnalysisCreateOrConnectWithoutDocumentInput | AnalysisCreateOrConnectWithoutDocumentInput[]
-    createMany?: AnalysisCreateManyDocumentInputEnvelope
-    connect?: AnalysisWhereUniqueInput | AnalysisWhereUniqueInput[]
-  }
-
-  export type AnalysisUncheckedCreateNestedManyWithoutDocumentInput = {
-    create?: XOR<AnalysisCreateWithoutDocumentInput, AnalysisUncheckedCreateWithoutDocumentInput> | AnalysisCreateWithoutDocumentInput[] | AnalysisUncheckedCreateWithoutDocumentInput[]
-    connectOrCreate?: AnalysisCreateOrConnectWithoutDocumentInput | AnalysisCreateOrConnectWithoutDocumentInput[]
-    createMany?: AnalysisCreateManyDocumentInputEnvelope
-    connect?: AnalysisWhereUniqueInput | AnalysisWhereUniqueInput[]
-  }
-
-  export type ProjectUpdateOneRequiredWithoutDocumentsNestedInput = {
-    create?: XOR<ProjectCreateWithoutDocumentsInput, ProjectUncheckedCreateWithoutDocumentsInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutDocumentsInput
-    upsert?: ProjectUpsertWithoutDocumentsInput
-    connect?: ProjectWhereUniqueInput
-    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutDocumentsInput, ProjectUpdateWithoutDocumentsInput>, ProjectUncheckedUpdateWithoutDocumentsInput>
-  }
-
-  export type AnalysisUpdateManyWithoutDocumentNestedInput = {
-    create?: XOR<AnalysisCreateWithoutDocumentInput, AnalysisUncheckedCreateWithoutDocumentInput> | AnalysisCreateWithoutDocumentInput[] | AnalysisUncheckedCreateWithoutDocumentInput[]
-    connectOrCreate?: AnalysisCreateOrConnectWithoutDocumentInput | AnalysisCreateOrConnectWithoutDocumentInput[]
-    upsert?: AnalysisUpsertWithWhereUniqueWithoutDocumentInput | AnalysisUpsertWithWhereUniqueWithoutDocumentInput[]
-    createMany?: AnalysisCreateManyDocumentInputEnvelope
-    set?: AnalysisWhereUniqueInput | AnalysisWhereUniqueInput[]
-    disconnect?: AnalysisWhereUniqueInput | AnalysisWhereUniqueInput[]
-    delete?: AnalysisWhereUniqueInput | AnalysisWhereUniqueInput[]
-    connect?: AnalysisWhereUniqueInput | AnalysisWhereUniqueInput[]
-    update?: AnalysisUpdateWithWhereUniqueWithoutDocumentInput | AnalysisUpdateWithWhereUniqueWithoutDocumentInput[]
-    updateMany?: AnalysisUpdateManyWithWhereWithoutDocumentInput | AnalysisUpdateManyWithWhereWithoutDocumentInput[]
-    deleteMany?: AnalysisScalarWhereInput | AnalysisScalarWhereInput[]
-  }
-
-  export type AnalysisUncheckedUpdateManyWithoutDocumentNestedInput = {
-    create?: XOR<AnalysisCreateWithoutDocumentInput, AnalysisUncheckedCreateWithoutDocumentInput> | AnalysisCreateWithoutDocumentInput[] | AnalysisUncheckedCreateWithoutDocumentInput[]
-    connectOrCreate?: AnalysisCreateOrConnectWithoutDocumentInput | AnalysisCreateOrConnectWithoutDocumentInput[]
-    upsert?: AnalysisUpsertWithWhereUniqueWithoutDocumentInput | AnalysisUpsertWithWhereUniqueWithoutDocumentInput[]
-    createMany?: AnalysisCreateManyDocumentInputEnvelope
-    set?: AnalysisWhereUniqueInput | AnalysisWhereUniqueInput[]
-    disconnect?: AnalysisWhereUniqueInput | AnalysisWhereUniqueInput[]
-    delete?: AnalysisWhereUniqueInput | AnalysisWhereUniqueInput[]
-    connect?: AnalysisWhereUniqueInput | AnalysisWhereUniqueInput[]
-    update?: AnalysisUpdateWithWhereUniqueWithoutDocumentInput | AnalysisUpdateWithWhereUniqueWithoutDocumentInput[]
-    updateMany?: AnalysisUpdateManyWithWhereWithoutDocumentInput | AnalysisUpdateManyWithWhereWithoutDocumentInput[]
-    deleteMany?: AnalysisScalarWhereInput | AnalysisScalarWhereInput[]
-  }
-
-  export type DocumentCreateNestedOneWithoutAnalysesInput = {
-    create?: XOR<DocumentCreateWithoutAnalysesInput, DocumentUncheckedCreateWithoutAnalysesInput>
-    connectOrCreate?: DocumentCreateOrConnectWithoutAnalysesInput
-    connect?: DocumentWhereUniqueInput
-  }
-
-  export type MissingItemCreateNestedManyWithoutAnalysisInput = {
-    create?: XOR<MissingItemCreateWithoutAnalysisInput, MissingItemUncheckedCreateWithoutAnalysisInput> | MissingItemCreateWithoutAnalysisInput[] | MissingItemUncheckedCreateWithoutAnalysisInput[]
-    connectOrCreate?: MissingItemCreateOrConnectWithoutAnalysisInput | MissingItemCreateOrConnectWithoutAnalysisInput[]
-    createMany?: MissingItemCreateManyAnalysisInputEnvelope
-    connect?: MissingItemWhereUniqueInput | MissingItemWhereUniqueInput[]
-  }
-
-  export type RiskCreateNestedManyWithoutAnalysisInput = {
-    create?: XOR<RiskCreateWithoutAnalysisInput, RiskUncheckedCreateWithoutAnalysisInput> | RiskCreateWithoutAnalysisInput[] | RiskUncheckedCreateWithoutAnalysisInput[]
-    connectOrCreate?: RiskCreateOrConnectWithoutAnalysisInput | RiskCreateOrConnectWithoutAnalysisInput[]
-    createMany?: RiskCreateManyAnalysisInputEnvelope
-    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
-  }
-
-  export type CompletenessCreateNestedOneWithoutAnalysisInput = {
-    create?: XOR<CompletenessCreateWithoutAnalysisInput, CompletenessUncheckedCreateWithoutAnalysisInput>
-    connectOrCreate?: CompletenessCreateOrConnectWithoutAnalysisInput
-    connect?: CompletenessWhereUniqueInput
-  }
-
-  export type GraphMetricCreateNestedOneWithoutAnalysisInput = {
-    create?: XOR<GraphMetricCreateWithoutAnalysisInput, GraphMetricUncheckedCreateWithoutAnalysisInput>
-    connectOrCreate?: GraphMetricCreateOrConnectWithoutAnalysisInput
-    connect?: GraphMetricWhereUniqueInput
-  }
-
-  export type MissingItemUncheckedCreateNestedManyWithoutAnalysisInput = {
-    create?: XOR<MissingItemCreateWithoutAnalysisInput, MissingItemUncheckedCreateWithoutAnalysisInput> | MissingItemCreateWithoutAnalysisInput[] | MissingItemUncheckedCreateWithoutAnalysisInput[]
-    connectOrCreate?: MissingItemCreateOrConnectWithoutAnalysisInput | MissingItemCreateOrConnectWithoutAnalysisInput[]
-    createMany?: MissingItemCreateManyAnalysisInputEnvelope
-    connect?: MissingItemWhereUniqueInput | MissingItemWhereUniqueInput[]
-  }
-
-  export type RiskUncheckedCreateNestedManyWithoutAnalysisInput = {
-    create?: XOR<RiskCreateWithoutAnalysisInput, RiskUncheckedCreateWithoutAnalysisInput> | RiskCreateWithoutAnalysisInput[] | RiskUncheckedCreateWithoutAnalysisInput[]
-    connectOrCreate?: RiskCreateOrConnectWithoutAnalysisInput | RiskCreateOrConnectWithoutAnalysisInput[]
-    createMany?: RiskCreateManyAnalysisInputEnvelope
-    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
-  }
-
-  export type CompletenessUncheckedCreateNestedOneWithoutAnalysisInput = {
-    create?: XOR<CompletenessCreateWithoutAnalysisInput, CompletenessUncheckedCreateWithoutAnalysisInput>
-    connectOrCreate?: CompletenessCreateOrConnectWithoutAnalysisInput
-    connect?: CompletenessWhereUniqueInput
-  }
-
-  export type GraphMetricUncheckedCreateNestedOneWithoutAnalysisInput = {
-    create?: XOR<GraphMetricCreateWithoutAnalysisInput, GraphMetricUncheckedCreateWithoutAnalysisInput>
-    connectOrCreate?: GraphMetricCreateOrConnectWithoutAnalysisInput
-    connect?: GraphMetricWhereUniqueInput
-  }
-
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
   }
 
-  export type DocumentUpdateOneRequiredWithoutAnalysesNestedInput = {
-    create?: XOR<DocumentCreateWithoutAnalysesInput, DocumentUncheckedCreateWithoutAnalysesInput>
-    connectOrCreate?: DocumentCreateOrConnectWithoutAnalysesInput
-    upsert?: DocumentUpsertWithoutAnalysesInput
-    connect?: DocumentWhereUniqueInput
-    update?: XOR<XOR<DocumentUpdateToOneWithWhereWithoutAnalysesInput, DocumentUpdateWithoutAnalysesInput>, DocumentUncheckedUpdateWithoutAnalysesInput>
+  export type FileUpdatemissingItemsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
-  export type MissingItemUpdateManyWithoutAnalysisNestedInput = {
-    create?: XOR<MissingItemCreateWithoutAnalysisInput, MissingItemUncheckedCreateWithoutAnalysisInput> | MissingItemCreateWithoutAnalysisInput[] | MissingItemUncheckedCreateWithoutAnalysisInput[]
-    connectOrCreate?: MissingItemCreateOrConnectWithoutAnalysisInput | MissingItemCreateOrConnectWithoutAnalysisInput[]
-    upsert?: MissingItemUpsertWithWhereUniqueWithoutAnalysisInput | MissingItemUpsertWithWhereUniqueWithoutAnalysisInput[]
-    createMany?: MissingItemCreateManyAnalysisInputEnvelope
-    set?: MissingItemWhereUniqueInput | MissingItemWhereUniqueInput[]
-    disconnect?: MissingItemWhereUniqueInput | MissingItemWhereUniqueInput[]
-    delete?: MissingItemWhereUniqueInput | MissingItemWhereUniqueInput[]
-    connect?: MissingItemWhereUniqueInput | MissingItemWhereUniqueInput[]
-    update?: MissingItemUpdateWithWhereUniqueWithoutAnalysisInput | MissingItemUpdateWithWhereUniqueWithoutAnalysisInput[]
-    updateMany?: MissingItemUpdateManyWithWhereWithoutAnalysisInput | MissingItemUpdateManyWithWhereWithoutAnalysisInput[]
-    deleteMany?: MissingItemScalarWhereInput | MissingItemScalarWhereInput[]
+  export type FileUpdaterisksInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
-  export type RiskUpdateManyWithoutAnalysisNestedInput = {
-    create?: XOR<RiskCreateWithoutAnalysisInput, RiskUncheckedCreateWithoutAnalysisInput> | RiskCreateWithoutAnalysisInput[] | RiskUncheckedCreateWithoutAnalysisInput[]
-    connectOrCreate?: RiskCreateOrConnectWithoutAnalysisInput | RiskCreateOrConnectWithoutAnalysisInput[]
-    upsert?: RiskUpsertWithWhereUniqueWithoutAnalysisInput | RiskUpsertWithWhereUniqueWithoutAnalysisInput[]
-    createMany?: RiskCreateManyAnalysisInputEnvelope
-    set?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
-    disconnect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
-    delete?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
-    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
-    update?: RiskUpdateWithWhereUniqueWithoutAnalysisInput | RiskUpdateWithWhereUniqueWithoutAnalysisInput[]
-    updateMany?: RiskUpdateManyWithWhereWithoutAnalysisInput | RiskUpdateManyWithWhereWithoutAnalysisInput[]
-    deleteMany?: RiskScalarWhereInput | RiskScalarWhereInput[]
-  }
-
-  export type CompletenessUpdateOneWithoutAnalysisNestedInput = {
-    create?: XOR<CompletenessCreateWithoutAnalysisInput, CompletenessUncheckedCreateWithoutAnalysisInput>
-    connectOrCreate?: CompletenessCreateOrConnectWithoutAnalysisInput
-    upsert?: CompletenessUpsertWithoutAnalysisInput
-    disconnect?: CompletenessWhereInput | boolean
-    delete?: CompletenessWhereInput | boolean
-    connect?: CompletenessWhereUniqueInput
-    update?: XOR<XOR<CompletenessUpdateToOneWithWhereWithoutAnalysisInput, CompletenessUpdateWithoutAnalysisInput>, CompletenessUncheckedUpdateWithoutAnalysisInput>
-  }
-
-  export type GraphMetricUpdateOneWithoutAnalysisNestedInput = {
-    create?: XOR<GraphMetricCreateWithoutAnalysisInput, GraphMetricUncheckedCreateWithoutAnalysisInput>
-    connectOrCreate?: GraphMetricCreateOrConnectWithoutAnalysisInput
-    upsert?: GraphMetricUpsertWithoutAnalysisInput
-    disconnect?: GraphMetricWhereInput | boolean
-    delete?: GraphMetricWhereInput | boolean
-    connect?: GraphMetricWhereUniqueInput
-    update?: XOR<XOR<GraphMetricUpdateToOneWithWhereWithoutAnalysisInput, GraphMetricUpdateWithoutAnalysisInput>, GraphMetricUncheckedUpdateWithoutAnalysisInput>
-  }
-
-  export type MissingItemUncheckedUpdateManyWithoutAnalysisNestedInput = {
-    create?: XOR<MissingItemCreateWithoutAnalysisInput, MissingItemUncheckedCreateWithoutAnalysisInput> | MissingItemCreateWithoutAnalysisInput[] | MissingItemUncheckedCreateWithoutAnalysisInput[]
-    connectOrCreate?: MissingItemCreateOrConnectWithoutAnalysisInput | MissingItemCreateOrConnectWithoutAnalysisInput[]
-    upsert?: MissingItemUpsertWithWhereUniqueWithoutAnalysisInput | MissingItemUpsertWithWhereUniqueWithoutAnalysisInput[]
-    createMany?: MissingItemCreateManyAnalysisInputEnvelope
-    set?: MissingItemWhereUniqueInput | MissingItemWhereUniqueInput[]
-    disconnect?: MissingItemWhereUniqueInput | MissingItemWhereUniqueInput[]
-    delete?: MissingItemWhereUniqueInput | MissingItemWhereUniqueInput[]
-    connect?: MissingItemWhereUniqueInput | MissingItemWhereUniqueInput[]
-    update?: MissingItemUpdateWithWhereUniqueWithoutAnalysisInput | MissingItemUpdateWithWhereUniqueWithoutAnalysisInput[]
-    updateMany?: MissingItemUpdateManyWithWhereWithoutAnalysisInput | MissingItemUpdateManyWithWhereWithoutAnalysisInput[]
-    deleteMany?: MissingItemScalarWhereInput | MissingItemScalarWhereInput[]
-  }
-
-  export type RiskUncheckedUpdateManyWithoutAnalysisNestedInput = {
-    create?: XOR<RiskCreateWithoutAnalysisInput, RiskUncheckedCreateWithoutAnalysisInput> | RiskCreateWithoutAnalysisInput[] | RiskUncheckedCreateWithoutAnalysisInput[]
-    connectOrCreate?: RiskCreateOrConnectWithoutAnalysisInput | RiskCreateOrConnectWithoutAnalysisInput[]
-    upsert?: RiskUpsertWithWhereUniqueWithoutAnalysisInput | RiskUpsertWithWhereUniqueWithoutAnalysisInput[]
-    createMany?: RiskCreateManyAnalysisInputEnvelope
-    set?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
-    disconnect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
-    delete?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
-    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
-    update?: RiskUpdateWithWhereUniqueWithoutAnalysisInput | RiskUpdateWithWhereUniqueWithoutAnalysisInput[]
-    updateMany?: RiskUpdateManyWithWhereWithoutAnalysisInput | RiskUpdateManyWithWhereWithoutAnalysisInput[]
-    deleteMany?: RiskScalarWhereInput | RiskScalarWhereInput[]
-  }
-
-  export type CompletenessUncheckedUpdateOneWithoutAnalysisNestedInput = {
-    create?: XOR<CompletenessCreateWithoutAnalysisInput, CompletenessUncheckedCreateWithoutAnalysisInput>
-    connectOrCreate?: CompletenessCreateOrConnectWithoutAnalysisInput
-    upsert?: CompletenessUpsertWithoutAnalysisInput
-    disconnect?: CompletenessWhereInput | boolean
-    delete?: CompletenessWhereInput | boolean
-    connect?: CompletenessWhereUniqueInput
-    update?: XOR<XOR<CompletenessUpdateToOneWithWhereWithoutAnalysisInput, CompletenessUpdateWithoutAnalysisInput>, CompletenessUncheckedUpdateWithoutAnalysisInput>
-  }
-
-  export type GraphMetricUncheckedUpdateOneWithoutAnalysisNestedInput = {
-    create?: XOR<GraphMetricCreateWithoutAnalysisInput, GraphMetricUncheckedCreateWithoutAnalysisInput>
-    connectOrCreate?: GraphMetricCreateOrConnectWithoutAnalysisInput
-    upsert?: GraphMetricUpsertWithoutAnalysisInput
-    disconnect?: GraphMetricWhereInput | boolean
-    delete?: GraphMetricWhereInput | boolean
-    connect?: GraphMetricWhereUniqueInput
-    update?: XOR<XOR<GraphMetricUpdateToOneWithWhereWithoutAnalysisInput, GraphMetricUpdateWithoutAnalysisInput>, GraphMetricUncheckedUpdateWithoutAnalysisInput>
-  }
-
-  export type AnalysisCreateNestedOneWithoutMissingItemsInput = {
-    create?: XOR<AnalysisCreateWithoutMissingItemsInput, AnalysisUncheckedCreateWithoutMissingItemsInput>
-    connectOrCreate?: AnalysisCreateOrConnectWithoutMissingItemsInput
-    connect?: AnalysisWhereUniqueInput
-  }
-
-  export type AnalysisUpdateOneRequiredWithoutMissingItemsNestedInput = {
-    create?: XOR<AnalysisCreateWithoutMissingItemsInput, AnalysisUncheckedCreateWithoutMissingItemsInput>
-    connectOrCreate?: AnalysisCreateOrConnectWithoutMissingItemsInput
-    upsert?: AnalysisUpsertWithoutMissingItemsInput
-    connect?: AnalysisWhereUniqueInput
-    update?: XOR<XOR<AnalysisUpdateToOneWithWhereWithoutMissingItemsInput, AnalysisUpdateWithoutMissingItemsInput>, AnalysisUncheckedUpdateWithoutMissingItemsInput>
-  }
-
-  export type AnalysisCreateNestedOneWithoutRisksInput = {
-    create?: XOR<AnalysisCreateWithoutRisksInput, AnalysisUncheckedCreateWithoutRisksInput>
-    connectOrCreate?: AnalysisCreateOrConnectWithoutRisksInput
-    connect?: AnalysisWhereUniqueInput
-  }
-
-  export type AnalysisUpdateOneRequiredWithoutRisksNestedInput = {
-    create?: XOR<AnalysisCreateWithoutRisksInput, AnalysisUncheckedCreateWithoutRisksInput>
-    connectOrCreate?: AnalysisCreateOrConnectWithoutRisksInput
-    upsert?: AnalysisUpsertWithoutRisksInput
-    connect?: AnalysisWhereUniqueInput
-    update?: XOR<XOR<AnalysisUpdateToOneWithWhereWithoutRisksInput, AnalysisUpdateWithoutRisksInput>, AnalysisUncheckedUpdateWithoutRisksInput>
-  }
-
-  export type AnalysisCreateNestedOneWithoutCompletenessInput = {
-    create?: XOR<AnalysisCreateWithoutCompletenessInput, AnalysisUncheckedCreateWithoutCompletenessInput>
-    connectOrCreate?: AnalysisCreateOrConnectWithoutCompletenessInput
-    connect?: AnalysisWhereUniqueInput
-  }
-
-  export type AnalysisUpdateOneRequiredWithoutCompletenessNestedInput = {
-    create?: XOR<AnalysisCreateWithoutCompletenessInput, AnalysisUncheckedCreateWithoutCompletenessInput>
-    connectOrCreate?: AnalysisCreateOrConnectWithoutCompletenessInput
-    upsert?: AnalysisUpsertWithoutCompletenessInput
-    connect?: AnalysisWhereUniqueInput
-    update?: XOR<XOR<AnalysisUpdateToOneWithWhereWithoutCompletenessInput, AnalysisUpdateWithoutCompletenessInput>, AnalysisUncheckedUpdateWithoutCompletenessInput>
-  }
-
-  export type AnalysisCreateNestedOneWithoutGraphMetricsInput = {
-    create?: XOR<AnalysisCreateWithoutGraphMetricsInput, AnalysisUncheckedCreateWithoutGraphMetricsInput>
-    connectOrCreate?: AnalysisCreateOrConnectWithoutGraphMetricsInput
-    connect?: AnalysisWhereUniqueInput
-  }
-
-  export type AnalysisUpdateOneRequiredWithoutGraphMetricsNestedInput = {
-    create?: XOR<AnalysisCreateWithoutGraphMetricsInput, AnalysisUncheckedCreateWithoutGraphMetricsInput>
-    connectOrCreate?: AnalysisCreateOrConnectWithoutGraphMetricsInput
-    upsert?: AnalysisUpsertWithoutGraphMetricsInput
-    connect?: AnalysisWhereUniqueInput
-    update?: XOR<XOR<AnalysisUpdateToOneWithWhereWithoutGraphMetricsInput, AnalysisUpdateWithoutGraphMetricsInput>, AnalysisUncheckedUpdateWithoutGraphMetricsInput>
+  export type EnumProcessingStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ProcessingStatus
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -18876,44 +9807,38 @@ export namespace Prisma {
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
   }
-  export type NestedJsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
 
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  export type NestedEnumProcessingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProcessingStatus | EnumProcessingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProcessingStatus[] | ListEnumProcessingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProcessingStatus[] | ListEnumProcessingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProcessingStatusFilter<$PrismaModel> | $Enums.ProcessingStatus
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumProcessingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProcessingStatus | EnumProcessingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProcessingStatus[] | ListEnumProcessingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProcessingStatus[] | ListEnumProcessingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProcessingStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProcessingStatus
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedEnumProcessingStatusFilter<$PrismaModel>
+    _max?: NestedEnumProcessingStatusFilter<$PrismaModel>
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -18956,28 +9881,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SessionCreateWithoutUserInput = {
-    id?: string
-    sessionToken: string
-    expires: Date | string
-  }
-
-  export type SessionUncheckedCreateWithoutUserInput = {
-    id?: string
-    sessionToken: string
-    expires: Date | string
-  }
-
-  export type SessionCreateOrConnectWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionCreateManyUserInputEnvelope = {
-    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type PostCreateWithoutCreatedByInput = {
     name: string
     createdAt?: Date | string
@@ -19001,27 +9904,25 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ProjectCreateWithoutUserInput = {
+  export type SessionCreateWithoutUserInput = {
     id?: string
-    name: string
-    createdAt?: Date | string
-    documents?: DocumentCreateNestedManyWithoutProjectInput
+    sessionToken: string
+    expires: Date | string
   }
 
-  export type ProjectUncheckedCreateWithoutUserInput = {
+  export type SessionUncheckedCreateWithoutUserInput = {
     id?: string
-    name: string
-    createdAt?: Date | string
-    documents?: DocumentUncheckedCreateNestedManyWithoutProjectInput
+    sessionToken: string
+    expires: Date | string
   }
 
-  export type ProjectCreateOrConnectWithoutUserInput = {
-    where: ProjectWhereUniqueInput
-    create: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput>
+  export type SessionCreateOrConnectWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
   }
 
-  export type ProjectCreateManyUserInputEnvelope = {
-    data: ProjectCreateManyUserInput | ProjectCreateManyUserInput[]
+  export type SessionCreateManyUserInputEnvelope = {
+    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -19060,32 +9961,6 @@ export namespace Prisma {
     refresh_token_expires_in?: IntNullableFilter<"Account"> | number | null
   }
 
-  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-  }
-
-  export type SessionUpdateManyWithWhereWithoutUserInput = {
-    where: SessionScalarWhereInput
-    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type SessionScalarWhereInput = {
-    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    OR?: SessionScalarWhereInput[]
-    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    id?: StringFilter<"Session"> | string
-    sessionToken?: StringFilter<"Session"> | string
-    userId?: StringFilter<"Session"> | string
-    expires?: DateTimeFilter<"Session"> | Date | string
-  }
-
   export type PostUpsertWithWhereUniqueWithoutCreatedByInput = {
     where: PostWhereUniqueInput
     update: XOR<PostUpdateWithoutCreatedByInput, PostUncheckedUpdateWithoutCreatedByInput>
@@ -19113,30 +9988,30 @@ export namespace Prisma {
     createdById?: StringFilter<"Post"> | string
   }
 
-  export type ProjectUpsertWithWhereUniqueWithoutUserInput = {
-    where: ProjectWhereUniqueInput
-    update: XOR<ProjectUpdateWithoutUserInput, ProjectUncheckedUpdateWithoutUserInput>
-    create: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput>
+  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
   }
 
-  export type ProjectUpdateWithWhereUniqueWithoutUserInput = {
-    where: ProjectWhereUniqueInput
-    data: XOR<ProjectUpdateWithoutUserInput, ProjectUncheckedUpdateWithoutUserInput>
+  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
   }
 
-  export type ProjectUpdateManyWithWhereWithoutUserInput = {
-    where: ProjectScalarWhereInput
-    data: XOR<ProjectUpdateManyMutationInput, ProjectUncheckedUpdateManyWithoutUserInput>
+  export type SessionUpdateManyWithWhereWithoutUserInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type ProjectScalarWhereInput = {
-    AND?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
-    OR?: ProjectScalarWhereInput[]
-    NOT?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
-    id?: StringFilter<"Project"> | string
-    name?: StringFilter<"Project"> | string
-    userId?: StringFilter<"Project"> | string
-    createdAt?: DateTimeFilter<"Project"> | Date | string
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    id?: StringFilter<"Session"> | string
+    sessionToken?: StringFilter<"Session"> | string
+    userId?: StringFilter<"Session"> | string
+    expires?: DateTimeFilter<"Session"> | Date | string
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -19145,9 +10020,8 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
-    projects?: ProjectCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -19156,9 +10030,8 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
-    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -19183,9 +10056,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
-    projects?: ProjectUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -19194,9 +10066,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
-    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -19207,7 +10078,6 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
-    projects?: ProjectCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -19218,7 +10088,6 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
-    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -19245,7 +10114,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
-    projects?: ProjectUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -19256,7 +10124,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
-    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPostsInput = {
@@ -19267,7 +10134,6 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    projects?: ProjectCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -19278,7 +10144,6 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -19305,7 +10170,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    projects?: ProjectUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -19316,775 +10180,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutProjectsInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
-  }
-
-  export type UserUncheckedCreateWithoutProjectsInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
-  }
-
-  export type UserCreateOrConnectWithoutProjectsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
-  }
-
-  export type DocumentCreateWithoutProjectInput = {
-    id?: string
-    fileUrl: string
-    fileName: string
-    status: string
-    createdAt?: Date | string
-    analyses?: AnalysisCreateNestedManyWithoutDocumentInput
-  }
-
-  export type DocumentUncheckedCreateWithoutProjectInput = {
-    id?: string
-    fileUrl: string
-    fileName: string
-    status: string
-    createdAt?: Date | string
-    analyses?: AnalysisUncheckedCreateNestedManyWithoutDocumentInput
-  }
-
-  export type DocumentCreateOrConnectWithoutProjectInput = {
-    where: DocumentWhereUniqueInput
-    create: XOR<DocumentCreateWithoutProjectInput, DocumentUncheckedCreateWithoutProjectInput>
-  }
-
-  export type DocumentCreateManyProjectInputEnvelope = {
-    data: DocumentCreateManyProjectInput | DocumentCreateManyProjectInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type UserUpsertWithoutProjectsInput = {
-    update: XOR<UserUpdateWithoutProjectsInput, UserUncheckedUpdateWithoutProjectsInput>
-    create: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutProjectsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutProjectsInput, UserUncheckedUpdateWithoutProjectsInput>
-  }
-
-  export type UserUpdateWithoutProjectsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutProjectsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
-  }
-
-  export type DocumentUpsertWithWhereUniqueWithoutProjectInput = {
-    where: DocumentWhereUniqueInput
-    update: XOR<DocumentUpdateWithoutProjectInput, DocumentUncheckedUpdateWithoutProjectInput>
-    create: XOR<DocumentCreateWithoutProjectInput, DocumentUncheckedCreateWithoutProjectInput>
-  }
-
-  export type DocumentUpdateWithWhereUniqueWithoutProjectInput = {
-    where: DocumentWhereUniqueInput
-    data: XOR<DocumentUpdateWithoutProjectInput, DocumentUncheckedUpdateWithoutProjectInput>
-  }
-
-  export type DocumentUpdateManyWithWhereWithoutProjectInput = {
-    where: DocumentScalarWhereInput
-    data: XOR<DocumentUpdateManyMutationInput, DocumentUncheckedUpdateManyWithoutProjectInput>
-  }
-
-  export type DocumentScalarWhereInput = {
-    AND?: DocumentScalarWhereInput | DocumentScalarWhereInput[]
-    OR?: DocumentScalarWhereInput[]
-    NOT?: DocumentScalarWhereInput | DocumentScalarWhereInput[]
-    id?: StringFilter<"Document"> | string
-    projectId?: StringFilter<"Document"> | string
-    fileUrl?: StringFilter<"Document"> | string
-    fileName?: StringFilter<"Document"> | string
-    status?: StringFilter<"Document"> | string
-    createdAt?: DateTimeFilter<"Document"> | Date | string
-  }
-
-  export type ProjectCreateWithoutDocumentsInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutProjectsInput
-  }
-
-  export type ProjectUncheckedCreateWithoutDocumentsInput = {
-    id?: string
-    name: string
-    userId: string
-    createdAt?: Date | string
-  }
-
-  export type ProjectCreateOrConnectWithoutDocumentsInput = {
-    where: ProjectWhereUniqueInput
-    create: XOR<ProjectCreateWithoutDocumentsInput, ProjectUncheckedCreateWithoutDocumentsInput>
-  }
-
-  export type AnalysisCreateWithoutDocumentInput = {
-    id?: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    missingItems?: MissingItemCreateNestedManyWithoutAnalysisInput
-    risks?: RiskCreateNestedManyWithoutAnalysisInput
-    completeness?: CompletenessCreateNestedOneWithoutAnalysisInput
-    graphMetrics?: GraphMetricCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisUncheckedCreateWithoutDocumentInput = {
-    id?: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    missingItems?: MissingItemUncheckedCreateNestedManyWithoutAnalysisInput
-    risks?: RiskUncheckedCreateNestedManyWithoutAnalysisInput
-    completeness?: CompletenessUncheckedCreateNestedOneWithoutAnalysisInput
-    graphMetrics?: GraphMetricUncheckedCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisCreateOrConnectWithoutDocumentInput = {
-    where: AnalysisWhereUniqueInput
-    create: XOR<AnalysisCreateWithoutDocumentInput, AnalysisUncheckedCreateWithoutDocumentInput>
-  }
-
-  export type AnalysisCreateManyDocumentInputEnvelope = {
-    data: AnalysisCreateManyDocumentInput | AnalysisCreateManyDocumentInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ProjectUpsertWithoutDocumentsInput = {
-    update: XOR<ProjectUpdateWithoutDocumentsInput, ProjectUncheckedUpdateWithoutDocumentsInput>
-    create: XOR<ProjectCreateWithoutDocumentsInput, ProjectUncheckedCreateWithoutDocumentsInput>
-    where?: ProjectWhereInput
-  }
-
-  export type ProjectUpdateToOneWithWhereWithoutDocumentsInput = {
-    where?: ProjectWhereInput
-    data: XOR<ProjectUpdateWithoutDocumentsInput, ProjectUncheckedUpdateWithoutDocumentsInput>
-  }
-
-  export type ProjectUpdateWithoutDocumentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutProjectsNestedInput
-  }
-
-  export type ProjectUncheckedUpdateWithoutDocumentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AnalysisUpsertWithWhereUniqueWithoutDocumentInput = {
-    where: AnalysisWhereUniqueInput
-    update: XOR<AnalysisUpdateWithoutDocumentInput, AnalysisUncheckedUpdateWithoutDocumentInput>
-    create: XOR<AnalysisCreateWithoutDocumentInput, AnalysisUncheckedCreateWithoutDocumentInput>
-  }
-
-  export type AnalysisUpdateWithWhereUniqueWithoutDocumentInput = {
-    where: AnalysisWhereUniqueInput
-    data: XOR<AnalysisUpdateWithoutDocumentInput, AnalysisUncheckedUpdateWithoutDocumentInput>
-  }
-
-  export type AnalysisUpdateManyWithWhereWithoutDocumentInput = {
-    where: AnalysisScalarWhereInput
-    data: XOR<AnalysisUpdateManyMutationInput, AnalysisUncheckedUpdateManyWithoutDocumentInput>
-  }
-
-  export type AnalysisScalarWhereInput = {
-    AND?: AnalysisScalarWhereInput | AnalysisScalarWhereInput[]
-    OR?: AnalysisScalarWhereInput[]
-    NOT?: AnalysisScalarWhereInput | AnalysisScalarWhereInput[]
-    id?: StringFilter<"Analysis"> | string
-    documentId?: StringFilter<"Analysis"> | string
-    rawJson?: JsonFilter<"Analysis">
-    summary?: JsonFilter<"Analysis">
-    confidence?: FloatFilter<"Analysis"> | number
-    createdAt?: DateTimeFilter<"Analysis"> | Date | string
-  }
-
-  export type DocumentCreateWithoutAnalysesInput = {
-    id?: string
-    fileUrl: string
-    fileName: string
-    status: string
-    createdAt?: Date | string
-    project: ProjectCreateNestedOneWithoutDocumentsInput
-  }
-
-  export type DocumentUncheckedCreateWithoutAnalysesInput = {
-    id?: string
-    projectId: string
-    fileUrl: string
-    fileName: string
-    status: string
-    createdAt?: Date | string
-  }
-
-  export type DocumentCreateOrConnectWithoutAnalysesInput = {
-    where: DocumentWhereUniqueInput
-    create: XOR<DocumentCreateWithoutAnalysesInput, DocumentUncheckedCreateWithoutAnalysesInput>
-  }
-
-  export type MissingItemCreateWithoutAnalysisInput = {
-    id?: string
-    category: string
-    title: string
-    description: string
-    severity: string
-    page?: number | null
-  }
-
-  export type MissingItemUncheckedCreateWithoutAnalysisInput = {
-    id?: string
-    category: string
-    title: string
-    description: string
-    severity: string
-    page?: number | null
-  }
-
-  export type MissingItemCreateOrConnectWithoutAnalysisInput = {
-    where: MissingItemWhereUniqueInput
-    create: XOR<MissingItemCreateWithoutAnalysisInput, MissingItemUncheckedCreateWithoutAnalysisInput>
-  }
-
-  export type MissingItemCreateManyAnalysisInputEnvelope = {
-    data: MissingItemCreateManyAnalysisInput | MissingItemCreateManyAnalysisInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type RiskCreateWithoutAnalysisInput = {
-    id?: string
-    category: string
-    title: string
-    description: string
-    impact: string
-    severity: string
-  }
-
-  export type RiskUncheckedCreateWithoutAnalysisInput = {
-    id?: string
-    category: string
-    title: string
-    description: string
-    impact: string
-    severity: string
-  }
-
-  export type RiskCreateOrConnectWithoutAnalysisInput = {
-    where: RiskWhereUniqueInput
-    create: XOR<RiskCreateWithoutAnalysisInput, RiskUncheckedCreateWithoutAnalysisInput>
-  }
-
-  export type RiskCreateManyAnalysisInputEnvelope = {
-    data: RiskCreateManyAnalysisInput | RiskCreateManyAnalysisInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type CompletenessCreateWithoutAnalysisInput = {
-    id?: string
-    electrical: number
-    plumbing: number
-    hvac: number
-    structural: number
-    safety: number
-    documentation: number
-  }
-
-  export type CompletenessUncheckedCreateWithoutAnalysisInput = {
-    id?: string
-    electrical: number
-    plumbing: number
-    hvac: number
-    structural: number
-    safety: number
-    documentation: number
-  }
-
-  export type CompletenessCreateOrConnectWithoutAnalysisInput = {
-    where: CompletenessWhereUniqueInput
-    create: XOR<CompletenessCreateWithoutAnalysisInput, CompletenessUncheckedCreateWithoutAnalysisInput>
-  }
-
-  export type GraphMetricCreateWithoutAnalysisInput = {
-    id?: string
-    riskLow: number
-    riskMedium: number
-    riskHigh: number
-    missingElectrical: number
-    missingPlumbing: number
-    missingHVAC: number
-    missingStructural: number
-    missingSafety: number
-    missingDocs: number
-  }
-
-  export type GraphMetricUncheckedCreateWithoutAnalysisInput = {
-    id?: string
-    riskLow: number
-    riskMedium: number
-    riskHigh: number
-    missingElectrical: number
-    missingPlumbing: number
-    missingHVAC: number
-    missingStructural: number
-    missingSafety: number
-    missingDocs: number
-  }
-
-  export type GraphMetricCreateOrConnectWithoutAnalysisInput = {
-    where: GraphMetricWhereUniqueInput
-    create: XOR<GraphMetricCreateWithoutAnalysisInput, GraphMetricUncheckedCreateWithoutAnalysisInput>
-  }
-
-  export type DocumentUpsertWithoutAnalysesInput = {
-    update: XOR<DocumentUpdateWithoutAnalysesInput, DocumentUncheckedUpdateWithoutAnalysesInput>
-    create: XOR<DocumentCreateWithoutAnalysesInput, DocumentUncheckedCreateWithoutAnalysesInput>
-    where?: DocumentWhereInput
-  }
-
-  export type DocumentUpdateToOneWithWhereWithoutAnalysesInput = {
-    where?: DocumentWhereInput
-    data: XOR<DocumentUpdateWithoutAnalysesInput, DocumentUncheckedUpdateWithoutAnalysesInput>
-  }
-
-  export type DocumentUpdateWithoutAnalysesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
-    fileName?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneRequiredWithoutDocumentsNestedInput
-  }
-
-  export type DocumentUncheckedUpdateWithoutAnalysesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
-    fileName?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MissingItemUpsertWithWhereUniqueWithoutAnalysisInput = {
-    where: MissingItemWhereUniqueInput
-    update: XOR<MissingItemUpdateWithoutAnalysisInput, MissingItemUncheckedUpdateWithoutAnalysisInput>
-    create: XOR<MissingItemCreateWithoutAnalysisInput, MissingItemUncheckedCreateWithoutAnalysisInput>
-  }
-
-  export type MissingItemUpdateWithWhereUniqueWithoutAnalysisInput = {
-    where: MissingItemWhereUniqueInput
-    data: XOR<MissingItemUpdateWithoutAnalysisInput, MissingItemUncheckedUpdateWithoutAnalysisInput>
-  }
-
-  export type MissingItemUpdateManyWithWhereWithoutAnalysisInput = {
-    where: MissingItemScalarWhereInput
-    data: XOR<MissingItemUpdateManyMutationInput, MissingItemUncheckedUpdateManyWithoutAnalysisInput>
-  }
-
-  export type MissingItemScalarWhereInput = {
-    AND?: MissingItemScalarWhereInput | MissingItemScalarWhereInput[]
-    OR?: MissingItemScalarWhereInput[]
-    NOT?: MissingItemScalarWhereInput | MissingItemScalarWhereInput[]
-    id?: StringFilter<"MissingItem"> | string
-    analysisId?: StringFilter<"MissingItem"> | string
-    category?: StringFilter<"MissingItem"> | string
-    title?: StringFilter<"MissingItem"> | string
-    description?: StringFilter<"MissingItem"> | string
-    severity?: StringFilter<"MissingItem"> | string
-    page?: IntNullableFilter<"MissingItem"> | number | null
-  }
-
-  export type RiskUpsertWithWhereUniqueWithoutAnalysisInput = {
-    where: RiskWhereUniqueInput
-    update: XOR<RiskUpdateWithoutAnalysisInput, RiskUncheckedUpdateWithoutAnalysisInput>
-    create: XOR<RiskCreateWithoutAnalysisInput, RiskUncheckedCreateWithoutAnalysisInput>
-  }
-
-  export type RiskUpdateWithWhereUniqueWithoutAnalysisInput = {
-    where: RiskWhereUniqueInput
-    data: XOR<RiskUpdateWithoutAnalysisInput, RiskUncheckedUpdateWithoutAnalysisInput>
-  }
-
-  export type RiskUpdateManyWithWhereWithoutAnalysisInput = {
-    where: RiskScalarWhereInput
-    data: XOR<RiskUpdateManyMutationInput, RiskUncheckedUpdateManyWithoutAnalysisInput>
-  }
-
-  export type RiskScalarWhereInput = {
-    AND?: RiskScalarWhereInput | RiskScalarWhereInput[]
-    OR?: RiskScalarWhereInput[]
-    NOT?: RiskScalarWhereInput | RiskScalarWhereInput[]
-    id?: StringFilter<"Risk"> | string
-    analysisId?: StringFilter<"Risk"> | string
-    category?: StringFilter<"Risk"> | string
-    title?: StringFilter<"Risk"> | string
-    description?: StringFilter<"Risk"> | string
-    impact?: StringFilter<"Risk"> | string
-    severity?: StringFilter<"Risk"> | string
-  }
-
-  export type CompletenessUpsertWithoutAnalysisInput = {
-    update: XOR<CompletenessUpdateWithoutAnalysisInput, CompletenessUncheckedUpdateWithoutAnalysisInput>
-    create: XOR<CompletenessCreateWithoutAnalysisInput, CompletenessUncheckedCreateWithoutAnalysisInput>
-    where?: CompletenessWhereInput
-  }
-
-  export type CompletenessUpdateToOneWithWhereWithoutAnalysisInput = {
-    where?: CompletenessWhereInput
-    data: XOR<CompletenessUpdateWithoutAnalysisInput, CompletenessUncheckedUpdateWithoutAnalysisInput>
-  }
-
-  export type CompletenessUpdateWithoutAnalysisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    electrical?: IntFieldUpdateOperationsInput | number
-    plumbing?: IntFieldUpdateOperationsInput | number
-    hvac?: IntFieldUpdateOperationsInput | number
-    structural?: IntFieldUpdateOperationsInput | number
-    safety?: IntFieldUpdateOperationsInput | number
-    documentation?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type CompletenessUncheckedUpdateWithoutAnalysisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    electrical?: IntFieldUpdateOperationsInput | number
-    plumbing?: IntFieldUpdateOperationsInput | number
-    hvac?: IntFieldUpdateOperationsInput | number
-    structural?: IntFieldUpdateOperationsInput | number
-    safety?: IntFieldUpdateOperationsInput | number
-    documentation?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type GraphMetricUpsertWithoutAnalysisInput = {
-    update: XOR<GraphMetricUpdateWithoutAnalysisInput, GraphMetricUncheckedUpdateWithoutAnalysisInput>
-    create: XOR<GraphMetricCreateWithoutAnalysisInput, GraphMetricUncheckedCreateWithoutAnalysisInput>
-    where?: GraphMetricWhereInput
-  }
-
-  export type GraphMetricUpdateToOneWithWhereWithoutAnalysisInput = {
-    where?: GraphMetricWhereInput
-    data: XOR<GraphMetricUpdateWithoutAnalysisInput, GraphMetricUncheckedUpdateWithoutAnalysisInput>
-  }
-
-  export type GraphMetricUpdateWithoutAnalysisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    riskLow?: IntFieldUpdateOperationsInput | number
-    riskMedium?: IntFieldUpdateOperationsInput | number
-    riskHigh?: IntFieldUpdateOperationsInput | number
-    missingElectrical?: IntFieldUpdateOperationsInput | number
-    missingPlumbing?: IntFieldUpdateOperationsInput | number
-    missingHVAC?: IntFieldUpdateOperationsInput | number
-    missingStructural?: IntFieldUpdateOperationsInput | number
-    missingSafety?: IntFieldUpdateOperationsInput | number
-    missingDocs?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type GraphMetricUncheckedUpdateWithoutAnalysisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    riskLow?: IntFieldUpdateOperationsInput | number
-    riskMedium?: IntFieldUpdateOperationsInput | number
-    riskHigh?: IntFieldUpdateOperationsInput | number
-    missingElectrical?: IntFieldUpdateOperationsInput | number
-    missingPlumbing?: IntFieldUpdateOperationsInput | number
-    missingHVAC?: IntFieldUpdateOperationsInput | number
-    missingStructural?: IntFieldUpdateOperationsInput | number
-    missingSafety?: IntFieldUpdateOperationsInput | number
-    missingDocs?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type AnalysisCreateWithoutMissingItemsInput = {
-    id?: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    document: DocumentCreateNestedOneWithoutAnalysesInput
-    risks?: RiskCreateNestedManyWithoutAnalysisInput
-    completeness?: CompletenessCreateNestedOneWithoutAnalysisInput
-    graphMetrics?: GraphMetricCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisUncheckedCreateWithoutMissingItemsInput = {
-    id?: string
-    documentId: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    risks?: RiskUncheckedCreateNestedManyWithoutAnalysisInput
-    completeness?: CompletenessUncheckedCreateNestedOneWithoutAnalysisInput
-    graphMetrics?: GraphMetricUncheckedCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisCreateOrConnectWithoutMissingItemsInput = {
-    where: AnalysisWhereUniqueInput
-    create: XOR<AnalysisCreateWithoutMissingItemsInput, AnalysisUncheckedCreateWithoutMissingItemsInput>
-  }
-
-  export type AnalysisUpsertWithoutMissingItemsInput = {
-    update: XOR<AnalysisUpdateWithoutMissingItemsInput, AnalysisUncheckedUpdateWithoutMissingItemsInput>
-    create: XOR<AnalysisCreateWithoutMissingItemsInput, AnalysisUncheckedCreateWithoutMissingItemsInput>
-    where?: AnalysisWhereInput
-  }
-
-  export type AnalysisUpdateToOneWithWhereWithoutMissingItemsInput = {
-    where?: AnalysisWhereInput
-    data: XOR<AnalysisUpdateWithoutMissingItemsInput, AnalysisUncheckedUpdateWithoutMissingItemsInput>
-  }
-
-  export type AnalysisUpdateWithoutMissingItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    document?: DocumentUpdateOneRequiredWithoutAnalysesNestedInput
-    risks?: RiskUpdateManyWithoutAnalysisNestedInput
-    completeness?: CompletenessUpdateOneWithoutAnalysisNestedInput
-    graphMetrics?: GraphMetricUpdateOneWithoutAnalysisNestedInput
-  }
-
-  export type AnalysisUncheckedUpdateWithoutMissingItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documentId?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    risks?: RiskUncheckedUpdateManyWithoutAnalysisNestedInput
-    completeness?: CompletenessUncheckedUpdateOneWithoutAnalysisNestedInput
-    graphMetrics?: GraphMetricUncheckedUpdateOneWithoutAnalysisNestedInput
-  }
-
-  export type AnalysisCreateWithoutRisksInput = {
-    id?: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    document: DocumentCreateNestedOneWithoutAnalysesInput
-    missingItems?: MissingItemCreateNestedManyWithoutAnalysisInput
-    completeness?: CompletenessCreateNestedOneWithoutAnalysisInput
-    graphMetrics?: GraphMetricCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisUncheckedCreateWithoutRisksInput = {
-    id?: string
-    documentId: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    missingItems?: MissingItemUncheckedCreateNestedManyWithoutAnalysisInput
-    completeness?: CompletenessUncheckedCreateNestedOneWithoutAnalysisInput
-    graphMetrics?: GraphMetricUncheckedCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisCreateOrConnectWithoutRisksInput = {
-    where: AnalysisWhereUniqueInput
-    create: XOR<AnalysisCreateWithoutRisksInput, AnalysisUncheckedCreateWithoutRisksInput>
-  }
-
-  export type AnalysisUpsertWithoutRisksInput = {
-    update: XOR<AnalysisUpdateWithoutRisksInput, AnalysisUncheckedUpdateWithoutRisksInput>
-    create: XOR<AnalysisCreateWithoutRisksInput, AnalysisUncheckedCreateWithoutRisksInput>
-    where?: AnalysisWhereInput
-  }
-
-  export type AnalysisUpdateToOneWithWhereWithoutRisksInput = {
-    where?: AnalysisWhereInput
-    data: XOR<AnalysisUpdateWithoutRisksInput, AnalysisUncheckedUpdateWithoutRisksInput>
-  }
-
-  export type AnalysisUpdateWithoutRisksInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    document?: DocumentUpdateOneRequiredWithoutAnalysesNestedInput
-    missingItems?: MissingItemUpdateManyWithoutAnalysisNestedInput
-    completeness?: CompletenessUpdateOneWithoutAnalysisNestedInput
-    graphMetrics?: GraphMetricUpdateOneWithoutAnalysisNestedInput
-  }
-
-  export type AnalysisUncheckedUpdateWithoutRisksInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documentId?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    missingItems?: MissingItemUncheckedUpdateManyWithoutAnalysisNestedInput
-    completeness?: CompletenessUncheckedUpdateOneWithoutAnalysisNestedInput
-    graphMetrics?: GraphMetricUncheckedUpdateOneWithoutAnalysisNestedInput
-  }
-
-  export type AnalysisCreateWithoutCompletenessInput = {
-    id?: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    document: DocumentCreateNestedOneWithoutAnalysesInput
-    missingItems?: MissingItemCreateNestedManyWithoutAnalysisInput
-    risks?: RiskCreateNestedManyWithoutAnalysisInput
-    graphMetrics?: GraphMetricCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisUncheckedCreateWithoutCompletenessInput = {
-    id?: string
-    documentId: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    missingItems?: MissingItemUncheckedCreateNestedManyWithoutAnalysisInput
-    risks?: RiskUncheckedCreateNestedManyWithoutAnalysisInput
-    graphMetrics?: GraphMetricUncheckedCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisCreateOrConnectWithoutCompletenessInput = {
-    where: AnalysisWhereUniqueInput
-    create: XOR<AnalysisCreateWithoutCompletenessInput, AnalysisUncheckedCreateWithoutCompletenessInput>
-  }
-
-  export type AnalysisUpsertWithoutCompletenessInput = {
-    update: XOR<AnalysisUpdateWithoutCompletenessInput, AnalysisUncheckedUpdateWithoutCompletenessInput>
-    create: XOR<AnalysisCreateWithoutCompletenessInput, AnalysisUncheckedCreateWithoutCompletenessInput>
-    where?: AnalysisWhereInput
-  }
-
-  export type AnalysisUpdateToOneWithWhereWithoutCompletenessInput = {
-    where?: AnalysisWhereInput
-    data: XOR<AnalysisUpdateWithoutCompletenessInput, AnalysisUncheckedUpdateWithoutCompletenessInput>
-  }
-
-  export type AnalysisUpdateWithoutCompletenessInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    document?: DocumentUpdateOneRequiredWithoutAnalysesNestedInput
-    missingItems?: MissingItemUpdateManyWithoutAnalysisNestedInput
-    risks?: RiskUpdateManyWithoutAnalysisNestedInput
-    graphMetrics?: GraphMetricUpdateOneWithoutAnalysisNestedInput
-  }
-
-  export type AnalysisUncheckedUpdateWithoutCompletenessInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documentId?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    missingItems?: MissingItemUncheckedUpdateManyWithoutAnalysisNestedInput
-    risks?: RiskUncheckedUpdateManyWithoutAnalysisNestedInput
-    graphMetrics?: GraphMetricUncheckedUpdateOneWithoutAnalysisNestedInput
-  }
-
-  export type AnalysisCreateWithoutGraphMetricsInput = {
-    id?: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    document: DocumentCreateNestedOneWithoutAnalysesInput
-    missingItems?: MissingItemCreateNestedManyWithoutAnalysisInput
-    risks?: RiskCreateNestedManyWithoutAnalysisInput
-    completeness?: CompletenessCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisUncheckedCreateWithoutGraphMetricsInput = {
-    id?: string
-    documentId: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-    missingItems?: MissingItemUncheckedCreateNestedManyWithoutAnalysisInput
-    risks?: RiskUncheckedCreateNestedManyWithoutAnalysisInput
-    completeness?: CompletenessUncheckedCreateNestedOneWithoutAnalysisInput
-  }
-
-  export type AnalysisCreateOrConnectWithoutGraphMetricsInput = {
-    where: AnalysisWhereUniqueInput
-    create: XOR<AnalysisCreateWithoutGraphMetricsInput, AnalysisUncheckedCreateWithoutGraphMetricsInput>
-  }
-
-  export type AnalysisUpsertWithoutGraphMetricsInput = {
-    update: XOR<AnalysisUpdateWithoutGraphMetricsInput, AnalysisUncheckedUpdateWithoutGraphMetricsInput>
-    create: XOR<AnalysisCreateWithoutGraphMetricsInput, AnalysisUncheckedCreateWithoutGraphMetricsInput>
-    where?: AnalysisWhereInput
-  }
-
-  export type AnalysisUpdateToOneWithWhereWithoutGraphMetricsInput = {
-    where?: AnalysisWhereInput
-    data: XOR<AnalysisUpdateWithoutGraphMetricsInput, AnalysisUncheckedUpdateWithoutGraphMetricsInput>
-  }
-
-  export type AnalysisUpdateWithoutGraphMetricsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    document?: DocumentUpdateOneRequiredWithoutAnalysesNestedInput
-    missingItems?: MissingItemUpdateManyWithoutAnalysisNestedInput
-    risks?: RiskUpdateManyWithoutAnalysisNestedInput
-    completeness?: CompletenessUpdateOneWithoutAnalysisNestedInput
-  }
-
-  export type AnalysisUncheckedUpdateWithoutGraphMetricsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documentId?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    missingItems?: MissingItemUncheckedUpdateManyWithoutAnalysisNestedInput
-    risks?: RiskUncheckedUpdateManyWithoutAnalysisNestedInput
-    completeness?: CompletenessUncheckedUpdateOneWithoutAnalysisNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -20102,12 +10197,6 @@ export namespace Prisma {
     refresh_token_expires_in?: number | null
   }
 
-  export type SessionCreateManyUserInput = {
-    id?: string
-    sessionToken: string
-    expires: Date | string
-  }
-
   export type PostCreateManyCreatedByInput = {
     id?: number
     name: string
@@ -20115,10 +10204,10 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type ProjectCreateManyUserInput = {
+  export type SessionCreateManyUserInput = {
     id?: string
-    name: string
-    createdAt?: Date | string
+    sessionToken: string
+    expires: Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -20166,24 +10255,6 @@ export namespace Prisma {
     refresh_token_expires_in?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type SessionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SessionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SessionUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type PostUpdateWithoutCreatedByInput = {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20204,170 +10275,22 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProjectUpdateWithoutUserInput = {
+  export type SessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    documents?: DocumentUpdateManyWithoutProjectNestedInput
+    sessionToken?: StringFieldUpdateOperationsInput | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProjectUncheckedUpdateWithoutUserInput = {
+  export type SessionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    documents?: DocumentUncheckedUpdateManyWithoutProjectNestedInput
+    sessionToken?: StringFieldUpdateOperationsInput | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProjectUncheckedUpdateManyWithoutUserInput = {
+  export type SessionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DocumentCreateManyProjectInput = {
-    id?: string
-    fileUrl: string
-    fileName: string
-    status: string
-    createdAt?: Date | string
-  }
-
-  export type DocumentUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
-    fileName?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    analyses?: AnalysisUpdateManyWithoutDocumentNestedInput
-  }
-
-  export type DocumentUncheckedUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
-    fileName?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    analyses?: AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
-  }
-
-  export type DocumentUncheckedUpdateManyWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
-    fileName?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AnalysisCreateManyDocumentInput = {
-    id?: string
-    rawJson: JsonNullValueInput | InputJsonValue
-    summary: JsonNullValueInput | InputJsonValue
-    confidence: number
-    createdAt?: Date | string
-  }
-
-  export type AnalysisUpdateWithoutDocumentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    missingItems?: MissingItemUpdateManyWithoutAnalysisNestedInput
-    risks?: RiskUpdateManyWithoutAnalysisNestedInput
-    completeness?: CompletenessUpdateOneWithoutAnalysisNestedInput
-    graphMetrics?: GraphMetricUpdateOneWithoutAnalysisNestedInput
-  }
-
-  export type AnalysisUncheckedUpdateWithoutDocumentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    missingItems?: MissingItemUncheckedUpdateManyWithoutAnalysisNestedInput
-    risks?: RiskUncheckedUpdateManyWithoutAnalysisNestedInput
-    completeness?: CompletenessUncheckedUpdateOneWithoutAnalysisNestedInput
-    graphMetrics?: GraphMetricUncheckedUpdateOneWithoutAnalysisNestedInput
-  }
-
-  export type AnalysisUncheckedUpdateManyWithoutDocumentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rawJson?: JsonNullValueInput | InputJsonValue
-    summary?: JsonNullValueInput | InputJsonValue
-    confidence?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MissingItemCreateManyAnalysisInput = {
-    id?: string
-    category: string
-    title: string
-    description: string
-    severity: string
-    page?: number | null
-  }
-
-  export type RiskCreateManyAnalysisInput = {
-    id?: string
-    category: string
-    title: string
-    description: string
-    impact: string
-    severity: string
-  }
-
-  export type MissingItemUpdateWithoutAnalysisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-    page?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type MissingItemUncheckedUpdateWithoutAnalysisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-    page?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type MissingItemUncheckedUpdateManyWithoutAnalysisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-    page?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type RiskUpdateWithoutAnalysisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    impact?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type RiskUncheckedUpdateWithoutAnalysisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    impact?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type RiskUncheckedUpdateManyWithoutAnalysisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    impact?: StringFieldUpdateOperationsInput | string
-    severity?: StringFieldUpdateOperationsInput | string
+    sessionToken?: StringFieldUpdateOperationsInput | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

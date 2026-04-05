@@ -138,83 +138,23 @@ exports.Prisma.PostScalarFieldEnum = {
   createdById: 'createdById'
 };
 
-exports.Prisma.ProjectScalarFieldEnum = {
+exports.Prisma.FileScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  userId: 'userId',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.DocumentScalarFieldEnum = {
-  id: 'id',
-  projectId: 'projectId',
-  fileUrl: 'fileUrl',
-  fileName: 'fileName',
-  status: 'status',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.AnalysisScalarFieldEnum = {
-  id: 'id',
-  documentId: 'documentId',
-  rawJson: 'rawJson',
-  summary: 'summary',
+  supabasePath: 'supabasePath',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   confidence: 'confidence',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.MissingItemScalarFieldEnum = {
-  id: 'id',
-  analysisId: 'analysisId',
-  category: 'category',
-  title: 'title',
-  description: 'description',
-  severity: 'severity',
-  page: 'page'
-};
-
-exports.Prisma.RiskScalarFieldEnum = {
-  id: 'id',
-  analysisId: 'analysisId',
-  category: 'category',
-  title: 'title',
-  description: 'description',
-  impact: 'impact',
-  severity: 'severity'
-};
-
-exports.Prisma.CompletenessScalarFieldEnum = {
-  id: 'id',
-  analysisId: 'analysisId',
-  electrical: 'electrical',
-  plumbing: 'plumbing',
-  hvac: 'hvac',
-  structural: 'structural',
-  safety: 'safety',
-  documentation: 'documentation'
-};
-
-exports.Prisma.GraphMetricScalarFieldEnum = {
-  id: 'id',
-  analysisId: 'analysisId',
-  riskLow: 'riskLow',
-  riskMedium: 'riskMedium',
-  riskHigh: 'riskHigh',
-  missingElectrical: 'missingElectrical',
-  missingPlumbing: 'missingPlumbing',
-  missingHVAC: 'missingHVAC',
-  missingStructural: 'missingStructural',
-  missingSafety: 'missingSafety',
-  missingDocs: 'missingDocs'
+  durationMinutes: 'durationMinutes',
+  missingItems: 'missingItems',
+  risks: 'risks',
+  summary: 'summary',
+  status: 'status'
 };
 
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
-};
-
-exports.Prisma.JsonNullValueInput = {
-  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -226,13 +166,12 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
+exports.ProcessingStatus = exports.$Enums.ProcessingStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  READY: 'READY',
+  ERROR: 'ERROR'
 };
-
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -240,13 +179,7 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   VerificationToken: 'VerificationToken',
   Post: 'Post',
-  Project: 'Project',
-  Document: 'Document',
-  Analysis: 'Analysis',
-  MissingItem: 'MissingItem',
-  Risk: 'Risk',
-  Completeness: 'Completeness',
-  GraphMetric: 'GraphMetric'
+  File: 'File'
 };
 /**
  * Create the Client
@@ -296,13 +229,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n/////////////////////////\n// AUTH MODELS (NextAuth)\n/////////////////////////\n\nmodel User {\n  id            String    @id @default(cuid())\n  name          String?\n  email         String?   @unique\n  emailVerified DateTime?\n  image         String?\n\n  accounts Account[]\n  sessions Session[]\n  posts    Post[]\n\n  // ✅ YOUR DOMAIN RELATION\n  projects Project[]\n}\n\nmodel Account {\n  id                       String  @id @default(cuid())\n  userId                   String\n  type                     String\n  provider                 String\n  providerAccountId        String\n  refresh_token            String?\n  access_token             String?\n  expires_at               Int?\n  token_type               String?\n  scope                    String?\n  id_token                 String?\n  session_state            String?\n  refresh_token_expires_in Int?\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([provider, providerAccountId])\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String   @unique\n  expires    DateTime\n\n  @@unique([identifier, token])\n}\n\n/////////////////////////\n// EXISTING SAMPLE MODEL\n/////////////////////////\n\nmodel Post {\n  id        Int      @id @default(autoincrement())\n  name      String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  createdBy   User   @relation(fields: [createdById], references: [id])\n  createdById String\n\n  @@index([name])\n}\n\n/////////////////////////\n// YOUR CORE PRODUCT MODELS\n/////////////////////////\n\nmodel Project {\n  id        String   @id @default(uuid())\n  name      String\n  userId    String\n  createdAt DateTime @default(now())\n\n  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)\n  documents Document[]\n}\n\nmodel Document {\n  id        String   @id @default(uuid())\n  projectId String\n  fileUrl   String\n  fileName  String\n  status    String // uploaded | processing | completed | failed\n  createdAt DateTime @default(now())\n\n  project  Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)\n  analyses Analysis[]\n}\n\nmodel Analysis {\n  id         String @id @default(uuid())\n  documentId String\n\n  rawJson    Json\n  summary    Json\n  confidence Float\n\n  createdAt DateTime @default(now())\n\n  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)\n\n  missingItems MissingItem[]\n  risks        Risk[]\n  completeness Completeness?\n  graphMetrics GraphMetric?\n}\n\nmodel MissingItem {\n  id         String @id @default(uuid())\n  analysisId String\n\n  category    String\n  title       String\n  description String\n  severity    String\n  page        Int?\n\n  analysis Analysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)\n}\n\nmodel Risk {\n  id         String @id @default(uuid())\n  analysisId String\n\n  category    String\n  title       String\n  description String\n  impact      String\n  severity    String\n\n  analysis Analysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)\n}\n\nmodel Completeness {\n  id         String @id @default(uuid())\n  analysisId String @unique\n\n  electrical    Int\n  plumbing      Int\n  hvac          Int\n  structural    Int\n  safety        Int\n  documentation Int\n\n  analysis Analysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)\n}\n\nmodel GraphMetric {\n  id         String @id @default(uuid())\n  analysisId String @unique\n\n  riskLow    Int\n  riskMedium Int\n  riskHigh   Int\n\n  missingElectrical Int\n  missingPlumbing   Int\n  missingHVAC       Int\n  missingStructural Int\n  missingSafety     Int\n  missingDocs       Int\n\n  analysis Analysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)\n}\n",
-  "inlineSchemaHash": "b6288f65a8d0f5dc66b6f4716c276958d49059948207ffda150195c42f6e7408",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id            String    @id @default(cuid())\n  name          String?\n  email         String?   @unique\n  emailVerified DateTime?\n  image         String?\n  accounts      Account[]\n  posts         Post[]\n  sessions      Session[]\n}\n\nmodel Account {\n  id                       String  @id @default(cuid())\n  userId                   String\n  type                     String\n  provider                 String\n  providerAccountId        String\n  refresh_token            String?\n  access_token             String?\n  expires_at               Int?\n  token_type               String?\n  scope                    String?\n  id_token                 String?\n  session_state            String?\n  refresh_token_expires_in Int?\n  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([provider, providerAccountId])\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String   @unique\n  expires    DateTime\n\n  @@unique([identifier, token])\n}\n\nmodel Post {\n  id          Int      @id @default(autoincrement())\n  name        String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  createdById String\n  createdBy   User     @relation(fields: [createdById], references: [id])\n\n  @@index([name])\n}\n\nmodel File {\n  id              String           @id\n  name            String\n  supabasePath    String           @unique\n  createdAt       DateTime         @default(now())\n  updatedAt       DateTime\n  confidence      String?\n  durationMinutes Float?\n  missingItems    String[]\n  risks           String[]\n  summary         String?\n  status          ProcessingStatus @default(PENDING)\n}\n\nenum ProcessingStatus {\n  PENDING\n  PROCESSING\n  READY\n  ERROR\n}\n",
+  "inlineSchemaHash": "9d9b0fd96a6c47d2903978a6d4a489b1ee14be8fe16d297e04d64596b744f496",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emailVerified\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accounts\",\"kind\":\"object\",\"type\":\"Account\",\"relationName\":\"AccountToUser\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"SessionToUser\"},{\"name\":\"posts\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToUser\"},{\"name\":\"projects\",\"kind\":\"object\",\"type\":\"Project\",\"relationName\":\"ProjectToUser\"}],\"dbName\":null},\"Account\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"provider\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"providerAccountId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refresh_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"access_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires_at\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"token_type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scope\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"id_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"session_state\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refresh_token_expires_in\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AccountToUser\"}],\"dbName\":null},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"SessionToUser\"}],\"dbName\":null},\"VerificationToken\":{\"fields\":[{\"name\":\"identifier\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PostToUser\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Project\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ProjectToUser\"},{\"name\":\"documents\",\"kind\":\"object\",\"type\":\"Document\",\"relationName\":\"DocumentToProject\"}],\"dbName\":null},\"Document\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"projectId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fileUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fileName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"project\",\"kind\":\"object\",\"type\":\"Project\",\"relationName\":\"DocumentToProject\"},{\"name\":\"analyses\",\"kind\":\"object\",\"type\":\"Analysis\",\"relationName\":\"AnalysisToDocument\"}],\"dbName\":null},\"Analysis\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"documentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rawJson\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"summary\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"confidence\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"document\",\"kind\":\"object\",\"type\":\"Document\",\"relationName\":\"AnalysisToDocument\"},{\"name\":\"missingItems\",\"kind\":\"object\",\"type\":\"MissingItem\",\"relationName\":\"AnalysisToMissingItem\"},{\"name\":\"risks\",\"kind\":\"object\",\"type\":\"Risk\",\"relationName\":\"AnalysisToRisk\"},{\"name\":\"completeness\",\"kind\":\"object\",\"type\":\"Completeness\",\"relationName\":\"AnalysisToCompleteness\"},{\"name\":\"graphMetrics\",\"kind\":\"object\",\"type\":\"GraphMetric\",\"relationName\":\"AnalysisToGraphMetric\"}],\"dbName\":null},\"MissingItem\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"analysisId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"severity\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"page\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"analysis\",\"kind\":\"object\",\"type\":\"Analysis\",\"relationName\":\"AnalysisToMissingItem\"}],\"dbName\":null},\"Risk\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"analysisId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"impact\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"severity\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"analysis\",\"kind\":\"object\",\"type\":\"Analysis\",\"relationName\":\"AnalysisToRisk\"}],\"dbName\":null},\"Completeness\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"analysisId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"electrical\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"plumbing\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"hvac\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"structural\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"safety\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"documentation\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"analysis\",\"kind\":\"object\",\"type\":\"Analysis\",\"relationName\":\"AnalysisToCompleteness\"}],\"dbName\":null},\"GraphMetric\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"analysisId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"riskLow\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"riskMedium\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"riskHigh\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"missingElectrical\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"missingPlumbing\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"missingHVAC\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"missingStructural\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"missingSafety\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"missingDocs\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"analysis\",\"kind\":\"object\",\"type\":\"Analysis\",\"relationName\":\"AnalysisToGraphMetric\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emailVerified\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accounts\",\"kind\":\"object\",\"type\":\"Account\",\"relationName\":\"AccountToUser\"},{\"name\":\"posts\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToUser\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"SessionToUser\"}],\"dbName\":null},\"Account\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"provider\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"providerAccountId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refresh_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"access_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires_at\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"token_type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scope\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"id_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"session_state\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refresh_token_expires_in\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AccountToUser\"}],\"dbName\":null},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"SessionToUser\"}],\"dbName\":null},\"VerificationToken\":{\"fields\":[{\"name\":\"identifier\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PostToUser\"}],\"dbName\":null},\"File\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"supabasePath\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"confidence\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"durationMinutes\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"missingItems\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"risks\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"summary\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"ProcessingStatus\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
