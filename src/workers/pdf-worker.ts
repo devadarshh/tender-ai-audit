@@ -7,14 +7,13 @@ import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const pdf = require("pdf-parse");
 
-// Import local libs using relative paths for standalone tsx execution
-// Fixed: Using correct relative paths and ensuring imports are clean
 import { prisma } from "../lib/prisma";
 import { supabase } from "../lib/supabase";
 import { splitter } from "../lib/splitter";
 import { hf } from "../lib/hfClient";
 import { COLLECTION_NAME, qdrantClient, ensureCollection } from "../lib/qdrant";
 import { redis } from "../lib/redis";
+import { runConstructionAnalysis } from "../lib/analyser";
 
 interface FileJobData {
     documentId: string;
@@ -36,116 +35,72 @@ export const pdfWorker = new Worker<FileJobData>(
         console.log(`🚀 [Job ${job.id}] Processing Pipeline Started: ${documentId}`);
 
         try {
-            // 0. Infrastructure Check
             await ensureCollection();
 
-            // 1. Fetch Document Record
             const docRecord = await prisma.document.findUnique({
                 where: { id: documentId }
             });
 
-            if (!docRecord) {
-                throw new Error(`Document ${documentId} not found in database.`);
-            }
+            if (!docRecord) throw new Error(`Document ${documentId} not found.`);
 
-            // 2. Download from Supabase
             console.log(`📦 Status: Downloading ${docRecord.fileName}...`);
             const { data: blob, error: downloadError } = await supabase.storage
                 .from("Files")
                 .download(docRecord.fileUrl);
 
-            if (downloadError || !blob) {
-                throw new Error(`Supabase Download Error: ${downloadError?.message || 'Empty file response'}`);
-            }
+            if (downloadError || !blob) throw new Error(`Download Error: ${downloadError?.message}`);
 
-            // 3. Text Extraction
-            console.log(`📄 Status: Extracting text from PDF (Buffer size: ${blob.size} bytes)...`);
-            const arrayBuffer = await blob.arrayBuffer();
-            const buffer = Buffer.from(arrayBuffer);
-
-            // Standard pdf-parse 1.1.1 usage
+            console.log(`📄 Status: Extracting text from PDF...`);
+            const buffer = Buffer.from(await blob.arrayBuffer());
             const pdfData = await pdf(buffer);
 
-            if (!pdfData || !pdfData.text || pdfData.text.trim().length === 0) {
-                throw new Error("PDF extraction resulted in no text content.");
-            }
+            if (!pdfData?.text) throw new Error("Empty PDF.");
 
-            console.log(`📝 Total text extracted: ${pdfData.text.length} characters.`);
-
-            // 4. Status Tracking: Processing
             await prisma.document.update({
                 where: { id: documentId },
                 data: { status: "processing" }
             });
 
-            // 5. NLP Processing: Chunking
-            console.log(`✂️  Status: Splitting text into ${pdfData.numpages} pages/chunks...`);
             const chunks = await splitter.splitDocuments([
                 new Document({
                     pageContent: pdfData.text,
-                    metadata: {
-                        documentId,
-                        fileName: docRecord.fileName,
-                        totalPages: pdfData.numpages
-                    }
+                    metadata: { documentId, fileName: docRecord.fileName }
                 })
             ]);
 
-            // 6. AI Engine: Vector Embeddings
             console.log(`🧠 Status: Generating embeddings for ${chunks.length} chunks...`);
             const embeddings = (await hf.featureExtraction({
                 model: "sentence-transformers/all-MiniLM-L6-v2",
                 inputs: chunks.map((c) => c.pageContent),
             })) as number[][];
 
-            // 7. Persistence: Vector Storage
-            console.log(`💾 Status: Syncing vectors to Qdrant collection...`);
-            const points = chunks.map((chunk, index) => ({
+            const points = chunks.map((chunk, i) => ({
                 id: uuidv4(),
-                vector: embeddings[index]!,
-                payload: {
-                    ...chunk.metadata,
-                    content: chunk.pageContent,
-                    part: index + 1
-                },
+                vector: embeddings[i]!,
+                payload: { ...chunk.metadata, content: chunk.pageContent },
             }));
 
             await qdrantClient.upsert(COLLECTION_NAME, { points });
+            
+            // --- AUTOMATIC AI ANALYSIS STAGE ---
+            console.log(`🔍 AI Status: Analyzing ${docRecord.fileName} for construction risks...`);
+            const analysisContext = pdfData.text.slice(0, 30000); 
+            await runConstructionAnalysis(documentId, analysisContext);
 
-            // 8. Finalization
             await prisma.document.update({
                 where: { id: documentId },
                 data: { status: "completed" }
             });
 
-            console.log(`✨ [Job ${job.id}] Finalized: ${docRecord.fileName} is READY.`);
-            console.log(`---------------------------------------------------------\n`);
+            console.log(`✨ [Job ${job.id}] Finalized: Full RAG and Analysis is READY.`);
 
         } catch (err: any) {
-            console.error(`❌ [Job ${job.id}] Critical Pipeline Failure:`, err.message);
-
-            try {
-                await prisma.document.update({
-                    where: { id: documentId },
-                    data: { status: "failed" }
-                });
-            } catch (dbErr) {
-                console.error("Infrastructure Error: Could not update status in DB.");
-            }
-
+            console.error(`❌ [Job ${job.id}] Critical Failure:`, err.message);
+            await prisma.document.update({ where: { id: documentId }, data: { status: "failed" } });
             throw err;
         }
     },
-    {
-        connection: redis as any,
-        concurrency: 5
-    }
+    { connection: redis as any, concurrency: 5 }
 );
 
-pdfWorker.on("ready", () => {
-    console.log("✅ Worker engine online. Listening for 'file-upload-queue' events...");
-});
-
-pdfWorker.on("error", (err) => {
-    console.error("📛 Worker connection error:", err);
-});
+pdfWorker.on("ready", () => console.log("✅ Worker engine online."));

@@ -1,22 +1,22 @@
 "use client"
 import { useState, useRef } from "react";
 import { uploadTenderToSupabase } from "../actions";
-import { Upload, FileText, X, CheckCircle2, AlertCircle } from "lucide-react";
+import { Upload, FileText, X, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function UploadPage() {
     const [file, setFile] = useState<File | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
+    const router = useRouter();
 
     const fileInputRef = useRef<HTMLInputElement>(null);
     const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
-
     const validateAndSetFile = (selectedFile: File) => {
         setError(null);
-
         if (selectedFile.type !== "application/pdf") {
             setError("Only PDF files are allowed");
             return;
@@ -24,10 +24,10 @@ export default function UploadPage() {
         if (selectedFile.size > MAX_FILE_SIZE) {
             setError("File size exceeds 50MB limit");
             return;
-
         }
         setFile(selectedFile);
     }
+
     const handleUpload = async () => {
         if (!file) return;
         setIsUploading(true);
@@ -35,25 +35,25 @@ export default function UploadPage() {
             const formData = new FormData();
             formData.append("file", file);
 
-            // TODO: In a real app, get the actual project ID from the URL or state
             const tempProjectId = "dev-project-id";
 
             const result = await uploadTenderToSupabase(formData, tempProjectId);
-            if (result.success) {
+            
+            if (result.success && result.documentId) {
                 toast.success("Upload Successful", {
-                    description: "Your file is now securely stored in supabase"
+                    description: "Moving to analysis dashboard..."
                 });
-                setFile(null);
+                // Redirect to the analysis page for real-time results
+                router.push(`/analysis/${result.documentId}`);
             }
             else {
                 toast.error("Upload Failed", { description: result.error });
+                setIsUploading(false);
             }
 
         } catch (error) {
             toast.error("An unexpected error occurred");
-        }
-        finally {
-            setIsUploading(false)
+            setIsUploading(false);
         }
     }
 
@@ -65,6 +65,7 @@ export default function UploadPage() {
     const handleDragLeave = () => {
         setIsDragging(false);
     };
+
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
         setIsDragging(false);
@@ -85,24 +86,24 @@ export default function UploadPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
-            <div className="w-full max-w-xl bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-8 border border-slate-100">
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Upload Tender</h1>
-                    <p className="text-slate-500 mt-2">Select your PDF document for analysis (Max 50MB)</p>
+            <div className="w-full max-w-xl bg-white rounded-[2.5rem] shadow-2xl shadow-indigo-100/50 p-10 border border-slate-100">
+                <div className="text-center mb-10">
+                    <h1 className="text-4xl font-black text-slate-900 tracking-tighter italic">Upload Tender</h1>
+                    <p className="text-slate-400 mt-2 font-medium">Select your PDF document for expert AI audit.</p>
                 </div>
-                {/* Dropzone Area */}
+
                 <div
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
                     onClick={() => fileInputRef.current?.click()}
                     className={`
-            relative group cursor-pointer
-            border-2 border-dashed rounded-2xl p-12 transition-all duration-300
-            flex flex-col items-center justify-center gap-4
-            ${isDragging ? "border-blue-500 bg-blue-50/50 scale-[1.02]" : "border-slate-200 hover:border-blue-400 hover:bg-slate-50"}
-            ${file ? "border-green-200 bg-green-50/20" : ""}
-          `}
+                        relative group cursor-pointer
+                        border-[3px] border-dashed rounded-3xl p-16 transition-all duration-500
+                        flex flex-col items-center justify-center gap-6
+                        ${isDragging ? "border-indigo-500 bg-indigo-50/50 scale-[1.03]" : "border-slate-100 hover:border-indigo-300 hover:bg-slate-50"}
+                        ${file ? "border-emerald-200 bg-emerald-50/20" : ""}
+                    `}
                 >
                     <input
                         type="file"
@@ -113,41 +114,43 @@ export default function UploadPage() {
                     />
                     {!file ? (
                         <>
-                            <div className="w-16 h-16 bg-blue-100/50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform duration-300">
-                                <Upload size={32} />
+                            <div className="w-20 h-20 bg-indigo-100/50 rounded-3xl flex items-center justify-center text-indigo-600 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-500">
+                                <Upload size={40} />
                             </div>
                             <div className="text-center">
-                                <p className="font-medium text-slate-700">Click to upload or drag & drop</p>
-                                <p className="text-sm text-slate-400 mt-1">PDF documents only</p>
+                                <p className="font-black text-slate-800 text-lg">Click to select PDF</p>
+                                <p className="text-xs text-slate-400 mt-1 uppercase font-black tracking-widest">Supports documents up to 50MB</p>
                             </div>
                         </>
                     ) : (
-                        <div className="flex flex-col items-center gap-2">
-                            <div className="w-16 h-16 bg-green-100/50 rounded-2xl flex items-center justify-center text-green-600">
-                                <FileText size={32} />
+                        <div className="flex flex-col items-center gap-3">
+                            <div className="w-20 h-20 bg-emerald-100/50 rounded-3xl flex items-center justify-center text-emerald-600 animate-in zoom-in duration-300">
+                                <FileText size={40} />
                             </div>
-                            <p className="font-semibold text-slate-800">{file.name}</p>
-                            <p className="text-xs text-slate-500">{(file.size / (1024 * 1024)).toFixed(2)} MB</p>
+                            <p className="font-black text-slate-800 tracking-tight">{file.name}</p>
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none bg-slate-100 px-3 py-1 rounded-full">
+                                {(file.size / (1024 * 1024)).toFixed(2)} MB • READY
+                            </p>
                         </div>
                     )}
                 </div>
-                {/* Action Area */}
-                <div className="mt-8 space-y-4">
+
+                <div className="mt-10 space-y-4">
                     {error && (
-                        <div className="flex items-center gap-2 text-red-500 bg-red-50 p-4 rounded-xl text-sm border border-red-100">
-                            <AlertCircle size={18} />
+                        <div className="flex items-center gap-3 text-rose-500 bg-rose-50 p-5 rounded-2xl text-sm font-bold border border-rose-100 animate-in slide-in-from-top-2">
+                            <AlertCircle size={20} />
                             <span>{error}</span>
                         </div>
                     )}
                     {file && !error && (
-                        <div className="flex items-center justify-between bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <div className="flex items-center gap-3">
-                                <CheckCircle2 size={20} className="text-green-500" />
-                                <span className="text-sm font-medium text-slate-700">File is ready for upload</span>
+                        <div className="flex items-center justify-between bg-slate-50 p-5 rounded-2xl border border-slate-100 animate-in slide-in-from-bottom-2">
+                            <div className="flex items-center gap-4">
+                                <CheckCircle2 size={24} className="text-emerald-500" />
+                                <span className="text-sm font-bold text-slate-700 font-mono italic">Document Verified</span>
                             </div>
                             <button
                                 onClick={(e) => { e.stopPropagation(); removeFile(); }}
-                                className="p-1 hover:bg-slate-200 rounded-full transition-colors text-slate-400"
+                                className="p-2 hover:bg-slate-200 rounded-full transition-colors text-slate-400"
                             >
                                 <X size={20} />
                             </button>
@@ -157,15 +160,22 @@ export default function UploadPage() {
                         onClick={handleUpload}
                         disabled={!file || !!error || isUploading}
                         className={`
-              w-full py-4 rounded-2xl font-bold text-white transition-all duration-300
-              ${!file || !!error ? "bg-slate-200 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200 leading-none"}
-            `}
+                            w-full py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all duration-500
+                            ${!file || !!error ? "bg-slate-100 text-slate-300 cursor-not-allowed" : "bg-slate-900 text-white hover:bg-indigo-700 hover:shadow-2xl hover:shadow-indigo-200 hover:-translate-y-1 active:scale-95"}
+                            flex items-center justify-center gap-3
+                        `}
                     >
-                        {isUploading ? "Uploading..." : "Start Analysis"}
+                        {isUploading ? (
+                            <>
+                                <Loader2 className="animate-spin" size={20} />
+                                Uploading to Vault...
+                            </>
+                        ) : (
+                            "Initiate AI Audit"
+                        )}
                     </button>
                 </div>
             </div>
         </div>
     )
 }
-

@@ -59,3 +59,28 @@ export async function uploadTenderToSupabase(formData: FormData, projectId: stri
         };
     }
 }
+
+/**
+ * SENIOR ARCHITECT TIP:
+ * Use a polling server action to fetch the completed AI analysis 
+ * without exposing raw Prisma to the client.
+ */
+export async function getAnalysisResult(documentId: string) {
+    try {
+        const analysis = await prisma.analysis.findUnique({
+            where: { documentId },
+            include: { document: true }
+        });
+        
+        if (!analysis) {
+            const doc = await prisma.document.findUnique({ where: { id: documentId } });
+            if (doc) return { status: doc.status || "processing" };
+            return null;
+        }
+
+        return { status: "completed", data: analysis };
+    } catch (error) {
+        console.error("Fetch Analysis Error:", error);
+        return null;
+    }
+}

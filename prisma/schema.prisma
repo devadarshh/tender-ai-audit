@@ -77,4 +77,24 @@ model Document {
   status    String   @default("uploaded")
   createdAt DateTime @default(now())
   project   Project  @relation(fields: [projectId], references: [id])
+  analysis  Analysis?
+}
+
+model Analysis {
+  id                String   @id @default(cuid())
+  documentId        String   @unique
+  document          Document @relation(fields: [documentId], references: [id])
+  
+  // Structured AI Insight
+  projectSnapshot   Json     
+  scopeGaps         String[] 
+  risks             Json     // Array of risk objects
+  riskSummary       Json     // Distribution counts
+  costSignals       Json     // Array of cost signals
+  costBreakdown     Json     // Distribution object
+  recommendation    String   @db.Text
+  confidence        Json     // level and score
+  completenessScore Int      // 0-100
+  
+  createdAt         DateTime @default(now())
 }
