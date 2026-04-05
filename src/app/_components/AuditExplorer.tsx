@@ -77,22 +77,26 @@ export function AuditExplorer({ initialDocuments, userEmail }: AuditExplorerProp
           </div>
 
           <div className="flex items-center gap-4">
-             <Link 
-              href="/upload" 
-              className="bg-brand-dark text-brand-bg px-10 py-5 font-tektur font-black text-[13px] uppercase tracking-[0.3em] flex items-center gap-4 hover:bg-brand-accent transition-all shadow-2xl shadow-brand-dark/20 group cursor-pointer"
-             >
-               <Plus size={18} className="group-hover:rotate-90 transition-transform duration-500"/> Initiate Audit
-             </Link>
+
 
              <button 
                onClick={() => signOut({ callbackUrl: '/' })}
-               className="bg-brand-bg border-2 border-brand-dark/5 p-5 text-brand-muted hover:text-brand-action transition-all cursor-pointer shadow-lg group"
+               className="flex items-center gap-3 bg-brand-bg border-2 border-brand-dark/5 px-6 py-4 text-brand-dark hover:text-brand-action hover:border-brand-action/30 transition-all cursor-pointer shadow-lg group font-tektur font-black text-[12px] uppercase tracking-widest"
              >
-               <LogOut size={24} className="group-hover:-translate-x-1 transition-transform"/>
+               <LogOut size={18} className="group-hover:-translate-x-1 transition-transform"/> LOGOUT
              </button>
           </div>
         </div>
       </div>
+
+      {/* Full-width Initiate Sequence Button */}
+      <Link 
+        href="/upload" 
+        className="flex items-center gap-4 px-10 py-6 mb-10 border-2 border-dotted border-[#A65536] bg-[#A65536]/5 hover:bg-[#A65536]/10 transition-all group cursor-pointer w-full"
+      >
+         <Plus size={22} className="text-[#A65536] group-hover:rotate-90 transition-transform duration-500"/>
+         <span className="font-tektur text-[14px] font-black uppercase tracking-[0.2em] text-[#A65536]">Initiate New Sequence</span>
+      </Link>
 
       {/* Dynamic Content Grid/List */}
       {viewMode === 'grid' ? (
@@ -152,10 +156,7 @@ export function AuditExplorer({ initialDocuments, userEmail }: AuditExplorerProp
             </Link>
           ))}
           
-          <Link href="/upload" className="bg-brand-bg border-2 border-dotted border-brand-dark/10 p-10 flex flex-col items-center justify-center gap-6 h-[340px] hover:border-brand-accent hover:bg-white transition-all group cursor-pointer">
-            <div className="w-16 h-16 rounded-full border-2 border-brand-dark/5 flex items-center justify-center text-brand-muted group-hover:bg-brand-accent group-hover:text-brand-bg transition-all duration-700 shadow-inner"><Plus size={32}/></div>
-            <p className="font-tektur text-[12px] font-black uppercase tracking-widest text-brand-dark/40 group-hover:text-brand-accent transition-colors">Start New Analysis</p>
-          </Link>
+
         </div>
       ) : (
         /* Senior List View: Optimized for Data-Dense Environments */
@@ -207,10 +208,7 @@ export function AuditExplorer({ initialDocuments, userEmail }: AuditExplorerProp
             </Link>
           ))}
           
-          <Link href="/upload" className="flex items-center gap-4 px-10 py-6 border-2 border-dotted border-brand-dark/10 hover:border-brand-accent transition-all group">
-             <Plus className="text-brand-muted group-hover:text-brand-accent transition-colors"/>
-             <span className="font-tektur text-[12px] font-black uppercase tracking-[0.2em] text-brand-dark/40 group-hover:text-brand-accent transition-colors">Initiate New Sequence</span>
-          </Link>
+
         </div>
       )}
 
