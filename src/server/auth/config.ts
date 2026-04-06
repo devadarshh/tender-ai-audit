@@ -43,7 +43,7 @@ export const authConfig = {
       ...session,
       user: {
         ...session.user,
-        id: token?.sub as string,
+        id: token.sub!,
       },
     }),
   },
