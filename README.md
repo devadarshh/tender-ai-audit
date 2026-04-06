@@ -1,32 +1,98 @@
-# tender-ai-audit
-AI-powered platform to analyze tender documents and extract risks, gaps, and cost insights.
+# 🏗️ Brickanta – Agentic AI for Society Builders
 
-## Stack Overview
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Brickanta is an enterprise-grade AI platform designed for senior construction auditors and society builders. It automates the extraction of risk-gaps, structural integrity flaws, and technical compliance data from large-scale tender documentation.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+Engage with an intelligent agentic engine that cross-references ISO construction standards against your technical PDF sequences, providing high-precision audits and risk inventory dashboards.
 
-## How to Run
-1. `npm install`
-2. `npx prisma generate`
-3. `npm run dev`
+**🌐 Live Demo:** [Access Brickanta](https://brickanta.adarshsingh.xyz)
 
-## CI/CD Pipeline
-The project includes a professional-grade GitHub Actions pipeline (`.github/workflows/pipeline.yml`) that automates:
-- **Quality Control**: Linting, formatting, and type-checking on every PR.
-- **Security**: Automated dependency audits for high-risk vulnerabilities.
-- **Build Verification**: Ensures Next.js and Prisma builds are successful.
-- **Containerization**: Automatically builds and pushes Docker images (Next.js & Worker) to GitHub Container Registry (GHCR) when changes are pushed to `main`.
+## ✅ Core Features
 
-### Docker Images
-Images available at `ghcr.io/<repo-owner>/tender-ai-audit`. 
-Tags: `latest`, `sha-short`, `<branch-name>`.
+- 📄 **Technical PDF Ingestion** – Securely upload and manage complex construction tender sequences.
+- 🧪 **AI Risk Extraction** – Instantly identify gaps, cost inconsistencies, and structural risks using advanced LLM reasoning.
+- 🗄️ **Audit Ledger (Overview)** – A high-density, senior-grade dashboard for tracking all audit sequences and their completeness scores.
+- 🤖 **Agentic Analysis Pipeline** – Multi-stage processing utilizing RAG (Retrieval-Augmented Generation) for cited, evidence-based results.
+- 📊 **Structural Integrity Scoring** – Automated scoring system to evaluate document compliance and project risk at a glance.
+- 🔄 **Background Processing** – Robust BullMQ integration for high-performance, asynchronous document chunking and embedding.
+- 🔎 **Vector Search** – Powered by Qdrant to ensure lightning-fast retrieval of relevant clauses from thousands of document pages.
 
-## Learn More
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq) — Awesome tutorials.
+## 🛠 Tech Stack
+
+### **Client (Frontend)**
+
+- ⚛️ **Next.js 15+** – React framework for high-performance server-side rendering and intuitive routing.
+- 🎨 **Tailwind CSS** – Custom-built design system with a premium, high-density construction aesthetic.
+- ✨ **Shadcn UI** – Highly-customized UI components for a professional ledger experience.
+- ⚡ **@tanstack/react-query** – Advanced state management and data fetching for real-time audit updates.
+- 💡 **Lucide React & Tektur Font** – Modern typography and iconography for superior legibility.
+- 🌗 **Next-Themes** – Sophisticated dark and light mode integration.
+
+### **Server (Backend & AI)**
+
+- 🟢 **tRPC** – End-to-end typesafe API layer for reliable communication between frontend and background workers.
+- 🗄️ **PostgreSQL + Prisma** – Managed database on Supabase with a high-performance ORM layer.
+- 🔒 **NextAuth.js v5** – Comprehensive authentication supporting Google OAuth for secure enterprise access.
+- 📦 **Qdrant** – Distributed vector database for high-accuracy similarity search across massive document pools.
+- ⚙️ **BullMQ + Redis** – Enterprise-ready job queue for handling intensive AI processing tasks in the background.
+- 🧠 **Google Gemini 1.5 Pro** – State-of-the-art LLM for deep technical analysis and risk scoring.
+- 🤗 **HuggingFace Inference** – Used for generating high-dimensional embeddings from technical document chunks.
+- ⛓️ **LangChain** – Orchestrates the RAG pipeline, document splitting, and agentic workflows.
+
+### **Infrastructure**
+
+- 🐳 **Docker** – Containerized multi-service architecture (App, Worker, Redis, Postgres, Qdrant).
+- 🐧 **Ubuntu EC2** – High-performance production deployment on AWS with Nginx reverse-proxying.
+- 🚀 **GitHub Actions** – Professional CI/CD pipeline for automated testing, building, and deployment.
+
+## Installation & Running Locally
+
+Follow these steps to initialize Brickanta on your local infrastructure:
+
+```bash
+# 1. Clone the repository
+git clone <your-repository-url>
+cd tender-ai-audit
+
+# 2. Install dependencies
+npm install
+
+# 3. Setup environment variables
+cp .env.example .env
+# Edit .env with your Google Gemini, Supabase, and Qdrant keys
+
+# 4. Start Local Infrastructure (Redis, Qdrant, etc.)
+docker-compose up -d
+
+# 5. Initialize the Ledger
+npx prisma generate
+npx prisma db push
+
+# 6. Boot the Core Services
+npm run dev      # Start the Next.js portal
+npm run worker   # Start the AI processing engine
+```
+
+## 📸 Screenshots
+
+### 🔑 Secure Auth Portal
+![Auth Portal](assets/Screenshot%202026-04-06%20at%205.09.10%20PM.png)
+
+### 📊 Audit Ledger Overview
+![Overview](assets/Screenshot%202026-04-06%20at%205.09.23%20PM.png)
+
+### 📤 Technical Document Ingestion
+![Upload](assets/Screenshot%202026-04-06%20at%205.10.08%20PM.png)
+
+### 🧠 Agentic Risk Extraction
+![Analysis](assets/Screenshot%202026-04-06%20at%205.09.32%20PM.png)
+
+### 📋 Structural Integrity Report
+![Report](assets/Screenshot%202026-04-06%20at%205.09.38%20PM.png)
+
+### 🔍 Deep Compliance View
+![Compliance](assets/Screenshot%202026-04-06%20at%205.09.47%20PM.png)
+
+## 📄 License
+
+This project is licensed under a **Custom Personal Use License** — you may view and learn from the code, but **commercial use, redistribution, or claiming authorship is strictly prohibited**. 
+See the full [LICENSE](./LICENSE) for details.
