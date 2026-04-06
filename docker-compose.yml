@@ -4,6 +4,7 @@ services:
       context: .
       target: runner
     container_name: tender-ai-app
+    image: ghcr.io/${GITHUB_REPOSITORY}/app:${IMAGE_TAG:-latest}
     ports:
       - "3001:3000"
     environment:
@@ -29,6 +30,7 @@ services:
       context: .
       target: worker
     container_name: tender-ai-worker
+    image: ghcr.io/${GITHUB_REPOSITORY}/worker:${IMAGE_TAG:-latest}
     environment:
       - DATABASE_URL=postgresql://postgres:password@db:5432/tender-db
       - UPSTASH_REDIS_URL=redis://redis:6379
