@@ -22,6 +22,7 @@ export const authConfig = {
     }),
   ],
 
+  trustHost: true,
   pages: {
     signIn: "/", // Root is the auth page
   },
@@ -31,12 +32,28 @@ export const authConfig = {
       const isProtectedRoute = 
         nextUrl.pathname.startsWith("/upload") || 
         nextUrl.pathname.startsWith("/overview") || 
-        nextUrl.pathname.startsWith("/analysis");
+        nextUrl.pathname.startsWith("/analysis") ||
+        nextUrl.pathname.startsWith("/api/analyze");
+
+      // Root page is for logging in
+      if (nextUrl.pathname === "/") {
+        if (isLoggedIn) {
+          return Response.redirect(new URL("/overview", nextUrl));
+        }
+        return true;
+      }
 
       if (isProtectedRoute) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
       }
+      
+      // Default to allowed for non-protected, or protect everything else?
+      // The user wants unauthenticated users NOT to visit ANY page.
+      if (!isLoggedIn) {
+        return false; // Redirect to signIn page (/)
+      }
+      
       return true;
     },
     session: ({ session, token }) => ({
