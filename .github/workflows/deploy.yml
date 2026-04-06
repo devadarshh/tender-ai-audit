@@ -165,11 +165,22 @@ jobs:
         env:
             GITHUB_REPOSITORY: ${{ github.repository }}
             IMAGE_TAG: ${{ github.sha }}
+            AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+            AUTH_URL: ${{ secrets.AUTH_URL }}
+            AUTH_GOOGLE_ID: ${{ secrets.AUTH_GOOGLE_ID }}
+            AUTH_GOOGLE_SECRET: ${{ secrets.AUTH_GOOGLE_SECRET }}
+            DATABASE_URL: ${{ secrets.DATABASE_URL }}
+            UPSTASH_REDIS_URL: ${{ secrets.UPSTASH_REDIS_URL }}
+            QDRANT_URL: ${{ secrets.QDRANT_URL }}
+            GOOGLE_GENERATIVE_AI_API_KEY: ${{ secrets.GOOGLE_GENERATIVE_AI_API_KEY }}
+            HUGGINGFACE_API_KEY: ${{ secrets.HUGGINGFACE_API_KEY }}
+            NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          envs: GITHUB_REPOSITORY,IMAGE_TAG
+          envs: GITHUB_REPOSITORY,IMAGE_TAG,AUTH_SECRET,AUTH_URL,AUTH_GOOGLE_ID,AUTH_GOOGLE_SECRET,DATABASE_URL,UPSTASH_REDIS_URL,QDRANT_URL,GOOGLE_GENERATIVE_AI_API_KEY,HUGGINGFACE_API_KEY,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY
           script: |
             cd ~/tender-ai-audit
             echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
