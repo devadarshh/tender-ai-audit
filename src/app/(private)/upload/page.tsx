@@ -55,7 +55,9 @@ export default function UploadPage() {
                 setIsUploading(false);
             }
 
-        } catch (error) {
+        } catch (err) {
+            const error = err as Error;
+            console.error("Upload Component Error:", error);
             toast.error("An unexpected error occurred during processing.");
             setIsUploading(false);
         }

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { 
   Plus, LogOut, FileText, BarChart3, Clock, 
-  ChevronRight, AlertTriangle, CheckCircle,
+  ChevronRight, CheckCircle,
   LayoutGrid, List
 } from "lucide-react";
 import { signOut } from "next-auth/react";

@@ -19,7 +19,7 @@ type IORedisInstance = InstanceType<typeof IORedis>;
 let redis: IORedisInstance | NoopRedis;
 
 // Treat "/" or empty string or non-redis URLs as invalid
-const trimmedUrl = UPSTASH_REDIS_URL?.trim().replace(/['"]/g, "") || "";
+const trimmedUrl = UPSTASH_REDIS_URL?.trim().replace(/['"]/g, "") ?? "";
 const isValidUrl =
     trimmedUrl !== "" &&
     trimmedUrl !== "/" &&

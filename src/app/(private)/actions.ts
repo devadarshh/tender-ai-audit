@@ -55,11 +55,12 @@ export async function uploadTenderToSupabase(formData: FormData, projectId: stri
             documentId: doc.id 
         };
 
-    } catch (error: any) {
+    } catch (err) {
+        const error = err as Error;
         console.error("Upload Action Pipeline Error:", error);
         return {
             success: false,
-            error: error.message || "An unexpected error occurred"
+            error: error.message ?? "An unexpected error occurred"
         };
     }
 }

@@ -2,6 +2,33 @@ import { generateText } from "ai";
 import { prisma } from "./prisma";
 import { geminiModel } from "./gemini";
 
+export interface AuditAnalysisSchema {
+  projectSnapshot: {
+    projectType: string;
+    scope: string[];
+    timeline: string;
+  };
+  scopeGaps: string[];
+  risks: Array<{
+    issue: string;
+    category: "Scope" | "Timeline" | "Cost" | "Contract";
+    severity: "Low" | "Medium" | "High";
+  }>;
+  riskSummary: Record<string, number>;
+  costSignals: Array<{
+    type: "Material" | "Labor" | "Logistics" | "Equipment";
+    description: string;
+    impact: "Low" | "Medium" | "High";
+  }>;
+  costBreakdown: Record<string, number>;
+  recommendation: string;
+  confidence: {
+    level: "Low" | "Medium" | "High";
+    score: number;
+  };
+  completenessScore: number;
+}
+
 /**
  * SENIOR AI WORKER: 
  * This contains the shared 'Expert Construction Analyst' logic. 
@@ -103,12 +130,12 @@ OUTPUT FORMAT (STRICT)
 =====================
 
 {
-  "project_snapshot": {
-    "project_type": "string",
+  "projectSnapshot": {
+    "projectType": "string",
     "scope": ["string"],
     "timeline": "string"
   },
-  "scope_gaps": ["string"],
+  "scopeGaps": ["string"],
   "risks": [
     {
       "issue": "string",
@@ -116,20 +143,20 @@ OUTPUT FORMAT (STRICT)
       "severity": "Low | Medium | High"
     }
   ],
-  "risk_summary": {
+  "riskSummary": {
     "Scope": 0,
     "Timeline": 0,
     "Cost": 0,
     "Contract": 0
   },
-  "cost_signals": [
+  "costSignals": [
     {
       "type": "Material | Labor | Logistics | Equipment",
       "description": "string",
       "impact": "Low | Medium | High"
     }
   ],
-  "cost_breakdown": {
+  "costBreakdown": {
     "Material": 0,
     "Labor": 0,
     "Logistics": 0,
@@ -139,7 +166,8 @@ OUTPUT FORMAT (STRICT)
   "confidence": {
     "level": "Low | Medium | High",
     "score": number
-  }
+  },
+  "completenessScore": number
 }
 `;
 
@@ -151,33 +179,17 @@ OUTPUT FORMAT (STRICT)
 
   // Parse with a safe format clean
   const jsonStr = analyzeOutput.replace(/```json|```/g, "").trim();
-  const parsedData = JSON.parse(jsonStr);
+  const parsedData = JSON.parse(jsonStr) as AuditAnalysisSchema;
 
   console.log(`💾 Persisting Analysis to database...`);
   return await prisma.analysis.upsert({
     where: { documentId: documentId },
     update: {
-      projectSnapshot: parsedData.project_snapshot,
-      scopeGaps: parsedData.scope_gaps,
-      risks: parsedData.risks,
-      riskSummary: parsedData.risk_summary,
-      costSignals: parsedData.cost_signals,
-      costBreakdown: parsedData.cost_breakdown,
-      recommendation: parsedData.recommendation,
-      confidence: parsedData.confidence,
-      completenessScore: parsedData.confidence.score,
+      ...parsedData,
     },
     create: {
       documentId: documentId,
-      projectSnapshot: parsedData.project_snapshot,
-      scopeGaps: parsedData.scope_gaps,
-      risks: parsedData.risks,
-      riskSummary: parsedData.risk_summary,
-      costSignals: parsedData.cost_signals,
-      costBreakdown: parsedData.cost_breakdown,
-      recommendation: parsedData.recommendation,
-      confidence: parsedData.confidence,
-      completenessScore: parsedData.confidence.score,
+      ...parsedData,
     }
   });
 }

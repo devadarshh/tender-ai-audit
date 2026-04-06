@@ -1,11 +1,12 @@
 import "dotenv/config";
-import { Worker, Job } from "bullmq";
+import type { Job } from "bullmq";
+import { Worker } from "bullmq";
 import { Document } from "@langchain/core/documents";
 import { v4 as uuidv4 } from "uuid";
 import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
-const pdf = require("pdf-parse");
+const pdf = require("pdf-parse") as (doc: Buffer) => Promise<PDFData>;
 
 import { prisma } from "../lib/prisma";
 import { supabase } from "../lib/supabase";
@@ -14,6 +15,12 @@ import { hf } from "../lib/hfClient";
 import { COLLECTION_NAME, qdrantClient, ensureCollection } from "../lib/qdrant";
 import { redis } from "../lib/redis";
 import { runConstructionAnalysis } from "../lib/analyser";
+
+interface PDFData {
+    text: string;
+    numpages: number;
+    info: unknown;
+}
 
 interface FileJobData {
     documentId: string;
@@ -53,7 +60,7 @@ export const pdfWorker = new Worker<FileJobData>(
                 .from("Files")
                 .download(docRecord.fileUrl);
 
-            if (downloadError || !blob) throw new Error(`Download Error: ${downloadError?.message}`);
+            if (downloadError || !blob) throw new Error(`Download Error: ${downloadError?.message ?? "Unknown error"}`);
 
             console.log(`📄 Status: Extracting text from PDF...`);
             const buffer = Buffer.from(await blob.arrayBuffer());
@@ -91,7 +98,7 @@ export const pdfWorker = new Worker<FileJobData>(
 
                 const batchPoints = batchChunks.map((chunk, j) => ({
                     id: uuidv4(),
-                    vector: batchEmbeddings[j]!,
+                    vector: batchEmbeddings[j] ?? [],
                     payload: { ...chunk.metadata, content: chunk.pageContent },
                 }));
                 
@@ -108,7 +115,7 @@ export const pdfWorker = new Worker<FileJobData>(
             });
 
             console.log(`🔍 AI Status: Analyzing ${docRecord.fileName} for construction risks...`);
-            const analysisContext = pdfData.text.slice(0, 30000); 
+            const analysisContext = pdfData.text.slice(0, 100000); 
             await runConstructionAnalysis(documentId, analysisContext);
 
             await prisma.document.update({
@@ -118,13 +125,14 @@ export const pdfWorker = new Worker<FileJobData>(
 
             console.log(`✨ [Job ${job.id}] Finalized: Full RAG and Analysis is READY.`);
 
-        } catch (err: any) {
-            console.error(`❌ [Job ${job.id}] Critical Failure:`, err.message);
+        } catch (err) {
+            const error = err as Error;
+            console.error(`❌ [Job ${job.id}] Critical Failure:`, error.message);
             await prisma.document.update({ where: { id: documentId }, data: { status: "failed" } });
-            throw err;
+            throw error;
         }
     },
-    { connection: redis as any, concurrency: 2 }
+    { connection: redis as never, concurrency: 2 }
 );
 
 // Explicit Event Listeners for Better Terminal Visibility

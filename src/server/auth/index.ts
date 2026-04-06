@@ -8,7 +8,7 @@ import { db } from "@/server/db";
 
 const { auth: uncachedAuth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
-  adapter: PrismaAdapter(db as any),
+  adapter: PrismaAdapter(db),
   session: { strategy: "jwt" }
 });
 

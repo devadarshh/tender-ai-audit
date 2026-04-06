@@ -6,7 +6,7 @@ if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
 }
 
 export const google = createGoogleGenerativeAI({
-    apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY || "",
+    apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY ?? "",
 });
 
 export const geminiModel = google("gemini-2.5-flash");

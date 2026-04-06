@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { COLLECTION_NAME, qdrantClient } from "@/lib/qdrant";
 import { runConstructionAnalysis } from "@/lib/analyser";
@@ -8,7 +9,7 @@ import { runConstructionAnalysis } from "@/lib/analyser";
  */
 export async function POST(req: NextRequest) {
     try {
-        const { documentId } = await req.json();
+        const { documentId } = (await req.json()) as { documentId: string };
 
         // 1. Fetch Document metadata
         const document = await prisma.document.findUnique({
@@ -26,7 +27,7 @@ export async function POST(req: NextRequest) {
         });
 
         const context = searchResult
-            .map((r, i) => `--- Chunk ${i + 1} ---\n${r.payload?.content}\n---`)
+            .map((r, i) => `--- Chunk ${i + 1} ---\n${(r.payload?.content as string) ?? ""}\n---`)
             .join("\n\n");
 
         // 3. Delegate to the Analyst Lib
