@@ -9,6 +9,8 @@ Engage with an intelligent agentic engine that cross-references ISO construction
 
 **🌐 Live Demo:** [Access Brickanta](https://brickanta.adarshsingh.xyz)
 
+
+
 ## ✅ Core Features
 
 - 📄 **Technical PDF Ingestion** – Securely upload and manage complex construction tender sequences.
@@ -76,6 +78,10 @@ npm run worker   # Start the AI processing engine
 ```
 
 ## 📸 Screenshots
+
+## 📐 System Design
+
+![System Architecture](assets/archi.png)
 
 ### 🔑 Secure Auth Portal
 
