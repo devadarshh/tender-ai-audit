@@ -26,11 +26,24 @@ export const authConfig = {
     signIn: "/", // Root is the auth page
   },
   callbacks: {
-    session: ({ session, token, user }) => ({
+    authorized: ({ auth, request: { nextUrl } }) => {
+      const isLoggedIn = !!auth?.user;
+      const isProtectedRoute = 
+        nextUrl.pathname.startsWith("/upload") || 
+        nextUrl.pathname.startsWith("/overview") || 
+        nextUrl.pathname.startsWith("/analysis");
+
+      if (isProtectedRoute) {
+        if (isLoggedIn) return true;
+        return false; // Redirect unauthenticated users to login page
+      }
+      return true;
+    },
+    session: ({ session, token }) => ({
       ...session,
       user: {
         ...session.user,
-        id: user?.id || token?.sub,
+        id: token?.sub as string,
       },
     }),
   },
