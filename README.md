@@ -1,4 +1,7 @@
-# 🏗️ Brickanta – Agentic AI for Society Builders
+# 🏗️ Brickanta – Agentic AI for Society Builders (MVP)
+
+> [!NOTE]
+> **Brickanta is currently in MVP (Minimum Viable Product) stage.** We are actively iterating on the agentic analysis pipeline and ISO compliance engine.
 
 Brickanta is an enterprise-grade AI platform designed for senior construction auditors and society builders. It automates the extraction of risk-gaps, structural integrity flaws, and technical compliance data from large-scale tender documentation.
 
@@ -75,22 +78,28 @@ npm run worker   # Start the AI processing engine
 ## 📸 Screenshots
 
 ### 🔑 Secure Auth Portal
-![Auth Portal](assets/Screenshot%202026-04-06%20at%205.09.10%20PM.png)
+
+![Auth Portal](assets/auth.png)
 
 ### 📊 Audit Ledger Overview
-![Overview](assets/Screenshot%202026-04-06%20at%205.09.23%20PM.png)
+
+![Overview](assets/overview.png)
 
 ### 📤 Technical Document Ingestion
-![Upload](assets/Screenshot%202026-04-06%20at%205.10.08%20PM.png)
+
+![Upload](assets/upload.png)
 
 ### 🧠 Agentic Risk Extraction
-![Analysis](assets/Screenshot%202026-04-06%20at%205.09.32%20PM.png)
+
+![Analysis](assets/analysis.png)
 
 ### 📋 Structural Integrity Report
-![Report](assets/Screenshot%202026-04-06%20at%205.09.38%20PM.png)
+
+![Report](assets/report.png)
 
 ### 🔍 Deep Compliance View
-![Compliance](assets/Screenshot%202026-04-06%20at%205.09.47%20PM.png)
+
+![Compliance](assets/compliance.png)
 
 ## 📄 License
 
