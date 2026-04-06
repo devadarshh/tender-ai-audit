@@ -1,7 +1,7 @@
 # 🏗️ Brickanta – Agentic AI for Society Builders (MVP)
 
-> [!NOTE]
-> **Brickanta is currently in MVP (Minimum Viable Product) stage.** We are actively iterating on the agentic analysis pipeline and ISO compliance engine.
+<!-- > [!NOTE]
+> **Brickanta is currently in MVP (Minimum Viable Product) stage.** We are actively iterating on the agentic analysis pipeline and ISO compliance engine. -->
 
 Brickanta is an enterprise-grade AI platform designed for senior construction auditors and society builders. It automates the extraction of risk-gaps, structural integrity flaws, and technical compliance data from large-scale tender documentation.
 
